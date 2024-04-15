@@ -15,6 +15,10 @@ module.exports = {
 
   async createUser(req, res) {
     try {
+      const findUser = await User.findOne({ where: { email: req.body.email } });
+      if (findUser) {
+        return res.status(400).json({ message: 'User already exists' });
+      }
       const user_instance = await User.create({
         name: req.body.name,
         email: req.body.email,

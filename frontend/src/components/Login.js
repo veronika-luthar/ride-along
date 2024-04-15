@@ -8,6 +8,8 @@ const LoginForm = () => {
     password: ''
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -21,10 +23,9 @@ const LoginForm = () => {
       console.log(response.data); // Handle response from the server
     } catch (error) {
       if(error.response.status === 401) {
-        alert('Invalid credentials');
+        setErrorMessage('Invalid credentials');
         return;
       }
-      // console.error('Error logging in:', error);
     }
   };
 
@@ -56,6 +57,7 @@ const LoginForm = () => {
         </div>
         <button type="submit" className="form-button">Login</button>
       </form>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
 }

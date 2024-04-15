@@ -2,8 +2,13 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import '../styles/FormStyles.css';
+import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import useHistory
+
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,6 +28,10 @@ const RegisterForm = () => {
     try {
       const response = await axios.post('http://localhost:3000/register', formData);
       console.log(response.data); // Handle response from the server
+      if (response.status === 200) {
+        alert('Registered successfully');
+        navigate('/login'); // Redirect to the login page
+      }
     } catch (error) {
       console.error('Error registering:', error);
     }
