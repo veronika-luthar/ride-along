@@ -15,12 +15,16 @@ module.exports = {
 
   async createUser(req, res) {
     try {
+      const findUser = await User.findOne({ where: { email: req.body.email } });
+      if (findUser) {
+        return res.status(400).json({ message: 'User already exists' });
+      }
       const user_instance = await User.create({
         name: req.body.name,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 10),
-        phone_number: req.body.phone_number,
-        public: req.body.public
+        phone_number: req.body.phoneNumber,
+        public: req.body.isPublic
       });
       const token = generateToken(user_instance);
       res.json({ token });
@@ -38,7 +42,7 @@ module.exports = {
       const token = generateToken(user_instance);
       res.json({ token });
     } catch (error) {
-      res.status(401).json({ message: error.message });
+      res.status(401).json({ message: 'Invalid credentials' });
     }
   }
   // Implement other controller methods for CRUD operations
