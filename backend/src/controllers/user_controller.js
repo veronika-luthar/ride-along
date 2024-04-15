@@ -19,8 +19,8 @@ module.exports = {
         name: req.body.name,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 10),
-        phone_number: req.body.phone_number,
-        public: req.body.public
+        phone_number: req.body.phoneNumber,
+        public: req.body.isPublic
       });
       const token = generateToken(user_instance);
       res.json({ token });
@@ -38,7 +38,7 @@ module.exports = {
       const token = generateToken(user_instance);
       res.json({ token });
     } catch (error) {
-      res.status(401).json({ message: error.message });
+      res.status(401).json({ message: 'Invalid credentials' });
     }
   }
   // Implement other controller methods for CRUD operations
