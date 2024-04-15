@@ -14,10 +14,7 @@ async function authenticate(email_user, password) {
   if (!user) {
     throw new Error('User not found');
   }
-  console.log(user.password);
-  console.log(password);
   const isValidPassword = await bcrypt.compare(password, user.password);
-  console.log(isValidPassword);
   if (!isValidPassword) {
     throw new Error('Invalid password');
   }
