@@ -28,20 +28,20 @@ export const joinRide = async (rideID, userID) => {
         const response = await fetch(`${BASE_URL}/rides/${rideID}/join?userID=${userID}`, {
         method: 'POST',
         });
-        console.log(response)
-        if (!response.ok) {
-            if(response.status === 404) {
-                throw new Error('Ride not found');
-            }
-            if(response.status === 400) {
-                alert("No more space in ride");
-                return;
-            }
-            const errorData = await response.json();
-            throw new Error(errorData.error);
+        if(response.status === 200){
+            alert("Joined ride successfully");
+            window.location.reload();
+            return response;
         }
-        const data = await response.json();
-        return data;
+        if(!response.ok){
+            if(response.status === 403){
+                alert("No more space in ride");
+            }else{
+                alert("Error joining ride");
+            }
+            return response
+        }
+        return response;
     } catch (error) {
         console.error('Error joining ride:', error);
         throw error;

@@ -20,8 +20,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
 
 
   const handleSelectRide = async () => {
-    await joinRide(id);
-    window.location.reload();
+    const response = await joinRide(id);
     
   };
 

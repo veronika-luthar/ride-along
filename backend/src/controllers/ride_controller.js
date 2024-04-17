@@ -28,7 +28,7 @@ module.exports = {
                 return res.status(404).json({ error: 'Ride not found' });
             }
             if (ride.attendance === ride.max_attendance) {
-                return res.status(400).json({ error: 'No more space in ride' });
+                return res.status(403).json({ error: 'No more space in ride' });
             }
             ride.attendance += 1;
             ride.updatedAt = sequelize.fn('NOW');
