@@ -2,6 +2,8 @@ import RideComponent from './Ride';
 import React, { useState, useEffect } from 'react';
 import { fetchRides } from '../backendAPI';
 import '../styles/FormStyles.css'; // Import the CSS file for styling
+import '../styles/ride.css'; // Import the CSS file for styling
+
 
 
 
@@ -28,10 +30,15 @@ const RideList = ({ onSelectRide }) => {
 
     
   return (
-    <div className="ride-list">
-      {rides.map((ride) => (
-        <RideComponent key={ride.id} ride={ride} onSelectRide={onSelectRide} />
-      ))}
+    <div>
+    <h1 className = "form-title" >Available Rides</h1>
+        <div className="ride-list">
+        {rides.map((ride,index) => (
+            <div key={ride.id} className={`ride-item ${(index + 1) % 3 === 0 ? 'last-in-row' : ''}`}>
+            <RideComponent ride={ride} onSelectRide={onSelectRide} />
+        </div>
+        ))}
+        </div>
     </div>
   );
 };

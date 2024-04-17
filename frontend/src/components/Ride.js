@@ -21,7 +21,6 @@ const RideComponent = ({ ride, onSelectRide }) => {
 
   const handleSelectRide = async () => {
     const response = await joinRide(id);
-    
   };
 
 
