@@ -14,14 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ride.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     title: DataTypes.STRING,
-    scheduled_time: DataTypes.DATE,
-    start_location: DataTypes.STRING,
+    date: DataTypes.DATE,
+    time: DataTypes.TIME,
+    estimatedDuration: DataTypes.TIME,
     city: DataTypes.STRING,
-    attendance: DataTypes.INTEGER,
+    location: DataTypes.STRING,
     description: DataTypes.STRING,
-    max_attendance: DataTypes.INTEGER
+    maxAttendance: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Ride',
