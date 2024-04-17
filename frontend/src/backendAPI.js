@@ -23,6 +23,22 @@ export const fetchRidesByCity = async (city) => {
   }
 };
 
+export const fetchCities = async () => {
+    try{
+    const response = await fetch(`${BASE_URL}/cities`);
+    const data = await response.json();
+    if(!response.ok){
+        throw new Error('Error fetching cities');
+    }
+    return data;
+    }catch(error){
+        console.error('Error fetching cities:', error);
+        throw error;
+    }   
+
+};
+
+
 export const joinRide = async (rideID, userID) => {
     try {
         const response = await fetch(`${BASE_URL}/rides/${rideID}/join?userID=${userID}`, {

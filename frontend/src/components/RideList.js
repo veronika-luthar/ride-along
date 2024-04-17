@@ -1,44 +1,66 @@
 import RideComponent from './Ride';
 import React, { useState, useEffect } from 'react';
-import { fetchRides } from '../backendAPI';
-import '../styles/FormStyles.css'; // Import the CSS file for styling
-import '../styles/ride.css'; // Import the CSS file for styling
-
-
-
-
+import { fetchRides, fetchCities } from '../backendAPI';
+import '../styles/FormStyles.css';
+import '../styles/ride.css';
 
 const RideList = ({ onSelectRide }) => {
-    const [rides, setRides] = useState([]);
-  
-    useEffect(() => {
-      const getRides = async () => {
-        try {
-          const data = await fetchRides();
-          setRides(data);
-        } catch (error) {
-          console.error('Error fetching rides:', error);
-        }
-      };
-  
-      getRides();
-    }, []);
+  const [rides, setRides] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('');
 
-    useEffect(() => {
-        fetchRides();
-      }, []);
+  useEffect(() => {
+    const getRides = async () => {
+      try {
+        const data = await fetchRides();
+        setRides(data);
+      } catch (error) {
+        console.error('Error fetching rides:', error);
+      }
+    };
 
-    
+    const getCities = async () => {
+      try {
+        const data = await fetchCities();
+        setCities(data);
+      } catch (error) {
+        console.error('Error fetching cities:', error);
+      }
+    };
+
+    getRides();
+    getCities();
+  }, []);
+
+  const handleCityChange = (event) => {
+    setSelectedCity(event.target.value);
+  };
+
+  const filteredRides = selectedCity
+    ? rides.filter((ride) => ride.city === selectedCity)
+    : rides;
+
   return (
     <div>
-    <h1 className = "form-title" >Available Rides</h1>
-        <div className="ride-list">
-        {rides.map((ride,index) => (
-            <div key={ride.id} className={`ride-item ${(index + 1) % 3 === 0 ? 'last-in-row' : ''}`}>
+      <h1 className="form-title">Available Rides</h1>
+      <div>
+        <label className="form-container">Filter by City:</label>
+        <select className="form-container" id="cityFilter" value={selectedCity} onChange={handleCityChange}>
+          <option value="">All Cities</option>
+          {cities.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="ride-list">
+        {filteredRides.map((ride, index) => (
+          <div key={ride.id} className={`ride-item ${(index + 1) % 3 === 0 ? 'last-in-row' : ''}`}>
             <RideComponent ride={ride} onSelectRide={onSelectRide} />
-        </div>
+          </div>
         ))}
-        </div>
+      </div>
     </div>
   );
 };

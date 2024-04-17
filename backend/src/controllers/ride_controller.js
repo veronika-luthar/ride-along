@@ -51,6 +51,17 @@ module.exports = {
           res.status(500).json({ error: 'Internal server error' });
         }
         
+    },
+
+    async getCities(req,res){
+        try{
+            const [cities, metadata] = await sequelize.query(`SELECT DISTINCT city FROM rides`);
+            const cityValues = cities.map(city => city.city);
+            res.status(200).json(cityValues);
+        }catch(error){
+            console.error('Error retrieving cities:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
     }
     // Implement other controller methods for CRUD operations
 
