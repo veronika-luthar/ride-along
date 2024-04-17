@@ -19,8 +19,10 @@ const RideComponent = ({ ride, onSelectRide }) => {
   const formattedScheduledTime = new Date(scheduled_time).toLocaleString();
 
 
-  const handleSelectRide = () => {
-    joinRide(id);
+  const handleSelectRide = async () => {
+    await joinRide(id);
+    window.location.reload();
+    
   };
 
 
@@ -28,13 +30,13 @@ const RideComponent = ({ ride, onSelectRide }) => {
 
   return (
     <div className="form-container">
-      <h3 class = "form-title" >{title}</h3>
+      <h3 className = "form-title" >{title}</h3>
       <p>City: {city}</p>
       <p>Description: {description}</p>
       <p>Start Location: {start_location}</p>
       <p>Scheduled Time: {formattedScheduledTime}</p>
       <p>Attendance: {attendance}/{max_attendance}</p>
-      <button class = "form-button"onClick={handleSelectRide}>Join Ride</button>
+      <button className = "form-button"onClick={handleSelectRide}>Join Ride</button>
     </div>
   );
 };
