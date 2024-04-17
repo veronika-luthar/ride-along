@@ -43,8 +43,7 @@ const RideList = ({ onSelectRide }) => {
   return (
     <div>
       <h1 className="form-title">Available Rides</h1>
-      <div>
-        <label className="form-container">Filter by City:</label>
+      <div className='form-group'>
         <select className="form-container" id="cityFilter" value={selectedCity} onChange={handleCityChange}>
           <option value="">All Cities</option>
           {cities.map((city) => (
