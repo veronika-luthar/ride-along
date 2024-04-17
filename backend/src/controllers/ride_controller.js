@@ -10,7 +10,7 @@ module.exports = {
               city: city
             }
           });
-          return rides
+          res.status(400).json(rides);
         } catch (error) {
           console.error('Error retrieving rides by city:', error);
           res.status(500).json({ error: 'Internal server error' });
@@ -30,14 +30,16 @@ module.exports = {
             return res.status(404).json({ error: 'Ride not found' });
           }
           if (ride.attendance == ride.max_attendance) {
-            return res.status(400).json({ error: 'No seats available' });
+            return res.status(400).json({ error: 'No more space in ride' });
           }
           ride.attendance += 1;
-          sequelize.query(
-            `UPDATE rides SET attendance = ${ride.attendance} WHERE ride_id = ${rideID}`
-          );
+          try{
+          await ride.save();
+          } catch (error) {
+            console.error('Error updating ride attendance:', error);
+            res.status(500).json({ error: 'Internal server error' });
+          }
           //Add ride user to ride attendance table
-          
           res.status(200);
         } catch (error) {
           console.error('Error joining ride:', error);
