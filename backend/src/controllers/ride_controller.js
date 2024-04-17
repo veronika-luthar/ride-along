@@ -4,17 +4,17 @@ const {Ride, sequelize} = require('../models');
 module.exports = {
   async createRide(req, res){
     try {
-      const ride = await Ride.create({
+      await Ride.create({
         title: req.body.title,
-        scheduled_time: req.body.scheduled_time,
-        start_location: req.body.start_location,
+        date: req.body.date,
+        time: req.body.time,
+        estimatedDuration: req.body.estimated_duration,
         city: req.body.city,
-        attendance: req.body.attendance,
+        startLocation: req.body.start_location,
         description: req.body.description,
-        max_attendance: req.body.max_attendance
+        maxAttendance: req.body.max_attendance
       });
-
-      res.status(200);
+      res.status(200).json({status: "Success"});
     } catch (err){
       console.error(err);
       res.status(500).json({ error: 'Internal server error' });
@@ -42,7 +42,7 @@ module.exports = {
           const rideID = req.params.rideID;
           const ride = await Ride.findAll({
             where: {
-                ride_id: rideID
+                id: rideID
             }
           });
           if (!ride) {
@@ -53,7 +53,7 @@ module.exports = {
           }
           ride.attendance += 1;
           sequelize.query(
-            `UPDATE rides SET attendance = ${ride.attendance} WHERE ride_id = ${rideID}`
+            `UPDATE rides SET attendance = ${ride.attendance} WHERE id = ${rideID}`
           );
           //Add ride user to ride attendance table
           
