@@ -10,7 +10,7 @@ module.exports = {
               city: city
             }
           });
-          res.status(400).json(rides);
+          res.status(200).json(rides);
         } catch (error) {
           console.error('Error retrieving rides by city:', error);
           res.status(500).json({ error: 'Internal server error' });
@@ -20,10 +20,10 @@ module.exports = {
     
     async joinRide(req, res) {
         try {
-          const rideID = req.params.rideID;
+          const rideID = req.query.rideID;
           const ride = await Ride.findAll({
             where: {
-                ride_id: rideID
+                id: rideID
             }
           });
           if (!ride) {
@@ -37,13 +37,13 @@ module.exports = {
           await ride.save();
           } catch (error) {
             console.error('Error updating ride attendance:', error);
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: `Internal server error ${error}`});
           }
           //Add ride user to ride attendance table
           res.status(200);
         } catch (error) {
           console.error('Error joining ride:', error);
-          res.status(500).json({ error: 'Internal server error' });
+          res.status(500).json({ error: "Internal server error {error}"});
         }
       },
 

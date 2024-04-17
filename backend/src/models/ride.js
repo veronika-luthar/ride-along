@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ride.init({
-    id: DataTypes.INTEGER,
+    id:{
+     type: DataTypes.INTEGER,
+      primaryKey: true,
+    } ,
     title: DataTypes.STRING,
     scheduled_time: DataTypes.DATE,
     start_location: DataTypes.STRING,
