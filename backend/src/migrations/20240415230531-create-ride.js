@@ -9,29 +9,29 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        type: Sequelize.INTEGER
-      },
       title: {
         type: Sequelize.STRING
       },
-      scheduled_time: {
+      date: {
         type: Sequelize.DATE
       },
-      start_location: {
-        type: Sequelize.STRING
+      time: {
+        type: Sequelize.TIME
+      },
+      estimatedDuration: {
+        type: Sequelize.TIME
       },
       city: {
         type: Sequelize.STRING
       },
-      attendance: {
-        type: Sequelize.INTEGER
+      location: {
+        type: Sequelize.STRING
       },
       description: {
         type: Sequelize.STRING
       },
-      max_attendance: {
-        type: Sequelize.INTEGER
+      maxAttendance: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
