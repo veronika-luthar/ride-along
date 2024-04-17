@@ -13,6 +13,7 @@ router.get('/rides', ride_controller.getRides);
 router.get('/rides/:city', ride_controller.getRidesByCity);
 
 router.post('/rides/:rideID', ride_controller.joinRide);
+router.post('/create-ride', ride_controller.createRide);
 
 
 
