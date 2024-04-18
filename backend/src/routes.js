@@ -18,6 +18,7 @@ router.get('/cities', ride_controller.getCities);
 
 
 router.post('/rides/:rideID/join', ride_controller.joinRide);
+router.post('/create-ride', ride_controller.createRide);
 
 
 

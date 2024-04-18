@@ -2,6 +2,25 @@ const {Ride, sequelize} = require('../models');
 
 
 module.exports = {
+  async createRide(req, res){
+    try {
+      await Ride.create({
+        title: req.body.title,
+        date: req.body.date,
+        time: req.body.time,
+        estimatedDuration: req.body.estimated_duration,
+        city: req.body.city,
+        startLocation: req.body.start_location,
+        description: req.body.description,
+        maxAttendance: req.body.max_attendance
+      });
+      res.status(200).json({status: "Success"});
+    } catch (err){
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  },
+
     async getRidesByCity(req, res) {
         try {
           const city = req.params.city;
