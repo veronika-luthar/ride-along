@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import '../styles/FormStyles.css';
+
 
 export default function Form() {
     const [input, setInput] = useState({
@@ -36,7 +38,7 @@ export default function Form() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="form-container">
                 <label>
                     Title
                     <input
@@ -44,6 +46,7 @@ export default function Form() {
                         onChange={handleChange}
                         type="text"
                         id="title"
+                        className="form-input"
                         required
                     />
                 </label>
@@ -54,6 +57,7 @@ export default function Form() {
                         onChange={handleChange}
                         type="date"
                         id="date"
+                        className="form-input"
                         required
                     />
                 </label>
@@ -64,6 +68,7 @@ export default function Form() {
                         onChange={handleChange}
                         type="time"
                         id="time"
+                        className="form-input"
                         required
                     />
                 </label>
@@ -74,6 +79,7 @@ export default function Form() {
                         onChange={handleChange}
                         type="time"
                         id="estimated_duration"
+                        className="form-input"
                         required
                     />
                 </label>
@@ -84,6 +90,7 @@ export default function Form() {
                         onChange={handleChange}
                         type="text"
                         id="city"
+                        className="form-input"
                         required
                     />
                 </label>
@@ -94,6 +101,7 @@ export default function Form() {
                         onChange={handleChange}
                         type="text"
                         id="start_location"
+                        className="form-input"
                         required
                     />
                 </label>
@@ -103,6 +111,7 @@ export default function Form() {
                         value={input.description}
                         onChange={handleChange}
                         id="description"
+                        className="form-input"
                     />
                 </label>
                 <label>
@@ -112,9 +121,10 @@ export default function Form() {
                         onChange={handleChange} 
                         type="number" 
                         id="max_attendance"
+                        className="form-input"
                     />
                 </label>
-                <input type="submit" value="Create ride"></input>
+                <input type="submit" value="Create ride" className="form-button"></input>
             </form>
         </>
     ); 
