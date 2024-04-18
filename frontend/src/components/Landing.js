@@ -9,6 +9,8 @@ const Landing = () => {
       <a href="/login">Login</a>
       <br />
       <a href="/register">Register</a>
+      <br />
+      <a href="/rides">View Rides</a> 
     </div>
   );
 }

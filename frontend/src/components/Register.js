@@ -2,7 +2,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import '../styles/FormStyles.css';
-import { redirect } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'; // Import useHistory
 
 
