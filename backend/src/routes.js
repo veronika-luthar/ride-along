@@ -10,9 +10,14 @@ router.post('/register', user_controller.createUser);
 router.post('/login', user_controller.loginUser);
 
 router.get('/rides', ride_controller.getRides);
+
 router.get('/rides/:city', ride_controller.getRidesByCity);
 
-router.post('/rides/:rideID', ride_controller.joinRide);
+
+router.get('/cities', ride_controller.getCities);
+
+
+router.post('/rides/:rideID/join', ride_controller.joinRide);
 router.post('/create-ride', ride_controller.createRide);
 
 
