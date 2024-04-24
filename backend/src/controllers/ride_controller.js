@@ -1,4 +1,5 @@
 const {Ride, sequelize} = require('../models');
+const {RideAttendance} = require('../models');
 
 
 module.exports = {
@@ -46,12 +47,24 @@ module.exports = {
             if (!ride) {
                 return res.status(404).json({ error: 'Ride not found' });
             }
-            if (ride.attendance === ride.max_attendance) {
+            var attendance = await RideAttendance.findAll({
+              attributes: [
+                [sequelize.fn('COUNT', sequelize.col('rideid')), 'no_of_attendees']
+              ]
+            });
+            attendance = attendance[0].dataValues.no_of_attendees;
+            console.log(attendance);
+            if (attendance=== ride.max_attendance) {
                 return res.status(403).json({ error: 'No more space in ride' });
             }
-            ride.attendance += 1;
             ride.updatedAt = sequelize.fn('NOW');
             await ride.save();
+            await sequelize.query(`INSERT INTO RIDEATTENDANCEs (rideId, userId, notifications,createdAt,UpdatedAt) VALUES (${rideID}, ${userID}, true,NOW(),NOW())`)
+            /*await RideAttendance.create({
+                rideId: rideID,
+                userId: userID,
+                notifications: true
+            });*/
             //Add ride user to ride attendance table
             res.status(200).json({ message: 'Joined ride successfully' }); // Send a response back to the client
 
@@ -81,6 +94,18 @@ module.exports = {
             console.error('Error retrieving cities:', error);
             res.status(500).json({ error: 'Internal server error' });
         }
+    },
+
+    async getRidesByUser(req,res){
+      try{
+        const userID = req.params.userID;
+        const rides = await sequelize.query(`SELECT * FROM rides WHERE id IN (SELECT rideId FROM rideattendances WHERE userId = ${userID})`);
+        res.status(200).json(rides[0]);
+      }
+      catch(error){
+        console.error('Error retrieving rides by user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
     }
     // Implement other controller methods for CRUD operations
 
