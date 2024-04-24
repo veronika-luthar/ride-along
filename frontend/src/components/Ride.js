@@ -1,40 +1,56 @@
 import React from 'react';
 import '../styles/FormStyles.css'; // Import the CSS file for styling
-import {joinRide} from '../backendAPI';
+import { joinRide } from '../backendAPI';
+import { fetchRideAttendance, leaveRide, userInRide } from '../backendAPI';
+import { useEffect, useState } from 'react';
+import { fetchUserRides } from '../backendAPI';
 
 const RideComponent = ({ ride, onSelectRide }) => {
-  const {
-    attendance,
-    city,
-    createdAt,
-    description,
-    id,
-    max_attendance,
-    scheduled_time,
-    start_location,
-    title,
-    updatedAt,
-  } = ride;
+  const { city, createdAt, description, id, maxAttendance, date, time, startLocation, title, updatedAt } = ride;
+  const [attendance, setAttendance] = useState(null);
+  const [userInRide, setUserInRide] = useState(false);
 
-  const formattedScheduledTime = new Date(scheduled_time).toLocaleString();
-
-
-  const handleSelectRide = async () => {
-    const response = await joinRide(id);
+  const fetchAttendance = async () => {
+    const response = await fetchRideAttendance(id);
+    setAttendance(response);
   };
 
+  const fetchUserInRide = async () => {
+    const response = await fetchUserRides(id);
+    if (response.some(r => r.id === ride.id)) {
+      setUserInRide(true);
+    } else {
+      setUserInRide(false);
+    }
+  };
 
+  useEffect(() => {
+    fetchUserInRide();
+    fetchAttendance();
+  }, [ride.id]);
 
+  const formattedScheduledTime = `${new Date(date).toLocaleString().split(',')[0]}, ${time}`;
+
+  const handleSelectRide = async () => {
+    if (userInRide === true) {
+      await leaveRide(id);
+    } else {
+      await joinRide(id);
+    }
+    fetchAttendance(); // Refetch attendance data after joining or leaving the ride
+  };
 
   return (
     <div className="form-container">
-      <h3 className = "form-title" >{title}</h3>
+      <h3 className="form-title">{title}</h3>
       <p>City: {city}</p>
       <p>Description: {description}</p>
-      <p>Start Location: {start_location}</p>
+      <p>Start Location: {startLocation}</p>
       <p>Scheduled Time: {formattedScheduledTime}</p>
-      <p>Attendance: {attendance}/{max_attendance}</p>
-      <button className = "form-button"onClick={handleSelectRide}>Join Ride</button>
+      <p>Attendance: {attendance !== null ? `${attendance}/${maxAttendance}` : 'Loading...'}</p>
+      <button className="form-button" onClick={handleSelectRide}>
+        {userInRide === true ? "Leave Ride" : "Join Ride"}
+      </button>
     </div>
   );
 };

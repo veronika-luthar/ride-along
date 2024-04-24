@@ -50,7 +50,10 @@ module.exports = {
             var attendance = await RideAttendance.findAll({
               attributes: [
                 [sequelize.fn('COUNT', sequelize.col('rideid')), 'no_of_attendees']
-              ]
+              ],
+              where: {
+                rideID: rideID
+              }
             });
             attendance = attendance[0].dataValues.no_of_attendees;
             console.log(attendance);
@@ -106,7 +109,49 @@ module.exports = {
         console.error('Error retrieving rides by user:', error);
         res.status(500).json({ error: 'Internal server error' });
       }
-    }
+    },
+
+    async leaveRide(req, res) {
+      try {
+          const rideID = req.params.rideID;
+          const userID = req.query.userID;
+          const ride = await Ride.findOne({ where: { id: rideID } });
+          if (!ride) {
+              return res.status(404).json({ error: 'Ride not found' });
+          }
+          ride.updatedAt = sequelize.fn('NOW');
+          await ride.save();
+          await sequelize.query(`DELETE FROM rideattendances WHERE rideId = ${rideID} AND userId = ${userID}`);
+          res.status(200).json({ message: 'Ride left successfully' }); // Send a response back to the client
+      } catch (error) {
+        console.error('Error leaving ride:', error);
+        res.status(500).json({ error: "Internal server error {error}"});
+      }
+    },
+
+
+    async getRideAttendance(req,res){
+      const rideID = req.params.rideID;
+      try{
+        var attendance = await RideAttendance.findAll({
+          attributes: [
+            [sequelize.fn('COUNT', sequelize.col('rideid')), 'no_of_attendees']
+          ],
+          where: {
+            rideID: rideID
+          }
+        });
+        attendance = attendance[0].dataValues.no_of_attendees;
+        console.log(attendance);
+        res.status(200).json(attendance);
+      }catch(error){
+        console.error('Error retrieving ride attendance:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    },
+
+
+
     // Implement other controller methods for CRUD operations
 
 };

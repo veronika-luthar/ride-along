@@ -22,6 +22,13 @@ router.post('/rides/:rideID/join', ride_controller.joinRide);
 
 router.post('/create-ride', ride_controller.createRide);
 
+router.post('/rides/:rideID/leave', ride_controller.leaveRide); 
+
+router.get('/rides/:rideID/attendance', ride_controller.getRideAttendance); 
+
+
+
+
 
 
 module.exports = router;
