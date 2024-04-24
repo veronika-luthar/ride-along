@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import '../styles/FormStyles.css';
+import env from "react-dotenv";
 
 
 export default function Form() {
@@ -25,7 +26,7 @@ export default function Form() {
 
     function handleSubmit(e){
         e.preventDefault();
-        axios.post('http://localhost:3000/create-ride', input)
+        axios.post(`${env.BASE_URL}/create-ride`, input)
             .then(function (response) {
                 if(response.status === 200){
                     alert("Success!");

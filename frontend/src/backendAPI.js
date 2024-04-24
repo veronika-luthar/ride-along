@@ -1,9 +1,8 @@
-const BASE_URL = 'http://localhost:3000'; 
-
+import env from "react-dotenv";
 
 export const fetchRides = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/rides`);
+    const response = await fetch(`${env.BASE_URL}/rides`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -14,7 +13,7 @@ export const fetchRides = async () => {
 
 export const fetchRidesByCity = async (city) => {
   try {
-    const response = await fetch(`${BASE_URL}/rides/${city}`);
+    const response = await fetch(`${env.BASE_URL}/rides/${city}`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -25,7 +24,7 @@ export const fetchRidesByCity = async (city) => {
 
 export const fetchCities = async () => {
     try{
-    const response = await fetch(`${BASE_URL}/cities`);
+    const response = await fetch(`${env.BASE_URL}/cities`);
     const data = await response.json();
     if(!response.ok){
         throw new Error('Error fetching cities');
@@ -41,7 +40,7 @@ export const fetchCities = async () => {
 
 export const joinRide = async (rideID, userID) => {
     try {
-        const response = await fetch(`${BASE_URL}/rides/${rideID}/join?userID=${userID}`, {
+        const response = await fetch(`${env.BASE_URL}/rides/${rideID}/join?userID=${userID}`, {
         method: 'POST',
         });
         if(response.status === 200){

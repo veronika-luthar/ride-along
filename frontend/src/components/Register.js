@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import '../styles/FormStyles.css';
 import { useNavigate } from 'react-router-dom'; // Import useHistory
+import env from "react-dotenv";
 
 
 const RegisterForm = () => {
@@ -25,7 +26,8 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/register', formData);
+      console.log(`${env.BASE_URL}/register`);
+      const response = await axios.post(`${env.BASE_URL}/register`, formData);
       console.log(response.data); // Handle response from the server
       if (response.status === 200) {
         alert('Registered successfully');
