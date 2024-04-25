@@ -2,9 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import '../styles/FormStyles.css';
 import env from "react-dotenv";
+import { useNavigate } from 'react-router-dom'; // Import useHistory
 
 
 export default function Form() {
+  const navigate = useNavigate();
     const [input, setInput] = useState({
         title: "",
         date: "",
@@ -29,7 +31,8 @@ export default function Form() {
         axios.post(`${env.BASE_URL}/create-ride`, input)
             .then(function (response) {
                 if(response.status === 200){
-                    alert("Success!");
+                    alert("Ride Created!");
+                    navigate('/');
                 }
             })
             .catch(function (error) {

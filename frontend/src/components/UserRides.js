@@ -1,6 +1,6 @@
 import RideComponent from './Ride';
 import React, { useState, useEffect } from 'react';
-import { fetchUserRides, fetchCities } from '../backendAPI';
+import { fetchUserRides, fetchCities } from '../utils';
 import '../styles/FormStyles.css';
 import '../styles/ride.css';
 import ErrorBoundary from './ErrorBoundary';

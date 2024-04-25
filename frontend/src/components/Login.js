@@ -26,6 +26,7 @@ const LoginForm = () => {
       console.log(env.BASE_URL);
       const response = await axios.post(`${env.BASE_URL}/login`, formData);
       alert('Logged in successfully');
+      localStorage.setItem('token', response.data.token); // Store the token in the browser
       navigate('/'); // Redirect to the login page
       console.log(response.data); // Handle response from the server
     } catch (error) {

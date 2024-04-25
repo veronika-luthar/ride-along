@@ -5,6 +5,8 @@ import Register from './components/Register';
 import RideList from './components/RideList';
 import CreateRide from './components/CreateRide';
 import UserRides from './components/UserRides';
+import Profile from './components/Profile';
+import EditProfile from './components/EditProfile';
 import React from 'react';
 
 function Routing(){
@@ -17,6 +19,8 @@ function Routing(){
                 <Route path={'/rides'} element={<RideList/>} />
                 <Route path={'/create-ride'} element={<CreateRide/>} />
                 <Route path={'/user-rides'} element={<UserRides/>} />
+                <Route path={'/profile'} element={<Profile/>} />
+                <Route path={'/edit-profile'} element={<EditProfile/>} />
             </Routes>
         </BrowserRouter>
     )
