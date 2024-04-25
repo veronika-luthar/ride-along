@@ -66,7 +66,8 @@ export const leaveRide = async (rideID, userID) => {
 
 export const joinRide = async (rideID, userID) => {
     try {
-        const response = await fetch(`${env.BASE_URL}/rides/${rideID}/join?userID=${userID}`, {
+        const testUserID = 1;
+        const response = await fetch(`${env.BASE_URL}/rides/${rideID}/join?userID=${testUserID}`, {
         method: 'POST',
         });
         if(response.status === 200){
