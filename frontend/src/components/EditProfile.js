@@ -4,18 +4,40 @@ import React, { useState } from 'react';
 import '../styles/FormStyles.css';
 import { useNavigate } from 'react-router-dom'; // Import useHistory
 import env from "react-dotenv";
+import { useEffect } from 'react';
 
 
 const RegisterForm = () => {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     phoneNumber: '',
-    isPublic: false
+    isPublic: ''
   });
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${env.BASE_URL}/get_user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setFormData({
+        name: response.data.name,
+        email: response.data.email,
+        phoneNumber: response.data.phone_number,
+        isPublic: response.data.public,
+      });
+      console.log(formData.isPublic);
+    }
+
+    getUserProfile();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,24 +48,30 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(`${env.BASE_URL}/register`);
-      console.log("REGISTRANDO");
-      const response = await axios.post(`${env.BASE_URL}/register`, formData);
-      console.log("DATA");
-      console.log(response.data); // Handle response from the server
-      if (response.status === 201) {
-        alert('Registered successfully');
-        navigate('/login'); // Redirect to the login page
+      const token = localStorage.getItem('token');
+      console.log(token);
+      const response = await axios.post(`${env.BASE_URL}/edit_profile`, 
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+        },
+      });      
+      if (response.status === 200) {
+        alert('Profile edited successfully');
+        navigate('/'); // Redirect to the landing page
       }
     } catch (error) {
-      console.log("ERROR");
-      console.error('Error registering:', error);
+      if(error.response.status === 401) {
+        setErrorMessage('Incorrect Password')      
+      }
+      console.error('Error Editing Profile:', error);
     }
   };
 
   return (
     <div className="form-container">
-      <h2 className="form-title">Register</h2>
+      <h2 className="form-title">Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label">Name:</label>
@@ -68,17 +96,6 @@ const RegisterForm = () => {
           />
         </div>
         <div className="form-group">
-          <label className="form-label">Password:</label>
-          <input 
-            type="password" 
-            name="password" 
-            value={formData.password} 
-            onChange={handleChange} 
-            className="form-input" 
-            required 
-          />
-        </div>
-        <div className="form-group">
           <label className="form-label">Phone Number:</label>
           <input 
             type="tel" 
@@ -90,16 +107,36 @@ const RegisterForm = () => {
           />
         </div>
         <div className="form-group">
-          <input 
+          {formData.isPublic ? (<input 
             type="checkbox" 
             name="isPublic" 
             onChange={handleChange} 
-            className="form-checkbox" 
-          />
+            className="form-checkbox"
+            checked
+          />)
+          : (<input 
+            type="checkbox" 
+            name="isPublic" 
+            onChange={handleChange} 
+            className="form-checkbox"/>
+            )
+          }
           <span className="form-checkbox-label">Make my account public</span>
         </div>
-        <button type="submit" className="form-button">Register</button>
+        <div className="form-group">
+          <label className="form-label">Enter your Password:</label>
+          <input 
+            type="password" 
+            name="password" 
+            value={formData.password} 
+            onChange={handleChange} 
+            className="form-input" 
+            required 
+          />
+        </div>
+        <button type="submit" className="form-button">Edit Profile</button>
       </form>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
 }

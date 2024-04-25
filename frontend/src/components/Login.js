@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // Import the axios library
 import '../styles/FormStyles.css'; // Import the CSS file for styling
-import { BASE_URL } from '../backendAPI';
+import env from "react-dotenv";
+import { useNavigate } from 'react-router-dom'; // Import useHistory
+
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -19,8 +23,11 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${BASE_URL}/login`, formData);
+      console.log(env.BASE_URL);
+      const response = await axios.post(`${env.BASE_URL}/login`, formData);
       alert('Logged in successfully');
+      localStorage.setItem('token', response.data.token); // Store the token in the browser
+      navigate('/'); // Redirect to the login page
       console.log(response.data); // Handle response from the server
     } catch (error) {
       if(error.response.status === 401) {

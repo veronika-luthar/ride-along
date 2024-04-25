@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/FormStyles.css'; // Import the CSS file for styling
-import {leaveRide} from '../backendAPI';
+import {leaveRide} from '../utils';
 
 const RideComponent = ({ ride, onSelectRide }) => {
   const {
@@ -22,9 +22,6 @@ const RideComponent = ({ ride, onSelectRide }) => {
   const handleSelectRide = async () => {
     const response = await leaveRide(id);
   };
-
-
-
 
   return (
     <div className="form-container">

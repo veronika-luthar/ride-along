@@ -1,6 +1,6 @@
 import RideComponent from './Ride';
 import React, { useState, useEffect } from 'react';
-import { fetchRides, fetchCities } from '../backendAPI';
+import { fetchRides, fetchCities } from '../utils';
 import '../styles/FormStyles.css';
 import '../styles/ride.css';
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/FormStyles.css'; // Import the CSS file for styling
-import { joinRide } from '../backendAPI';
-import { fetchRideAttendance, leaveRide, userInRide } from '../backendAPI';
+import { joinRide } from '../utils';
+import { fetchRideAttendance, leaveRide, userInRide } from '../utils';
 import { useEffect, useState } from 'react';
-import { fetchUserRides } from '../backendAPI';
+import { fetchUserRides } from '../utils';
 
 const RideComponent = ({ ride, onSelectRide }) => {
   const { city, createdAt, description, id, maxAttendance, date, time, startLocation, title, updatedAt } = ride;
