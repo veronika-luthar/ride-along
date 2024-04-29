@@ -9,13 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER
       },
-      reviewer_id: {
+      reviewerOd: {
         type: Sequelize.INTEGER
       },
-      no_stars: {
+      noStars: {
         type: Sequelize.INTEGER
       },
       comment: {
