@@ -10,12 +10,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       reviewerId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       noStars: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       comment: {
