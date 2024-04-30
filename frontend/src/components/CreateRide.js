@@ -28,7 +28,8 @@ export default function Form() {
 
     function handleSubmit(e){
         e.preventDefault();
-        axios.post(`${env.BASE_URL}/create-ride`, input)
+        const token = localStorage.getItem('token');
+        axios.post(`${env.BASE_URL}/create-ride`, input, { headers: { Authorization: `Bearer ${token}`}})
             .then(function (response) {
                 if(response.status === 200){
                     alert("Ride Created!");

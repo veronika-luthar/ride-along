@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Ride.init({
     id: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true
     },
     title: DataTypes.STRING,
