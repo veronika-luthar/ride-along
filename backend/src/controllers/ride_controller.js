@@ -1,11 +1,12 @@
 const {Ride, sequelize} = require('../models');
 const {RideAttendance} = require('../models');
+const user = require('../models/user');
 
 
 module.exports = {
   async createRide(req, res){
     try {
-      await Ride.create({
+      var createdRide = await Ride.create({
         title: req.body.title,
         date: req.body.date,
         time: req.body.time,
@@ -14,7 +15,12 @@ module.exports = {
         startLocation: req.body.start_location,
         description: req.body.description,
         maxAttendance: req.body.max_attendance
-      });
+      })
+      var fakeUserID = 2;
+      userID = fakeUserID;
+      createdRide = await Ride.findOne({where: {createdAt: createdRide.createdAt,
+      updatedAt: createdRide.updatedAt, title : createdRide.title}});// This isn't great is there a better way to do this?
+      await sequelize.query(`INSERT INTO RIDEATTENDANCEs (rideId, userId, notifications,createdAt,UpdatedAt,isOwner) VALUES (${createdRide.id}, ${userID}, true,NOW(),NOW(),true)`)
       res.status(200).json({status: "Success"});
     } catch (err){
       console.error(err);
@@ -22,6 +28,7 @@ module.exports = {
     }
   },
 
+   
     async getRidesByCity(req, res) {
         try {
           const city = req.params.city;
@@ -79,6 +86,7 @@ module.exports = {
 
     async getRides(req, res) {
         try {
+          console.log(req.user);
           const rides = await Ride.findAll();
           res.status(200).json(rides);
         } catch (error) {
