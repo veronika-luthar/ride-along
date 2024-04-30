@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn('RideAttendances', 'isOwnder', {
+    await queryInterface.addColumn('RideAttendances', 'isOwner', {
       type: Sequelize.BOOLEAN,
       allowNull: true,
       onUpdate: 'CASCADE',
@@ -12,6 +12,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn('RideAttendances', 'isOwnder');
+    await queryInterface.removeColumn('RideAttendances', 'isOwner');
   }
 };
