@@ -5,7 +5,7 @@ const {RideAttendance} = require('../models');
 module.exports = {
   async createRide(req, res){
     try {
-      await Ride.create({
+      const ride = await Ride.create({
         title: req.body.title,
         date: req.body.date,
         time: req.body.time,
@@ -15,11 +15,18 @@ module.exports = {
         description: req.body.description,
         maxAttendance: req.body.max_attendance
       });
+      console.log("RIDE " + ride.id);
+      console.log("USER" + req.user.id);
+      await RideAttendance.create({
+        rideId: ride.id,
+        userId: req.user.id
+      });
       res.status(200).json({status: "Success"});
     } catch (err){
       console.error(err);
       res.status(500).json({ error: 'Internal server error' });
     }
+    //console.log("RIDE " + ride.id);
   },
 
     async getRidesByCity(req, res) {

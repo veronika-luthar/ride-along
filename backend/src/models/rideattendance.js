@@ -17,8 +17,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   RideAttendance.init({
-    rideId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
+    rideId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     notifications: DataTypes.BOOLEAN
   }, {
     sequelize,
