@@ -1,5 +1,6 @@
 const {Ride, sequelize} = require('../models');
 const {RideAttendance} = require('../models');
+const user = require('../models/user');
 
 
 module.exports = {
@@ -15,8 +16,6 @@ module.exports = {
         description: req.body.description,
         maxAttendance: req.body.max_attendance
       });
-      console.log("RIDE " + ride.id);
-      console.log("USER" + req.user.id);
       await RideAttendance.create({
         rideId: ride.id,
         userId: req.user.id
@@ -26,9 +25,9 @@ module.exports = {
       console.error(err);
       res.status(500).json({ error: 'Internal server error' });
     }
-    //console.log("RIDE " + ride.id);
-  },
+},
 
+   
     async getRidesByCity(req, res) {
         try {
           const city = req.params.city;
@@ -86,6 +85,7 @@ module.exports = {
 
     async getRides(req, res) {
         try {
+          console.log(req.user);
           const rides = await Ride.findAll();
           res.status(200).json(rides);
         } catch (error) {
