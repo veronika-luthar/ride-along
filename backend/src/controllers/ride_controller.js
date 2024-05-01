@@ -16,11 +16,10 @@ module.exports = {
         description: req.body.description,
         maxAttendance: req.body.max_attendance
       });
-      console.log("RIDE " + ride.id);
-      console.log("USER" + req.user.id);
-      await RideAttendance.create({
+      const test = await RideAttendance.create({
         rideId: ride.id,
-        userId: req.user.id
+        userId: req.user.id,
+        isOwner: true,
       });
       res.status(200).json({status: "Success"});
     } catch (err){
