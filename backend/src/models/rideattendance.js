@@ -29,11 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-      primaryKey: true
-    },
     notifications: DataTypes.BOOLEAN,
     isOwner: DataTypes.BOOLEAN
-  }, {
+  }, 
     sequelize,
     modelName: 'RideAttendance',
   });
