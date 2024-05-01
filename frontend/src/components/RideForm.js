@@ -18,6 +18,7 @@ export default function Form({input, onChange, onSubmit}) {
                         id="title"
                         className="form-input"
                         required
+                        disabled={input.title == null}
                     />
                 </label>
                 <label>
@@ -29,6 +30,7 @@ export default function Form({input, onChange, onSubmit}) {
                         id="date"
                         className="form-input"
                         required
+                        disabled={input.date == null}
                     />
                 </label>
                 <label>
@@ -40,6 +42,7 @@ export default function Form({input, onChange, onSubmit}) {
                         id="time"
                         className="form-input"
                         required
+                        disabled={input.time == null}
                     />
                 </label>
                 <label>
@@ -51,6 +54,7 @@ export default function Form({input, onChange, onSubmit}) {
                         id="estimated_duration"
                         className="form-input"
                         required
+                        disabled={input.estimated_duration == null}
                     />
                 </label>
                 <label>
@@ -62,6 +66,7 @@ export default function Form({input, onChange, onSubmit}) {
                         id="city"
                         className="form-input"
                         required
+                        disabled={input.city == null}
                     />
                 </label>
                 <label>
@@ -73,6 +78,7 @@ export default function Form({input, onChange, onSubmit}) {
                         id="start_location"
                         className="form-input"
                         required
+                        disabled={input.start_location == null}
                     />
                 </label>
                 <label>
@@ -82,6 +88,7 @@ export default function Form({input, onChange, onSubmit}) {
                         onChange={onChange}
                         id="description"
                         className="form-input"
+                        disabled={input.description == null}
                     />
                 </label>
                 <label>
@@ -92,6 +99,7 @@ export default function Form({input, onChange, onSubmit}) {
                         type="number" 
                         id="max_attendance"
                         className="form-input"
+                        disabled={input.max_attendance == null}
                     />
                 </label>
                 <input type="submit" value="Create ride" className="form-button"></input>
