@@ -28,6 +28,32 @@ module.exports = {
     }
 },
 
+  async isOwner(req, res){
+    try{ const ride = await RideAttendance.findByPk(req.rideID, req.user.id);
+    if(isOwner){
+      res.json(JSON.stringify({isOwner: true}));
+    }
+  } catch(err){
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+    }
+  },
+
+  async editRide(req, res){
+    try {
+      await Ride.update({
+        date: req.body.date,
+        time: req.body.time,
+        estimatedDuration: req.body.estimated_duration,
+        startLocation: req.body.start_location,
+        description: req.body.description,
+        maxAttendance: req.body.max_attendance
+      })
+    } catch (err){
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  },
    
     async getRidesByCity(req, res) {
         try {

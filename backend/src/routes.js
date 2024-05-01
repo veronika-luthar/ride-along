@@ -24,6 +24,8 @@ router.get('/cities', ride_controller.getCities);
 router.post('/rides/:rideID/join', ride_controller.joinRide);
 
 router.post('/create-ride', authenticateToken, ride_controller.createRide);
+router.post('/edit-ride', ride_controller.editRide);
+router.get('is-owner', authenticateToken, ride_controller.isOwner);
 
 router.post('/rides/:rideID/leave', ride_controller.leaveRide); 
 
