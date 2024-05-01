@@ -8,6 +8,7 @@ import UserRides from './components/UserRides';
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 import React from 'react';
+import RideAttendances from './components/RideAttendance';
 
 function Routing(){
     return(
@@ -21,6 +22,7 @@ function Routing(){
                 <Route path={'/user-rides'} element={<UserRides/>} />
                 <Route path={'/profile'} element={<Profile/>} />
                 <Route path={'/edit-profile'} element={<EditProfile/>} />
+                <Route path={'/ride-attendance'} element={<RideAttendances rideId= {1} />} />
             </Routes>
         </BrowserRouter>
     )
