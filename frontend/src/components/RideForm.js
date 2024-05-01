@@ -1,9 +1,4 @@
-import axios from "axios";
-import { useState } from "react";
 import '../styles/FormStyles.css';
-import env from "react-dotenv";
-import { useNavigate } from 'react-router-dom'; // Import useHistory
-
 
 export default function Form({input, onChange, onSubmit}) {
     return (
