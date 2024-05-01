@@ -16,16 +16,17 @@ router.get('/rides', ride_controller.getRides);
 
 router.get('/rides/:city', ride_controller.getRidesByCity);
 
-router.get('/user/rides/:userID', ride_controller.getRidesByUser);
+
+router.get('/user/rides',authenticateToken,ride_controller.getRidesByUser);
 
 router.get('/cities', ride_controller.getCities);
 
 
-router.post('/rides/:rideID/join', ride_controller.joinRide);
+router.post('/rides/:rideID/join',authenticateToken, ride_controller.joinRide);
 
 router.post('/create-ride', authenticateToken, ride_controller.createRide);
 
-router.post('/rides/:rideID/leave', ride_controller.leaveRide); 
+router.post('/rides/:rideID/leave',authenticateToken,ride_controller.leaveRide); 
 
 router.get('/rides/:rideID/attendance', ride_controller.getRideAttendance); 
 

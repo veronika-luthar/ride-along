@@ -49,7 +49,7 @@ module.exports = {
     async joinRide(req, res) {
         try {
             const rideID = req.params.rideID;
-            const userID = req.query.userID;
+            const userID = req.user.id
             const ride = await Ride.findOne({ where: { id: rideID } });
 
             if (!ride) {
@@ -110,7 +110,7 @@ module.exports = {
 
     async getRidesByUser(req,res){
       try{
-        const userID = req.params.userID;
+        const userID = req.user.id;
         const rides = await sequelize.query(`SELECT * FROM rides WHERE id IN (SELECT rideId FROM rideattendances WHERE userId = ${userID})`);
         res.status(200).json(rides[0]);
       }
@@ -123,7 +123,7 @@ module.exports = {
     async leaveRide(req, res) {
       try {
           const rideID = req.params.rideID;
-          const userID = req.query.userID;
+          const userID = req.user.id; 
           const ride = await Ride.findOne({ where: { id: rideID } });
           if (!ride) {
               return res.status(404).json({ error: 'Ride not found' });
@@ -151,6 +151,46 @@ module.exports = {
           }
         });
         attendance = attendance[0].dataValues.no_of_attendees;
+        console.log(attendance);
+        res.status(200).json(attendance);
+      }catch(error){
+        console.error('Error retrieving ride attendance:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    },
+
+
+    async getUserInformationForRide(req,res){
+      const rideID = req.params.rideID;
+      try{
+        var attendance = await User.findAll({
+          attributes: [
+            'name',
+            [
+              sequelize.literal(`
+                CASE
+                  WHEN "User"."isPublicProfile" = true THEN "User"."phoneNumber"
+                  ELSE NULL
+                END
+              `),
+              'phoneNumber'
+            ]
+          ],
+          include: [
+            {
+              model: RideAttendance,
+              where: {
+                isOwner: true
+              },
+              include: [
+                {
+                  model: Ride,
+                  required: true
+                }
+              ]
+            }
+          ]
+        })
         console.log(attendance);
         res.status(200).json(attendance);
       }catch(error){
