@@ -27,6 +27,19 @@ h1 {
   cursor: pointer;
 }
 
+.action-button-2 {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #21dbdf;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .action-button:hover {
   background-color: #0056b3;
 }
