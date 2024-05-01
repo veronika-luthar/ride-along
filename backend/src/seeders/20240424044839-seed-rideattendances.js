@@ -19,6 +19,7 @@ module.exports = {
           notifications: true,
           createdAt: new Date(),
           updatedAt: new Date(),
+          isOwner : true
         },
         {
           rideId: rideIds[1],
@@ -26,7 +27,25 @@ module.exports = {
           notifications: false,
           createdAt: new Date(),
           updatedAt: new Date(),
+          isOwner : true
         },
+        {
+          rideId: rideIds[1],
+          userId: userIds[0],
+          notifications: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          isOwner : false
+        },
+        {
+          rideId: rideIds[0],
+          userId: userIds[1],
+          notifications: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          isOwner : false
+        },
+        
         // Add more ride attendance objects as needed
       ];
 
