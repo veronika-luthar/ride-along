@@ -30,6 +30,8 @@ router.post('/rides/:rideID/leave',authenticateToken,ride_controller.leaveRide);
 
 router.get('/rides/:rideID/attendance', ride_controller.getRideAttendance); 
 
+router.get('/rides/:rideID/users', ride_controller.getUserInformationForRide); 
+
 
 
 

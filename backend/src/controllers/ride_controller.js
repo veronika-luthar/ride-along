@@ -1,6 +1,6 @@
 const {Ride, sequelize} = require('../models');
 const {RideAttendance} = require('../models');
-const user = require('../models/user');
+const {User} = require('../models');
 
 
 module.exports = {
@@ -163,18 +163,19 @@ module.exports = {
     async getUserInformationForRide(req,res){
       const rideID = req.params.rideID;
       try{
+      /*
         var attendance = await User.findAll({
           attributes: [
             'name',
             [
               sequelize.literal(`
-                CASE
-                  WHEN "User"."isPublicProfile" = true THEN "User"."phoneNumber"
-                  ELSE NULL
-                END
-              `),
-              'phoneNumber'
-            ]
+              CASE
+                WHEN \`User\`.\`public\` = true THEN \`User\`.\`phone_Number\`
+                ELSE NULL
+              END
+            `),
+            'phoneNumber'
+          ]
           ],
           include: [
             {
@@ -182,16 +183,12 @@ module.exports = {
               where: {
                 isOwner: true
               },
-              include: [
-                {
-                  model: Ride,
-                  required: true
-                }
-              ]
             }
           ]
-        })
+        })*/
+        var attendance = await sequelize.query(`SELECT name, isOwner,CASE WHEN public = true THEN phone_number ELSE NULL END AS phoneNumber FROM users JOIN rideattendances ON users.id = rideattendances.userId WHERE rideId = ${rideID}`);
         console.log(attendance);
+        
         res.status(200).json(attendance);
       }catch(error){
         console.error('Error retrieving ride attendance:', error);
