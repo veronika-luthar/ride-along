@@ -1,4 +1,5 @@
 import env from "react-dotenv";
+import axios from 'axios'; // Import the axios library
 
 export const fetchRides = async () => {
   try {
@@ -24,7 +25,12 @@ export const fetchRidesByCity = async (city) => {
 
 export const fetchUserRides = async (userID) => {
   try {
-    const response = await fetch(`${env.BASE_URL}/user/rides/1`);
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${env.BASE_URL}/user/rides/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -51,8 +57,12 @@ export const fetchCities = async () => {
 export const leaveRide = async (rideID, userID) => {
   try {
     const userIDTest = 1;
-    const response = await fetch(`${env.BASE_URL}/rides/${rideID}/leave?userID=${userIDTest}`, {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${env.BASE_URL}/rides/${rideID}/leave`, {
     method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
     });
     alert("Ride left succesfully");
     window.location.reload();
@@ -64,11 +74,14 @@ export const leaveRide = async (rideID, userID) => {
 
 
 
-export const joinRide = async (rideID, userID) => {
+export const joinRide = async (rideID) => {
     try {
-        const testUserID = 1;
-        const response = await fetch(`${env.BASE_URL}/rides/${rideID}/join?userID=${testUserID}`, {
+      const token = localStorage.getItem('token');
+        const response = await fetch(`${env.BASE_URL}/rides/${rideID}/join`, {// Need to change route to use token.
         method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         });
         if(response.status === 200){
             alert("Joined ride successfully");
@@ -96,11 +109,27 @@ export const fetchRideAttendance = async (rideID) => {
   const response = await fetch(`${env.BASE_URL}/rides/${rideID}/attendance`);
   const data = await response.json();
   if(!response.ok){
-      throw new Error('Error fetching cities');
+      throw new Error('Error fetching attendance');
   }
   return data;
   }catch(error){
-      console.error('Error fetching cities:', error);
+      console.error('Error fetching attendance:', error);
+      throw error;
+  }   
+
+};
+
+export const fetchUserInRide = async (rideID) => {
+  try{
+  const response = await fetch(`${env.BASE_URL}/rides/${rideID}/users`);
+  console.log(response);
+  const data = await response.json();
+  if(!response.ok){
+      throw new Error('Error fetching users in ride');
+  }
+  return data;
+  }catch(error){
+      console.error('Error fetching users in ride:', error);
       throw error;
   }   
 
