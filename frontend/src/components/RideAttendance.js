@@ -5,7 +5,7 @@ import '../styles/Attendee.css';
 
 import { fetchUserInRide } from '../utils';
 
-const RideAttendances = ({ rideId }) => {
+const RideAttendances = ({ rideId,rideName}) => {
   const [attendance, setUsers] = useState([]);
 
   useEffect(() => {
@@ -22,8 +22,9 @@ const RideAttendances = ({ rideId }) => {
 
   return (
     <div className="form-container">
-      <h1 className="form-title">Ride Members</h1>
+      <h1 className="form-title">{rideName}</h1>
       <div className="form-group">
+      <h3 className="form-label">Ride members</h3>
         {owner && (
           <p className="owner-info">
             <span className="owner-label">Owner:</span> {owner.name}{' '}
