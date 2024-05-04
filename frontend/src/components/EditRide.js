@@ -2,15 +2,20 @@ import axios from "axios";
 import { useState } from "react";
 import '../styles/FormStyles.css';
 import env from "react-dotenv";
-import { useNavigate, useParams } from 'react-router-dom'; // Import useHistory
-import RideForm from './RideForm';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function EditRide() {
     const navigate = useNavigate();
-    const ride = JSON.parse(localStorage.getItem('ride-edit'));
-    console.log(ride);
-    const [input, setInput] = useState({ ride });
+    let ride = JSON.parse(localStorage.getItem('ride-edit'));
+
+    // Need to convert date to correct format
+    const date = new Date(ride.date).toISOString();
+    let newDate = date.slice(0, date.indexOf('T'));
+    ride.date = newDate;
+
+    const [input, setInput] = useState(ride);
+
 
     function handleChange(e) {
         setInput({
@@ -21,7 +26,7 @@ export default function EditRide() {
 
     function handleSubmit(e){
         e.preventDefault();
-        axios.post(`${env.BASE_URL}/edit-ride`, ride)
+        axios.post(`${env.BASE_URL}/edit-ride`, input)
             .then(function (response) {
                 if(response.status === 200){
                     alert("Ride Edited!");
@@ -34,15 +39,17 @@ export default function EditRide() {
             });
     }
 
+    
+
     return (
         <>
-            <h1>{ride.title}</h1>
-            <h2>{ride.city}</h2>
+            <h1>{input.title}</h1>
+            <h2>{input.city}</h2>
             <form onSubmit={handleSubmit} className="form-container">
                 <label>
                     Date
                     <input
-                        value={ride.date}
+                        value={input.date}
                         onChange={handleChange}
                         type="date"
                         id="date"
@@ -53,7 +60,7 @@ export default function EditRide() {
                 <label>
                     Time
                     <input
-                        value={ride.time}
+                        value={input.time}
                         onChange={handleChange}
                         type="time"
                         id="time"
@@ -64,10 +71,10 @@ export default function EditRide() {
                 <label>
                     Estimated duration
                     <input
-                        value={ride.estimatedDuration}
+                        value={input.estimatedDuration}
                         onChange={handleChange}
                         type="time"
-                        id="estimated_duration"
+                        id="estimatedDuration"
                         className="form-input"
                         required
                     />
@@ -75,10 +82,10 @@ export default function EditRide() {
                 <label>
                     Start location
                     <input 
-                        value={ride.startLocation}
+                        value={input.startLocation}
                         onChange={handleChange}
                         type="text"
-                        id="start_location"
+                        id="startLocation"
                         className="form-input"
                         required
                     />
@@ -86,7 +93,7 @@ export default function EditRide() {
                 <label>
                     Description
                     <textarea
-                        value={ride.description}
+                        value={input.description}
                         onChange={handleChange}
                         id="description"
                         className="form-input"
@@ -95,14 +102,14 @@ export default function EditRide() {
                 <label>
                     Max attendance
                     <input
-                        value={ride.maxAttendance}
+                        value={input.maxAttendance}
                         onChange={handleChange} 
                         type="number" 
-                        id="max_attendance"
+                        id="maxAttendance"
                         className="form-input"
                     />
                 </label>
-                <input type="submit" value="Create ride" className="form-button"></input>
+                <input type="submit" value="Confirm" className="form-button"></input>
             </form>
         </>
     ); 

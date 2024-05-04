@@ -5,12 +5,15 @@ import { fetchRideAttendance, leaveRide, userInRide } from '../utils';
 import { useEffect, useState } from 'react';
 import { fetchUserRides } from '../utils';
 import RideAttendances from './RideAttendance'; // Import the RideAttendances component
+import { Route, useNavigate } from 'react-router-dom';
+
 
 const RideComponent = ({ ride, onSelectRide }) => {
   const { city, createdAt, description, id, maxAttendance, date, time, startLocation, title, updatedAt } = ride;
   const [attendance, setAttendance] = useState(null);
   const [userInRide, setUserInRide] = useState(false);
   const [showAttendancePopup, setShowAttendancePopup] = useState(false);
+  const navigate = useNavigate();
 
   const fetchAttendance = async () => {
     const response = await fetchRideAttendance(id);
@@ -46,6 +49,11 @@ const RideComponent = ({ ride, onSelectRide }) => {
     setShowAttendancePopup(!showAttendancePopup);
   };
 
+  function onClick(){
+    localStorage.setItem('ride-edit', JSON.stringify(ride));
+    navigate('/edit-ride');
+  }
+
   return (
     <div className="form-container">
       <h3 className="form-title">{title}</h3>
@@ -59,6 +67,9 @@ const RideComponent = ({ ride, onSelectRide }) => {
       </button>
       <button className="form-button" onClick={toggleAttendancePopup}>
         View Attendance
+      </button>
+      <button onClick={onClick}>
+        Edit Ride
       </button>
       {showAttendancePopup && (
         <div className="attendance-popup">
