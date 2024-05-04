@@ -10,11 +10,11 @@ export default function CreateRide() {
         title: "",
         date: "",
         time: "",
-        estimated_duration: "",
+        estimatedDuration: "",
         city: "",
-        start_location: "",
+        startLocation: "",
         description: "",
-        max_attendance: "",
+        maxAttendance: "",
 
     });
 
@@ -79,7 +79,7 @@ export default function CreateRide() {
                 <label>
                     Estimated duration
                     <input
-                        value={input.estimated_duration}
+                        value={input.estimatedDuration}
                         onChange={handleChange}
                         type="time"
                         id="estimated_duration"
@@ -101,7 +101,7 @@ export default function CreateRide() {
                 <label>
                     Start location
                     <input 
-                        value={input.start_location}
+                        value={input.startLocation}
                         onChange={handleChange}
                         type="text"
                         id="start_location"
@@ -121,7 +121,7 @@ export default function CreateRide() {
                 <label>
                     Max attendance
                     <input
-                        value={input.max_attendance}
+                        value={input.maxAttendance}
                         onChange={handleChange} 
                         type="number" 
                         id="max_attendance"

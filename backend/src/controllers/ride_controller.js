@@ -10,11 +10,11 @@ module.exports = {
         title: req.body.title,
         date: req.body.date,
         time: req.body.time,
-        estimatedDuration: req.body.estimated_duration,
+        estimatedDuration: req.body.estimatedDuration,
         city: req.body.city,
-        startLocation: req.body.start_location,
+        startLocation: req.body.startLocation,
         description: req.body.description,
-        maxAttendance: req.body.max_attendance
+        maxAttendance: req.body.maxAttendance
       });
       const test = await RideAttendance.create({
         rideId: ride.id,
