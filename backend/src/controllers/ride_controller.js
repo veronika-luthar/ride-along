@@ -134,10 +134,6 @@ module.exports = {
         try {
           console.log(req.user);
           const rides = await Ride.findAll();
-        //  rides.forEach((ride) => {
-        //    ride.date = ride.date.toLocaleDateString();
-        //    console.log(ride.date);
-        //  });
           res.status(200).json(rides);
         } catch (error) {
           console.error('Error retrieving rides:', error);
