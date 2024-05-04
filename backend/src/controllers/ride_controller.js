@@ -29,21 +29,24 @@ module.exports = {
     //console.log("RIDE " + ride.id);
   },
 
-  async getRide(req, res){
-    try{
-      const ride = await Ride.findByPk(req.id);
-      res.status(200).json(JSON.stringify(ride));
-    } catch(err){
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
-      }
-  },
 
   async isOwner(req, res){
-    try{ const ride = await RideAttendance.findByPk(req.rideID, req.user.id);
-    if(isOwner){
-      res.json(JSON.stringify({isOwner: true}));
-    }
+    try{ 
+      const rideAttendance = await RideAttendance.findOne({
+        where: {
+          userId: req.user.id,
+          rideId: req.body.rideID
+        }
+      });
+      if(rideAttendance === null){
+        res.status(200).json({isOwner: false});
+      }
+      else if(rideAttendance.isOwner){
+        res.status(200).json({isOwner: true});
+      }
+      else{
+        res.status(200).json({isOwner: false});
+      }
   } catch(err){
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });

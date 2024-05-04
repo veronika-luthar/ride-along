@@ -1,6 +1,16 @@
 import env from "react-dotenv";
 import axios from 'axios'; // Import the axios library
 
+export const fetchOwner = async (rideID, token) => {
+  try{
+    const response = await axios.post(`${env.BASE_URL}/is-owner`, {rideID: rideID} , { headers: { Authorization: `Bearer ${token}`}});
+    return response.data.isOwner;
+  } catch (error){
+    console.error('Error checking if user is owner of ride.', error);
+    return false;
+  }
+}
+
 export const fetchRides = async () => {
   try {
     const response = await fetch(`${env.BASE_URL}/rides`);

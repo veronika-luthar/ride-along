@@ -1,11 +1,12 @@
 import React from 'react';
 import '../styles/FormStyles.css';
 import { joinRide } from '../utils';
-import { fetchRideAttendance, leaveRide, userInRide } from '../utils';
+import { fetchRideAttendance, leaveRide, userInRide, fetchOwner } from '../utils';
 import { useEffect, useState } from 'react';
 import { fetchUserRides } from '../utils';
 import RideAttendances from './RideAttendance'; // Import the RideAttendances component
 import { Route, useNavigate } from 'react-router-dom';
+
 
 
 const RideComponent = ({ ride, onSelectRide }) => {
@@ -14,6 +15,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
   const [userInRide, setUserInRide] = useState(false);
   const [showAttendancePopup, setShowAttendancePopup] = useState(false);
   const navigate = useNavigate();
+  const [userIsOwner, setUserIsOwner] = useState(false);
 
   const fetchAttendance = async () => {
     const response = await fetchRideAttendance(id);
@@ -32,6 +34,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
   useEffect(() => {
     fetchUserInRide();
     fetchAttendance();
+    isUserOwner();
   }, [ride.id]);
 
   const formattedScheduledTime = `${new Date(date).toLocaleString().split(',')[0]}, ${time}`;
@@ -54,6 +57,14 @@ const RideComponent = ({ ride, onSelectRide }) => {
     navigate('/edit-ride');
   }
 
+  async function isUserOwner(){
+    if(localStorage.getItem('token') !== null && localStorage.getItem('token') !== ""){
+      const res = await fetchOwner(ride.id, localStorage.getItem('token'));
+      console.log(res);
+      setUserIsOwner(res);
+    }
+  }
+
   return (
     <div className="form-container">
       <h3 className="form-title">{title}</h3>
@@ -68,9 +79,9 @@ const RideComponent = ({ ride, onSelectRide }) => {
       <button className="form-button" onClick={toggleAttendancePopup}>
         View Attendance
       </button>
-      <button onClick={onClick}>
+      {userIsOwner ? <button onClick={onClick} className="form-button">
         Edit Ride
-      </button>
+      </button> : ""}
       {showAttendancePopup && (
         <div className="attendance-popup">
           <div className="attendance-popup-content">
