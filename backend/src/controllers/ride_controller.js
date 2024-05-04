@@ -28,6 +28,16 @@ module.exports = {
     }
 },
 
+  async getRide(req, res){
+    try{
+      const ride = await Ride.findByPk(req.id);
+      res.status(200).json(JSON.stringify(ride));
+    } catch(err){
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+      }
+  },
+
   async isOwner(req, res){
     try{ const ride = await RideAttendance.findByPk(req.rideID, req.user.id);
     if(isOwner){
@@ -41,14 +51,23 @@ module.exports = {
 
   async editRide(req, res){
     try {
-      await Ride.update({
+      const ride = await Ride.findByPk(req.body.id);
+      const newRide = await ride.update({
         date: req.body.date,
         time: req.body.time,
-        estimatedDuration: req.body.estimated_duration,
-        startLocation: req.body.start_location,
+        estimatedDuration: req.body.estimatedDuration,
+        startLocation: req.body.startLocation,
         description: req.body.description,
-        maxAttendance: req.body.max_attendance
-      })
+        maxAttendance: req.body.maxAttendance
+      },
+      {
+        where: {
+          id: req.body.id
+        },
+      });
+      newRide.save();
+      console.log(newRide);
+      res.status(200).json({status: "Success"});
     } catch (err){
       console.error(err);
       res.status(500).json({ error: 'Internal server error' });
@@ -114,6 +133,10 @@ module.exports = {
         try {
           console.log(req.user);
           const rides = await Ride.findAll();
+        //  rides.forEach((ride) => {
+        //    ride.date = ride.date.toLocaleDateString();
+        //    console.log(ride.date);
+        //  });
           res.status(200).json(rides);
         } catch (error) {
           console.error('Error retrieving rides:', error);
