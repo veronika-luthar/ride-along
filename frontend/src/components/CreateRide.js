@@ -82,7 +82,7 @@ export default function CreateRide() {
                         value={input.estimatedDuration}
                         onChange={handleChange}
                         type="time"
-                        id="estimated_duration"
+                        id="estimatedDuration"
                         className="form-input"
                         required
                     />
@@ -104,7 +104,7 @@ export default function CreateRide() {
                         value={input.startLocation}
                         onChange={handleChange}
                         type="text"
-                        id="start_location"
+                        id="startLocation"
                         className="form-input"
                         required
                     />
@@ -124,7 +124,7 @@ export default function CreateRide() {
                         value={input.maxAttendance}
                         onChange={handleChange} 
                         type="number" 
-                        id="max_attendance"
+                        id="maxAttendance"
                         className="form-input"
                     />
                 </label>
