@@ -81,7 +81,7 @@ export default function CreateRide() {
                     <input
                         value={input.estimatedDuration}
                         onChange={handleChange}
-                        type="time"
+                        type="number"
                         id="estimatedDuration"
                         className="form-input"
                         required
