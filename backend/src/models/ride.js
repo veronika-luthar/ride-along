@@ -13,19 +13,70 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+  function dateConstraint(){
+    const date = new Date();
+    date.setDate(date.getDate()+2);
+    return date.toDateString();
+  }
+
   Ride.init({
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    title: DataTypes.STRING,
-    date: DataTypes.DATE,
-    time: DataTypes.TIME,
-    estimatedDuration: DataTypes.TIME,
-    city: DataTypes.STRING,
-    startLocation: DataTypes.STRING,
-    description: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [2, 50]
+      }
+    },
+    date: {
+      type: DataTypes.DATEONLY,
+      validate: {
+        isAfter: dateConstraint()
+      }
+    }, 
+    time: {
+      type: DataTypes.TIME,
+      validate: {
+        timeValidator(value){
+          const [hour, minute] = value.split(":");
+          const date = new Date(this.date);
+          
+          const datetime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute);
+          const currDate = new Date();
+          if((datetime.getTime() - currDate.getTime() < (3600000 * 48))){
+            throw new Error("Ride must be scheduled for at least 48 hours from now.");
+          }
+        }
+      }
+    },
+      estimatedDuration: {
+      type: DataTypes.SMALLINT,
+      validate: {
+        max: 10,
+        min: 1
+      }
+    },
+    city: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [2,100]
+      }
+    },
+    startLocation: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [2,250]
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [0,250]
+      }
+    },
     maxAttendance: DataTypes.STRING
   }, {
     sequelize,
