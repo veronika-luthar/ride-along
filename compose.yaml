@@ -26,6 +26,8 @@ services:
     depends_on:
       database:
         condition: service_healthy
+    ports:
+      - "3000:3000"
     volumes:
       - ./backend:/app
     command: sh -c "
