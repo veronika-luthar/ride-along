@@ -70,7 +70,7 @@ module.exports = {
             }
             ride.updatedAt = sequelize.fn('NOW');
             await ride.save();
-            await sequelize.query(`INSERT INTO RIDEATTENDANCEs (rideId, userId, notifications,createdAt,UpdatedAt) VALUES (${rideID}, ${userID}, true,NOW(),NOW())`)
+            await sequelize.query(`INSERT INTO RideAttendances (rideId, userId, notifications,createdAt,UpdatedAt) VALUES (${rideID}, ${userID}, true,NOW(),NOW())`)
             /*await RideAttendance.create({
                 rideId: rideID,
                 userId: userID,
@@ -99,7 +99,7 @@ module.exports = {
 
     async getCities(req,res){
         try{
-            const [cities, metadata] = await sequelize.query(`SELECT DISTINCT city FROM rides`);
+            const [cities, metadata] = await sequelize.query(`SELECT DISTINCT city FROM Rides`);
             const cityValues = cities.map(city => city.city);
             res.status(200).json(cityValues);
         }catch(error){
@@ -111,7 +111,7 @@ module.exports = {
     async getRidesByUser(req,res){
       try{
         const userID = req.user.id;
-        const rides = await sequelize.query(`SELECT * FROM rides WHERE id IN (SELECT rideId FROM rideattendances WHERE userId = ${userID})`);
+        const rides = await sequelize.query(`SELECT * FROM Rides WHERE id IN (SELECT rideId FROM RideAttendances WHERE userId = ${userID})`);
         res.status(200).json(rides[0]);
       }
       catch(error){
@@ -130,7 +130,7 @@ module.exports = {
           }
           ride.updatedAt = sequelize.fn('NOW');
           await ride.save();
-          await sequelize.query(`DELETE FROM rideattendances WHERE rideId = ${rideID} AND userId = ${userID}`);
+          await sequelize.query(`DELETE FROM RideAttendances WHERE rideId = ${rideID} AND userId = ${userID}`);
           res.status(200).json({ message: 'Ride left successfully' }); // Send a response back to the client
       } catch (error) {
         console.error('Error leaving ride:', error);
@@ -186,7 +186,7 @@ module.exports = {
             }
           ]
         })*/
-        var attendance = await sequelize.query(`SELECT name, isOwner,CASE WHEN public = true THEN phone_number ELSE NULL END AS phoneNumber FROM users JOIN rideattendances ON users.id = rideattendances.userId WHERE rideId = ${rideID}`);
+        var attendance = await sequelize.query(`SELECT name, isOwner,CASE WHEN public = true THEN phone_number ELSE NULL END AS phoneNumber FROM Users JOIN RideAttendances ON Users.id = RideAttendances.userId WHERE rideId = ${rideID}`);
         console.log(attendance);
         
         res.status(200).json(attendance);
