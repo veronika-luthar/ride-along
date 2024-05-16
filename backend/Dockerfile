@@ -13,6 +13,10 @@ RUN npm install --build-from-source
 # Copy the rest of the backend code to the working directory
 COPY . .
 
+# Add wait-for-it.sh script
+COPY wait-for-it.sh .
+
+RUN chmod +x wait-for-it.sh
 # Expose the port on which the server will run (if needed)
 EXPOSE 3000
 
