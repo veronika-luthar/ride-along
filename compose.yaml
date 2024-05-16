@@ -4,15 +4,12 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    environment:
-      - DB_HOST=database
-      - DB_PORT=3306
-      - DB_NAME=mydb
-      - DB_USER=root
-      - DB_PASSWORD=password
+    env_file: ./backend/.env # Specify environment variables
     depends_on:
       - database
-  
+    volumes:
+      - ./backend:/app # Map host and container directories
+
   frontend:
     build:
       context: ./frontend
@@ -21,14 +18,21 @@ services:
       - "8080:3001"
     depends_on:
       - backend
-  
+
   database:
     image: mysql:8.0
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=mydb
+    env_file: ./backend/.env
+    ports:
+      - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
-  
+    command: --default-authentication-plugin=mysql_native_password --sql_mode=NO_ENGINE_SUBSTITUTION
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    
+
 volumes:
   db-data:

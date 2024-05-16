@@ -1,6 +1,6 @@
 const {User, sequelize} = require('../models');
 const { generateToken, authenticateLogin, authenticateToken } = require("../auth");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   async hi(req, res) {
