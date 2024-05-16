@@ -1,24 +1,8 @@
 version: '3'
+networks:
+  app-network:
+    driver: bridge
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    env_file: ./backend/.env # Specify environment variables
-    depends_on:
-      - database
-    volumes:
-      - ./backend:/app # Map host and container directories
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "8080:3001"
-    depends_on:
-      - backend
-
   database:
     image: mysql:8.0
     env_file: ./backend/.env
@@ -32,7 +16,33 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-    
-
+    networks:
+      - app-network
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file: ./backend/.env
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    command: sh -c "
+      ./wait-for-it.sh database:3306 --timeout=60 &&
+      npx sequelize-cli db:migrate &&
+      npm start"
+    networks:
+      - app-network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    expose:
+      - "3001"
+    depends_on:
+      - backend
 volumes:
   db-data:

@@ -21,9 +21,10 @@ FROM nginx:stable-alpine
 
 # Copy the built frontend files from the previous stage to the Nginx HTML directory
 COPY --from=build /app/build /usr/share/nginx/html
+COPY default.conf /etc/nginx/conf.d/default.conf
 
 # Expose the port on which the frontend will be served
-EXPOSE 3000
+EXPOSE 3001
 
 # Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]

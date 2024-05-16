@@ -14,7 +14,7 @@ RUN npm install --build-from-source
 COPY . .
 
 # Expose the port on which the server will run (if needed)
-EXPOSE 3001
+EXPOSE 3000
 
 # Start the server
 CMD ["npm", "start"]
