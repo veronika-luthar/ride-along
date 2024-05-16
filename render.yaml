@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: myapp
+    env: docker
+    dockerCommand: docker-compose up
+    dockerfilePath: ./docker-compose.yml
+    autoDeploy: false
+    disk:
+      mountPath: /data
+      sizeGB: 10
