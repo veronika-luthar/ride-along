@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true
     },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       validate: {
         len: [2, 50]
       }
@@ -60,21 +60,21 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     city: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
       validate: {
         len: [2,100]
       }
     },
     startLocation: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(250),
       validate: {
         len: [2,250]
       }
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(500),
       validate: {
-        len: [0,250]
+        len: [0,500]
       }
     },
     maxAttendance: DataTypes.STRING
