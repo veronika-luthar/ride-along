@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: myapp
+    name: ride-along
     env: docker
     dockerCommand: docker-compose up
     dockerfilePath: ./docker-compose.yml

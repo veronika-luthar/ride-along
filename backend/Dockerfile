@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the dependencies and rebuild bcrypt
-RUN npm install --build-from-source
+RUN npm install && npm install sequelize-cli -g
 
 # Copy the rest of the backend code to the working directory
 COPY . .
