@@ -3,19 +3,14 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Ratings', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
       reviewerId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        primaryKey: true
       },
       no_stars: {
         allowNull: false,
@@ -31,6 +26,11 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      rideID: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        primaryKey: true
       }
     });
   },
