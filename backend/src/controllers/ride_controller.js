@@ -24,7 +24,7 @@ module.exports = {
       res.status(200).json({status: "Success"});
     } catch (err){
       console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: err });
     }
     //console.log("RIDE " + ride.id);
   },

@@ -28,13 +28,19 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING(50),
       validate: {
-        len: [2, 50]
+        len: {
+          args: [2,50],
+          msg: "Title must be more than 2 characters and less than 50 characters in length."
+        },
       }
     },
     date: {
       type: DataTypes.DATEONLY,
       validate: {
-        isAfter: dateConstraint()
+        isAfter: {
+          args: [dateConstraint()],
+          msg: "Date must be at least two days away."
+        }
       }
     }, 
     time: {
@@ -55,26 +61,41 @@ module.exports = (sequelize, DataTypes) => {
       estimatedDuration: {
       type: DataTypes.SMALLINT,
       validate: {
-        max: 10,
-        min: 1
+        max: {
+          args: [10],
+          msg: "Estimated duration must be less than 10 hours."
+        },
+        min: {
+          args: [1],
+          msg: "Estimated duration must be at least 1 hour."
+        }
       }
     },
     city: {
       type: DataTypes.STRING(100),
       validate: {
-        len: [2,100]
+        len: {
+          args: [2,100],
+          msg: "City must be more than 2 characters and less than 100 characters in length."
+        },
       }
     },
     startLocation: {
       type: DataTypes.STRING(250),
       validate: {
-        len: [2,250]
+        len: {
+          args: [2,250],
+          msg: "Start location must be more than 2 characters and less than 250 characters in length."
+        },
       }
     },
     description: {
       type: DataTypes.STRING(500),
       validate: {
-        len: [0,500]
+        len: {
+          args: [0,500],
+          msg: "Description must be less than 500 characters in length."
+        },
       }
     },
     maxAttendance: DataTypes.STRING

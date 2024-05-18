@@ -18,6 +18,8 @@ export default function CreateRide() {
 
     });
 
+    const [errors, setErrors] = useState([]);
+
     function handleChange(e) {
         setInput({
             ...input,
@@ -36,7 +38,16 @@ export default function CreateRide() {
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                const errorType = error.response.data.error;
+                console.log(errorType.name);
+                if(errorType.name === "SequelizeValidationError"){
+                    const errors = errorType.errors.map((x)  => x.message);
+                    setErrors(errors);
+                }
+                else{
+                    setErrors(["Unknown error occurred"]);
+                }
+                
             });
     }
 
@@ -84,7 +95,7 @@ export default function CreateRide() {
                         value={input.estimatedDuration}
                         onChange={handleChange}
                         type="number"
-                        min="3"
+                        min="1"
                         max="10"
                         id="estimatedDuration"
                         className="form-input"
@@ -136,6 +147,9 @@ export default function CreateRide() {
                         className="form-input"
                     />
                 </label>
+                {
+                   errors.map((error, index) => <p key={index}>{error}</p>)
+                }
                 <input type="submit" value="Create ride" className="form-button"></input>
             </form>
         </>
