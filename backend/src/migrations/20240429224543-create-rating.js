@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      noStars: {
+      no_stars: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
