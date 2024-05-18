@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { fetchUserRides } from '../utils';
 import RideAttendances from './RideAttendance'; // Import the RideAttendances component
 import { Route, useNavigate } from 'react-router-dom';
+import RateRider  from './RateRider';
 
 
 
@@ -14,6 +15,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
   const [attendance, setAttendance] = useState(null);
   const [userInRide, setUserInRide] = useState(false);
   const [showAttendancePopup, setShowAttendancePopup] = useState(false);
+  const [showRateRideButton, setRateRidePopUp] = useState(false);
   const navigate = useNavigate();
   const [userIsOwner, setUserIsOwner] = useState(false);
 
@@ -52,6 +54,10 @@ const RideComponent = ({ ride, onSelectRide }) => {
     setShowAttendancePopup(!showAttendancePopup);
   };
 
+ const toggleRateRidePopup = () => {
+      setRateRidePopUp(!showRateRideButton);
+  };
+
   function onClick(){
     localStorage.setItem('ride-edit', JSON.stringify(ride));
     navigate('/edit-ride');
@@ -79,6 +85,9 @@ const RideComponent = ({ ride, onSelectRide }) => {
       <button className="form-button" onClick={toggleAttendancePopup}>
         View Attendance
       </button>
+      <button className="form-button" onClick={toggleRateRidePopup}>
+        Rate Ride
+      </button>
       {userIsOwner ? <button onClick={onClick} className="form-button">
         Edit Ride
       </button> : ""}
@@ -87,6 +96,16 @@ const RideComponent = ({ ride, onSelectRide }) => {
           <div className="attendance-popup-content">
             <RideAttendances rideId={id} rideName= {title} />
             <button className="form-button" onClick={toggleAttendancePopup}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      {showRateRideButton && (
+        <div className="attendance-popup">
+          <div className="attendance-popup-content">
+            <RateRider rideId={id}/>
+            <button className="form-button" onClick={toggleRateRidePopup}>
               Close
             </button>
           </div>
