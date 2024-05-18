@@ -104,7 +104,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
       {showRateRideButton && (
         <div className="attendance-popup">
           <div className="attendance-popup-content">
-            <RateRider rideId={id}/>
+            <RateRider rideID={id}/>
             <button className="form-button" onClick={toggleRateRidePopup}>
               Close
             </button>

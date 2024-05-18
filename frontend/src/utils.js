@@ -145,21 +145,22 @@ export const fetchUserInRide = async (rideID) => {
 
 };
 
-export const rateRide = async (rideID) => {
+export const rateRide = async (rideID,ratingData) => {
   try{
     const token = localStorage.getItem('token');
-    const response = await fetch(`${env.BASE_URL}/rides/${rideID}/rate`, {// Need to change route to use token.
+    const response = await fetch(`${env.BASE_URL}/rides/${rideID}/rate`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
     },
-    });
+    body: JSON.stringify(ratingData)
+  });
   console.log(response);
   const data = await response.json();
   if(!response.ok){
       throw new Error('Error rating ride');
   }
-  return data;
   }catch(error){
       console.error('Error fetching users in ride:', error);
       throw error;

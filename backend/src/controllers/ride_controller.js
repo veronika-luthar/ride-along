@@ -237,18 +237,21 @@ module.exports = {
     async rateRide(req,res){
 
       try{
-        const rideOwner = await sequelize.query(`
-          select userId from rideattendances where rideId = ${req.body.rideId} and isOwner = true
+        var rideOwner = await sequelize.query(`
+          select 
+            userId 
+          from 
+            rideattendances 
+          where rideId = ${req.params.rideID} 
+                and isOwner = true
         `);
-        console.log(rideOwner[0][0].userId);
-        console.log(rideOwner);
-
+        rideOwner = rideOwner[0][0].userId;
         const rating = await Rating.create({
-          user_id: rideOwner,
-          reviewer_id: req.user.id,
-          no_stars: req.body.no_stars,
+          userId: rideOwner,
+          reviewerId: req.user.id,
+          no_stars: req.body.rating,
           comment: req.body.comment,
-          rideID: req.params.rideId
+          rideID: req.params.rideID
         }); 
         console.log(rating)
         res.status(200).json({status: "Success"});

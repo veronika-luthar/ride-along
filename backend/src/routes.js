@@ -36,7 +36,7 @@ router.get('/rides/:rideID/attendance', ride_controller.getRideAttendance);
 
 router.get('/rides/:rideID/users', ride_controller.getUserInformationForRide); 
 
-router.post('/rides/:rideID/rate', authenticateToken, ride_controller.rateRider);
+router.post('/rides/:rideID/rate', authenticateToken, ride_controller.rateRide);
 
 
 

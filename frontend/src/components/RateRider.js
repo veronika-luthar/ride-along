@@ -1,6 +1,8 @@
 import { useState } from "react";
+import React from 'react';
+import {rateRide} from '../utils';
 
-export default function RateRider(rideId){
+const RateRider = ({rideID}) => {
     const[stars, setStars] = useState([false, false, false, false, false ]);
     const[countStars, setCountStars] = useState(0);
     
@@ -15,9 +17,25 @@ export default function RateRider(rideId){
     }
 
     function handleSubmit(e){
-        /* TO-DO */
-        
+        e.preventDefault()
+        const formData = new FormData(e.target);
+        const comment = formData.get('comment');
+        const rating = stars.filter(Boolean).length;
+      
+        console.log('Form submitted!');
+        console.log(rideID)
+        console.log('Comment:', comment);
+        console.log('Rating:', rating);
+        const ratingData = {
+            rating: rating,
+            comment: comment
+        };
+        rateRide(rideID,ratingData).then(() => {
+            window.location.reload();
+        });
+        console.log(`You rated the rider ${rating} stars!`);
     }
+        
 
     return(
         <>
@@ -32,7 +50,7 @@ export default function RateRider(rideId){
                 </label>
                 <label>
                     Comment
-                    <textarea className="form-input"/>
+                 <textarea className="form-input" name="comment" />
                 </label>
                 <input type="submit" value="Submit review" className="form-button"></input>
             </form>
@@ -57,4 +75,6 @@ function Stars({stars, handleChange, className}){
             </div>
         </>
     )
-}
+};
+
+export default RateRider;
