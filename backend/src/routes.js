@@ -12,6 +12,8 @@ router.post('/edit_profile', authenticateToken, user_controller.editProfile);
 router.post('/login', user_controller.loginUser);
 router.get('/get_user', authenticateToken, user_controller.getUser);
 
+router.get('/get_user/ratings', authenticateToken, user_controller.getUserRating);
+
 router.get('/rides', ride_controller.getRides);
 
 router.get('/rides/:city', ride_controller.getRidesByCity);
