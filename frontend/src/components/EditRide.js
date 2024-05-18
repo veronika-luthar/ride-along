@@ -16,6 +16,23 @@ export default function EditRide() {
 
     const [input, setInput] = useState(ride);
 
+    function deleteRide(){
+        const token = localStorage.getItem('token');
+        console.log(ride.id);
+        if(window.confirm("Are you sure you want to delete this ride?")){
+            axios.post(`${env.BASE_URL}/delete-ride`, {id: ride.id}, { headers: { Authorization: `Bearer ${token}`}})
+                .then(function (response){
+                    if(response.status === 200){
+                        alert("Ride Deleted!");
+                        localStorage.removeItem('ride-edit');
+                        navigate('/');
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })   
+        }
+    }
 
     function handleChange(e) {
         setInput({
@@ -26,7 +43,8 @@ export default function EditRide() {
 
     function handleSubmit(e){
         e.preventDefault();
-        axios.post(`${env.BASE_URL}/edit-ride`, input)
+        const token = localStorage.getItem('token');
+        axios.post(`${env.BASE_URL}/edit-ride`, input, { headers: { Authorization: `Bearer ${token}`}})
             .then(function (response) {
                 if(response.status === 200){
                     alert("Ride Edited!");
@@ -45,6 +63,7 @@ export default function EditRide() {
         <>
             <h1>{input.title}</h1>
             <h2>{input.city}</h2>
+            <button onClick={deleteRide}>Delete</button>
             <form onSubmit={handleSubmit} className="form-container">
                 <label>
                     Date

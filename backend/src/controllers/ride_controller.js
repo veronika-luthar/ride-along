@@ -26,8 +26,26 @@ module.exports = {
       console.error(err);
       res.status(500).json({ error: err });
     }
-},
+  },
 
+  async deleteRide(req, res){
+    try{
+      await RideAttendance.destroy({
+        where: {
+          rideId: req.body.id
+        }
+      });
+      await Ride.destroy({
+        where: {
+          id: req.body.id
+        }
+      });
+      res.status(200).json({status: "Success"});
+    } catch(err){
+      console.error(err);
+      res.status(500).json({error: "Error deleting ride."});
+    }
+  },
 
   async isOwner(req, res){
     try{ 
