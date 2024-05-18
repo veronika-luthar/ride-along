@@ -18,20 +18,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   RideAttendance.init({
     rideId: {
-      type: {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-      primaryKey: true
-    },
     userId: {
-      type: {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
     notifications: DataTypes.BOOLEAN,
     isOwner: DataTypes.BOOLEAN
-  }, 
+  },{
     sequelize,
     modelName: 'RideAttendance',
   });
