@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function RateRider(){
+export default function RateRider(rideId){
     const[stars, setStars] = useState([false, false, false, false, false ]);
     const[countStars, setCountStars] = useState(0);
     
@@ -16,6 +16,7 @@ export default function RateRider(){
 
     function handleSubmit(e){
         /* TO-DO */
+        
     }
 
     return(
