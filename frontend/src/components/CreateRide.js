@@ -49,6 +49,8 @@ export default function CreateRide() {
                         value={input.title}
                         onChange={handleChange}
                         type="text"
+                        minLength="2"
+                        maxLength="50"
                         id="title"
                         className="form-input"
                         required
@@ -82,9 +84,10 @@ export default function CreateRide() {
                         value={input.estimatedDuration}
                         onChange={handleChange}
                         type="number"
+                        min="3"
+                        max="10"
                         id="estimatedDuration"
                         className="form-input"
-                        required
                     />
                 </label>
                 <label>
@@ -93,6 +96,8 @@ export default function CreateRide() {
                         value={input.city}
                         onChange={handleChange}
                         type="text"
+                        minLength="2"
+                        maxLength="100"
                         id="city"
                         className="form-input"
                         required
@@ -104,6 +109,8 @@ export default function CreateRide() {
                         value={input.startLocation}
                         onChange={handleChange}
                         type="text"
+                        minLength="2"
+                        maxLength="250"
                         id="startLocation"
                         className="form-input"
                         required
@@ -114,6 +121,7 @@ export default function CreateRide() {
                     <textarea
                         value={input.description}
                         onChange={handleChange}
+                        maxLength="500"
                         id="description"
                         className="form-input"
                     />
