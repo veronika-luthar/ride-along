@@ -34,6 +34,7 @@ services:
     command: sh -c "
       chmod +x wait-for-it.sh &&
       ./wait-for-it.sh database:3306 --timeout=60 &&
+      npm install &&
       npx sequelize-cli db:create &&
       npx sequelize-cli db:migrate &&
       npx sequelize-cli db:seed:all &&
