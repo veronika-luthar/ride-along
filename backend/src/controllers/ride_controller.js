@@ -212,19 +212,22 @@ module.exports = {
       const rideID = req.params.rideID;
       try{
         var attendance = await sequelize.query(
-          `SELECT
-           name,
-           isOwner,
-           CASE 
+          ` SELECT
+            name,
+            isOwner,
+            avg(ratings.no_stars) as rating,
+            CASE 
               WHEN public = true 
                 THEN phone_number
               ELSE NULL 
-           END 
+            END 
           AS phoneNumber 
           FROM users 
-          JOIN 
-          rideattendances ON users.id = rideattendances.userId 
-          WHERE rideId = ${rideID}`);
+          INNER JOIN rideattendances ra ON users.id = ra.userId 
+          left join ratings on users.id = ratings.userId
+          WHERE ra.rideId = ${rideID}
+          GROUP BY name, isOwner, phone_number, public`);
+        
         console.log(attendance);
         
         res.status(200).json(attendance);

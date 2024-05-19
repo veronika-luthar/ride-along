@@ -12,7 +12,7 @@ const Stars = ({ rating }) => {
   };
 
   return (
-    <div>
+    <div style={{ display: 'inline' }}>
       {[...Array(maxRating)].map((_, index) => (
         <span key={index}>{getStarIcon(index)}</span>
       ))}
