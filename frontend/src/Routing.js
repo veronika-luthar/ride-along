@@ -8,6 +8,7 @@ import EditRide from './components/EditRide';
 import UserRides from './components/UserRides';
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
+import FrontPage from './components/FrontPage';
 import React from 'react';
 import RideAttendances from './components/RideAttendance';
 
@@ -15,7 +16,7 @@ function Routing(){
     return(
         <BrowserRouter>
             <Routes>
-                <Route path={'/'} element={<Landing/>} />
+                <Route path={'/'} element={<FrontPage/>} />
                 <Route path={'/login'} element={<Login/>} />
                 <Route path={'/register'} element={<Register/>} />
                 <Route path={'/rides'} element={<RideList/>} />
