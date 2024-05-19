@@ -18,7 +18,9 @@ services:
       timeout: 5s
       retries: 10
     networks:
-      - app-network
+      app-network:
+        aliases:
+          - backend
   backend:
     build:
       context: ./backend
@@ -51,5 +53,9 @@ services:
       - "3001"
     depends_on:
       - backend
+    networks:
+      app-network:
+        aliases:
+          - frontend
 volumes:
   db-data:
