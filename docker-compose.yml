@@ -51,6 +51,5 @@ services:
       - "3001"
     depends_on:
       - backend
-    network_mode: host
 volumes:
   db-data:
