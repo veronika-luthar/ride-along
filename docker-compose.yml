@@ -19,8 +19,6 @@ services:
       retries: 10
     networks:
       app-network:
-        aliases:
-          - backend
   backend:
     build:
       context: ./backend
@@ -53,9 +51,6 @@ services:
       - "3001"
     depends_on:
       - backend
-    networks:
-      app-network:
-        aliases:
-          - frontend
+    network_mode: host
 volumes:
   db-data:
