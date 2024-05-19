@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'Radio Canada';
+    src: url('../fonts/RadioCanada-Regular.ttf');
+}
+
+#header {
+    position: absolute;
+    background-color: #231F20;
+    width: 100vw;
+    height: 100px;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 50px;
+}
+
+#header-login {
+    font-family: 'Radio Canada';
+    font-size: large;
+    color: #FFFFFF;
+    background: none;
+    border: none;
+}
+
+#header-login:hover {
+    color: #D5D5D5;
+}
+
+#header-browse-rides {
+    font-family: 'Radio Canada';
+    font-size: large;
+    color: #FFFFFF;
+    background-color: #FA362F;
+    border: none;
+    height: 50px;
+    width: 200px;
+    margin-right: 50px;;
+}
+
+#header-browse-rides:hover{
+    background-color: #9B9B9B;
+}

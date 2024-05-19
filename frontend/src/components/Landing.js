@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/Landing.css'; // Import the CSS file for styling
 import RideList from './RideList';
+import Header from './Header';
 
 const Landing = () => {
 
@@ -11,6 +12,7 @@ const Landing = () => {
 
   return (
     <div className="landing-container">
+      <Header></Header>
       <h1>Welcome to Ride Along</h1>
       <div className="button-container">
         {localStorage.getItem('token') === '' ? (
