@@ -7,7 +7,7 @@
     position: absolute;
     background-color: #231F20;
     width: 100vw;
-    height: 100px;
+    height: 10%;
     top: 0px;
     left: 0px;
     display: flex;
@@ -35,7 +35,7 @@
     color: #FFFFFF;
     background-color: #FA362F;
     border: none;
-    height: 50px;
+    height: 65%;
     width: 200px;
     margin-right: 50px;;
 }
