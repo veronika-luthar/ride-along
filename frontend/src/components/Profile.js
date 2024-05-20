@@ -25,15 +25,24 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="form-container1">
-      <h1 className="">{userProfile.name}</h1>
-      <h4 className="">{userProfile.email}</h4>
+    <div className="profile-container">
+      <h2>Profile</h2>
+      <div className="profile-item">
+        <strong>Username:</strong> {userProfile.name}
+      </div>
+      <div className="profile-item">
+        <strong>Email:</strong> {userProfile.email}
+      </div>
+      <div className="profile-item">
+        <strong>Phone Number:</strong> {userProfile.phone_number}
+      </div>
+      <div className="profile-item">
+        <strong>Public Profile:</strong> {userProfile.public ? 'Yes' : 'No'}
+      </div>
+
       <Link to="/edit-profile">
-        <button className="">Edit Profile</button>
+        <button className="edit-profile-button">Edit Profile</button>
       </Link>
-    <div>
-      <h2 className="">Reviews</h2>
-    </div>
     </div>
   );
 };

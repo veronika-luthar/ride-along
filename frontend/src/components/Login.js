@@ -66,6 +66,10 @@ const LoginForm = () => {
         </div>
         <button type="submit" className="form-button">Login</button>
       </form>
+      <div className="form-group">
+        <br></br>
+        <a href="/register" className="form-label">Don't have an account? Register</a>
+      </div>  
       {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
