@@ -3,22 +3,38 @@
   src: url('../fonts/RadioCanada-Regular.ttf');
 }
 
+.photo {
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: url(../resources/bikingphoto.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.cover{
+  background-color: #fff;
+}
+
+.cover-grey{
+  background-color:#f0f0f0;
+}
+
 
 .cityFilter{
   margin-left: 25px;
   color: #666;
 }
 
-  
-  .ride-list-container {
-    flex: 1;
-    padding: 20px;
-  }
+.form-container{
+  background-color: #f0f0f0;
+}
   
   .ride-details-container {
     flex: 1;
     padding: 20px;
-    background-color: #f0f0f0;
   }
   
 

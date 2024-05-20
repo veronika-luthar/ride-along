@@ -53,8 +53,9 @@ const RideListPreview = ({ onSelectRide }) => {
 
   
     return (
+      <div className="photo">
       <div className="ride-list-preview">
-        <div className="ride-list-container">
+        <div className="ride-list-container cover">
           <h1 className="form-title">Browse rides</h1>
           <div className="form-group">
             <span className="cityFilter">Filter by:   </span>
@@ -86,10 +87,11 @@ const RideListPreview = ({ onSelectRide }) => {
             ))}
           </div>
         </div>
-        <div className="ride-details-container">
+        <div className={`ride-details-container ${selectedRide ? 'cover-grey' : ''}`}>
           {selectedRide && ( <Ride ride={selectedRide} />
           )}
         </div>
+      </div>
       </div>
     );
   };

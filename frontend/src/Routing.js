@@ -21,13 +21,12 @@ function Routing(){
                 <Route path={'/'} element={<FrontPage/>} />
                 <Route path={'/login'} element={<Login/>} />
                 <Route path={'/register'} element={<Register/>} />
-                <Route path={'/rides'} element={<RideList/>} />
                 <Route path={'/create-ride'} element={<CreateRide/>} />
                 <Route path={'/edit-ride'} element={<EditRide/>}/>
                 <Route path={'/user-rides'} element={<UserRides/>} />
                 <Route path={'/profile'} element={<Profile/>} />
                 <Route path={'/edit-profile'} element={<EditProfile/>} />
-                <Route path={'/newRideBrowse'} element={<RideListPreview/>} />
+                <Route path={'/rides'} element={<RideListPreview/>} />
                 <Route path={'/ride-attendance'} element={<RideAttendances rideId= {1} />} />
             </Routes>
         </BrowserRouter>

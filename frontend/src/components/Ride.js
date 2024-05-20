@@ -72,7 +72,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
       <p>Description: {description}</p>
       <p>Start Location: {startLocation}</p>
       <p>Scheduled Time: {formattedScheduledTime}</p>
-      <p>Attendance: {attendance !== null ? `${attendance}/${maxAttendance}` : 'Loading...'}</p>
+      <p>Attendances: {attendance !== null ? `${attendance}/${maxAttendance}` : 'Loading...'}</p>
       <RideAttendances rideId={id} rideName= {title} />
       <button className="form-button" onClick={handleSelectRide}>
         {userInRide === true ? "Leave Ride" : "Join Ride"}
