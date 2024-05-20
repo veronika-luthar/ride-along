@@ -26,8 +26,7 @@ module.exports = {
       console.error(err);
       res.status(500).json({ error: err });
     }
-    //console.log("RIDE " + ride.id);
-  },
+},
 
 
   async isOwner(req, res){

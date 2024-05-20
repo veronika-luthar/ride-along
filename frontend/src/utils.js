@@ -167,3 +167,18 @@ export const rateRide = async (rideID,ratingData) => {
   }   
 
 };
+export const fetchUserInRide = async (rideID) => {
+  try{
+  const response = await fetch(`${env.BASE_URL}/rides/${rideID}/users`);
+  console.log(response);
+  const data = await response.json();
+  if(!response.ok){
+      throw new Error('Error fetching users in ride');
+  }
+  return data;
+  }catch(error){
+      console.error('Error fetching users in ride:', error);
+      throw error;
+  }   
+
+};

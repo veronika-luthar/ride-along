@@ -24,13 +24,13 @@ router.get('/user/rides',authenticateToken,ride_controller.getRidesByUser);
 router.get('/cities', ride_controller.getCities);
 
 
-router.post('/rides/:rideID/join',authenticateToken, ride_controller.joinRide);
+router.post('/rides/:rideID/join',authenticateToken,authenticateToken, ride_controller.joinRide);
 
 router.post('/create-ride', authenticateToken, ride_controller.createRide);
 router.post('/edit-ride', ride_controller.editRide);
 router.post('/is-owner', authenticateToken, ride_controller.isOwner);
 
-router.post('/rides/:rideID/leave',authenticateToken,ride_controller.leaveRide); 
+router.post('/rides/:rideID/leave', ride_controller.leaveRide); 
 
 router.get('/rides/:rideID/attendance', ride_controller.getRideAttendance); 
 
