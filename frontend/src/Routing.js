@@ -11,6 +11,7 @@ import FrontPage from './components/FrontPage';
 import React from 'react';
 import RideAttendances from './components/RideAttendance';
 import Header from './components/Header';
+import RideListPreview from './components/RideList_copy';
 
 function Routing(){
     return(
@@ -26,6 +27,7 @@ function Routing(){
                 <Route path={'/user-rides'} element={<UserRides/>} />
                 <Route path={'/profile'} element={<Profile/>} />
                 <Route path={'/edit-profile'} element={<EditProfile/>} />
+                <Route path={'/newRideBrowse'} element={<RideListPreview/>} />
                 <Route path={'/ride-attendance'} element={<RideAttendances rideId= {1} />} />
             </Routes>
         </BrowserRouter>

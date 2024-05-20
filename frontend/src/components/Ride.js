@@ -73,6 +73,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
       <p>Start Location: {startLocation}</p>
       <p>Scheduled Time: {formattedScheduledTime}</p>
       <p>Attendance: {attendance !== null ? `${attendance}/${maxAttendance}` : 'Loading...'}</p>
+      <RideAttendances rideId={id} rideName= {title} />
       <button className="form-button" onClick={handleSelectRide}>
         {userInRide === true ? "Leave Ride" : "Join Ride"}
       </button>
@@ -82,16 +83,6 @@ const RideComponent = ({ ride, onSelectRide }) => {
       {userIsOwner ? <button onClick={onClick} className="form-button">
         Edit Ride
       </button> : ""}
-      {showAttendancePopup && (
-        <div className="attendance-popup">
-          <div className="attendance-popup-content">
-            <RideAttendances rideId={id} rideName= {title} />
-            <button className="form-button" onClick={toggleAttendancePopup}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -22,9 +22,7 @@ const RideAttendances = ({ rideId,rideName}) => {
 
   return (
     <div className="form-container">
-      <h1 className="form-title">{rideName}</h1>
       <div className="form-group">
-      <h3 className="form-label">Ride members</h3>
         {owner && (
           <p className="owner-info">
             <span className="owner-label">Owner:</span> {owner.name}{' '}

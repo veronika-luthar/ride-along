@@ -1,9 +1,81 @@
-.ride-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-  }
+@font-face {
+  font-family: 'Radio Canada';
+  src: url('../fonts/RadioCanada-Regular.ttf');
+}
 
-  .last-in-row {
-    margin-right: 0; 
+
+.cityFilter{
+  margin-left: 25px;
+  color: #666;
+}
+
+  
+  .ride-list-container {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .ride-details-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+
+  
+  .ride-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ride-details-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-city {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .ride-details-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .ride-details-value {
+    color: #666;
+  }
+  
+  .ride-details-description {
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-attendance {
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-attendees {
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-attendees-list {
+    list-style: none;
+    padding-left: 0;
   }
