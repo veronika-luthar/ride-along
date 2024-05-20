@@ -70,75 +70,62 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2 className="form-title">Edit Profile</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="form-label">Name:</label>
-          <input 
-            type="text" 
-            name="name" 
-            value={formData.name} 
-            onChange={handleChange} 
-            className="form-input" 
-            required 
-          />
-        </div>
-        <div className="form-group">
-          <label className="form-label">Email:</label>
-          <input 
-            type="email" 
-            name="email" 
-            value={formData.email} 
-            onChange={handleChange} 
-            className="form-input" 
-            required 
-          />
-        </div>
-        <div className="form-group">
-          <label className="form-label">Phone Number:</label>
-          <input 
-            type="tel" 
-            name="phoneNumber" 
-            value={formData.phoneNumber} 
-            onChange={handleChange} 
-            className="form-input" 
-            required 
-          />
-        </div>
-        <div className="form-group">
-          {formData.isPublic ? (<input 
-            type="checkbox" 
-            name="isPublic" 
-            onChange={handleChange} 
-            className="form-checkbox"
-            checked
-          />)
-          : (<input 
-            type="checkbox" 
-            name="isPublic" 
-            onChange={handleChange} 
-            className="form-checkbox"/>
-            )
-          }
-          <span className="form-checkbox-label">Make my account public</span>
-        </div>
-        <div className="form-group">
-          <label className="form-label">Enter your Password:</label>
-          <input 
-            type="password" 
-            name="password" 
-            value={formData.password} 
-            onChange={handleChange} 
-            className="form-input" 
-            required 
-          />
-        </div>
-        <button type="submit" className="form-button">Edit Profile</button>
-      </form>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-    </div>
+    <form className="update-form" onSubmit={handleSubmit}>
+      <h2 className='form-title'>Update your Profile</h2>
+      <label>
+        Name
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Veronika Luthar"
+        />
+      </label>
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="veronika@somesemail.com"
+        />
+      </label>
+      <label>
+        Password
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder=""
+        />
+      </label>
+      <label>
+        Phone no.
+        <input
+          type="tel"
+          name="phone"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          placeholder="+000000000"
+        />
+      </label>
+      <label className="checkbox-container">
+        <input
+          type="checkbox"
+          name="isPublic"
+          checked={formData.isPublic}
+          onChange={handleChange}
+        />
+        Make my profile public
+      </label>
+      <button type="submit" className="confirm-button">
+        CONFIRM
+      </button>
+    </form>
   );
-}
+};
 
 export default RegisterForm;

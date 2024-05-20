@@ -1,12 +1,11 @@
 /* FormStyles.css */
 
-.form-container {
+.form-container1 {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .form-title {
@@ -46,7 +45,7 @@
     width: 100%;
     padding: 10px;
     margin: 10px 0; /* Add margin to the top and bottom of the buttons */
-    background-color: #007bff;
+    background-color: #fc2201;
     border: none;
     border-radius: 4px;
     color: #fff;
@@ -61,4 +60,66 @@
 .error-message {
   color: red;
   margin-top: 10px;
+}
+
+/* UpdateForm.css */
+.update-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.update-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.update-form label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.update-form label input[type="text"],
+.update-form label input[type="email"],
+.update-form label input[type="password"],
+.update-form label input[type="tel"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox-container input {
+  margin-right: 0.5rem;
+}
+
+.confirm-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.confirm-button:hover {
+  background-color: #c0392b;
+}
+
+.form-title{
+  font-family: Radio Canada;
 }
