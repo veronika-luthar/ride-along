@@ -2,7 +2,7 @@
     font-family: 'Radio Canada';
     src: url('../fonts/RadioCanada-Regular.ttf');
 }
-
+/* 
 #header {
     position: absolute;
     background-color: #231F20;
@@ -17,7 +17,7 @@
     gap: 50px;
 }
 
-#header-login {
+.header-component {
     font-family: 'Radio Canada';
     font-size: large;
     color: #FFFFFF;
@@ -25,21 +25,75 @@
     border: none;
 }
 
-#header-login:hover {
+.header-component:hover {
     color: #D5D5D5;
 }
-
-#header-browse-rides {
+*/
+.header-browse-rides {
     font-family: 'Radio Canada';
     font-size: large;
     color: #FFFFFF;
     background-color: #FA362F;
     border: none;
     height: 65%;
-    width: 200px;
-    margin-right: 50px;;
+    width: 120px;
+    margin-right: 50px;
+    text-align: center;
 }
 
-#header-browse-rides:hover{
+.header-browse-rides:hover{
     background-color: #9B9B9B;
+} 
+
+/* src/styles/DesignComponents.css */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #333;
+  color: white;
+}
+
+.navbar-left {
+  flex: 0 1 auto; /* Adjust the flex property to auto-size the container */
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 1rem;
+}
+
+.header-component, .header-browse-rides {
+  color: white;
+  text-decoration: none;
+}
+
+.header-component:hover, .header-browse-rides:hover {
+  text-decoration: underline;
+}
+
+button.header-component {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+
+button.header-component:hover {
+  text-decoration: underline;
 }

@@ -11,7 +11,6 @@ const routeChange = () =>{
 }
   return (
     <div className="frontpage">
-      <Header />
       <div className="overlaylayer"></div>
       <div className="focalpoint">
         <h1 className="main-text">Ride Along</h1>

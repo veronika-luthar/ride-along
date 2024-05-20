@@ -1,5 +1,4 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Landing from './components/Landing';
 import Login from './components/Login';
 import Register from './components/Register';
 import RideList from './components/RideList';
@@ -11,10 +10,12 @@ import EditProfile from './components/EditProfile';
 import FrontPage from './components/FrontPage';
 import React from 'react';
 import RideAttendances from './components/RideAttendance';
+import Header from './components/Header';
 
 function Routing(){
     return(
         <BrowserRouter>
+            <Header/>
             <Routes>
                 <Route path={'/'} element={<FrontPage/>} />
                 <Route path={'/login'} element={<Login/>} />

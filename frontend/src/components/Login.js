@@ -28,6 +28,7 @@ const LoginForm = () => {
       alert('Logged in successfully');
       localStorage.setItem('token', response.data.token); // Store the token in the browser
       navigate('/'); // Redirect to the login page
+      window.location.reload();
       console.log(response.data); // Handle response from the server
     } catch (error) {
       if(error.response.status === 401) {

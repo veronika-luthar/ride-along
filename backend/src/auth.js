@@ -47,3 +47,5 @@ function authenticateToken(req, res, next) {
 }
 
 module.exports = { generateToken, verifyToken, authenticateLogin, authenticateToken };
+
+

@@ -48,7 +48,7 @@ const RideList = ({ onSelectRide }) => {
   return (
     <ErrorBoundary>
         <div>
-        <h1 className="form-title">Available Rides</h1>
+        <h1 className="form-title">Your Rides</h1>
         <div className='form-group'>
             <select className="form-container" id="cityFilter" value={selectedCity} onChange={handleCityChange}>
             <option value="">All Cities</option>
