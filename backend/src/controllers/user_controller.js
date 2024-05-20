@@ -106,5 +106,28 @@ module.exports = {
       console.error('Error calculating mean rating:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
+  },
+
+  async getUserAllRating(req, res) {
+    try {
+      const userID = req.user.id;
+  
+      const result = await Rating.findAll({
+        where: {
+          userID: userID
+        }
+      });
+  
+      if (result) {
+        console.log(`All ratings for ${userID}: ${result}`);
+        res.status(200).json({result });
+      } else {
+        console.log(`No ratings found for userID ${userID}`);
+        res.status(404).json({ message: 'No ratings found' });
+      }
+    } catch (error) {
+      console.error('Error retreiving all ratings:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
   }
 }
