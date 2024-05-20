@@ -23,6 +23,10 @@
   .ride-item:hover {
     transform: scale(1.01);
   }
+  .description{
+    width: 100%;
+    height: 200px;
+  }
   
   .ride-item {
     cursor: pointer;

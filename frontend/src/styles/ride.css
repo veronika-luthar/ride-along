@@ -6,14 +6,19 @@
 .photo {
     content: '';
     width: 100%;
-    height: 100%;
     left: 0px;
     top: 0px;
     background: url(../resources/bikingphoto.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
+.full-height{
+  height: 100vh;
+}
+.down{
+  margin-top:40%
 
+}
 .cover{
   background-color: #fff;
 }
@@ -36,7 +41,58 @@
     flex: 1;
     padding: 20px;
   }
+  .middle{
+    text-align: center;
+
+  }
+  .ride-details-info {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
   
+  .ride-details-info-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .black-background{
+    background-color: #333;
+  }
+  .no-justify{
+    justify-content: flex-start;
+  }
+  .redBox{
+    background-color: red;
+    width: 25px;
+    height:25px;
+  }
+  .emptyBox{
+    width: 25px;
+    height:25px;
+  }
+  .ride-details-info-label {
+    font-weight: bold;
+    justify-self: flex-start;
+  }
+
+  .white{
+    color: white;
+  }
+  
+  .ride-details-info-value {
+    margin-left: 25%;
+  }
+
+  .margin-smaller{
+    margin: left 110px;
+  }
+  .inline{
+    display: inline;
+  }
 
   
   .ride-details {
@@ -64,11 +120,7 @@
     margin-bottom: 10px;
   }
   
-  .ride-details-info-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+
   
   .ride-details-label {
     font-weight: bold;
@@ -82,7 +134,17 @@
   .ride-details-description {
     margin-bottom: 10px;
   }
-  
+
+  .description{
+    width: 200px;
+    height: 200px;
+  }
+
+  .description-text{
+    width: 200px;
+    height: 200px;
+  }
+
   .ride-details-attendance {
     margin-bottom: 10px;
   }

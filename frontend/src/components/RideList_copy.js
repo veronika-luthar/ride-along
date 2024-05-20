@@ -55,7 +55,7 @@ const RideListPreview = ({ onSelectRide }) => {
     return (
       <div className="photo">
       <div className="ride-list-preview">
-        <div className="ride-list-container cover">
+        <div className="ride-list-container cover full-height">
           <h1 className="form-title">Browse rides</h1>
           <div className="form-group">
             <span className="cityFilter">Filter by:   </span>
@@ -77,9 +77,7 @@ const RideListPreview = ({ onSelectRide }) => {
             {filteredRides.map((ride, index) => (
               <div
                 key={ride.id}
-                className={`ride-item ${
-                  (index + 1) % 3 === 0 ? 'last-in-row' : ''
-                }`}
+                className="ride-item"
                 onClick={() => handleRideClick(ride)}
               >
                 <RidePreview ride={ride} />
@@ -87,7 +85,7 @@ const RideListPreview = ({ onSelectRide }) => {
             ))}
           </div>
         </div>
-        <div className={`ride-details-container ${selectedRide ? 'cover-grey' : ''}`}>
+        <div className={`ride-details-container full-height ${selectedRide ? 'cover-grey' : ''}`}>
           {selectedRide && ( <Ride ride={selectedRide} />
           )}
         </div>

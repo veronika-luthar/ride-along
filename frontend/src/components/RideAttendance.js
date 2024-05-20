@@ -21,31 +21,30 @@ const RideAttendances = ({ rideId,rideName}) => {
   const attendees = attendance.filter((user) => !user.isOwner);
 
   return (
-    <div className="form-container">
-      <div className="form-group">
-        {owner && (
-          <p className="owner-info">
-            <span className="owner-label">Owner:</span> {owner.name}{' '}
-            {owner.phoneNumber && (
-              <span className="owner-phone">{owner.phoneNumber}</span>
-            )}
-          </p>
-        )}
-        <ul className="attendee-list">
+    <div>
+      {owner && (
+        <div className="ride-details-info-itema">
+          <span className="ride-details-info-labela">Owner:</span>
+          <div className="ride-details-info-value-wrappera">
+            <span className="ride-details-info-valuea">{owner.name}</span>
+            <span className="ride-details-info-valuea">| {owner.phoneNumber && owner.phoneNumber}</span>
+          </div>
+        </div>
+      )}
+      <div className="ride-details-info-itema">
+        <span className="ride-details-info-labela">Other Attendees:</span>
+        <div className="ride-details-info-value-wrappera">
           {attendees.map((userAttendance) => (
-            <li key={userAttendance.name} className="attendee-item">
-              {userAttendance.name}{' '}
-              {userAttendance.phoneNumber && (
-                <span className="attendee-phone">
-                    <span className="phone-separator">|</span> +{userAttendance.phoneNumber}
+            <div key={userAttendance.name}>
+              <span className="ride-details-info-valuea">
+              {userAttendance.name} |{userAttendance.phoneNumber && userAttendance.phoneNumber}
                 </span>
-                )}
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
-  );
+  );  
 };
 
 export default RideAttendances;

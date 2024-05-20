@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/FormStyles.css';
+import '../styles/ride.css';
 import { joinRide } from '../utils';
 import { fetchRideAttendance, leaveRide, userInRide, fetchOwner } from '../utils';
 import { useEffect, useState } from 'react';
@@ -10,7 +11,7 @@ import { Route, useNavigate } from 'react-router-dom';
 
 
 const RideComponent = ({ ride, onSelectRide }) => {
-  const { city, createdAt, description, id, maxAttendance, date, time, startLocation, title, updatedAt } = ride;
+  const { city, estimatedDuration,createdAt, description, id, maxAttendance, date, time, startLocation, title, updatedAt } = ride;
   const [attendance, setAttendance] = useState(null);
   const [userInRide, setUserInRide] = useState(false);
   const [showAttendancePopup, setShowAttendancePopup] = useState(false);
@@ -68,21 +69,43 @@ const RideComponent = ({ ride, onSelectRide }) => {
   return (
     <div className="form-container">
       <h3 className="form-title">{title}</h3>
-      <p>City: {city}</p>
-      <p>Description: {description}</p>
-      <p>Start Location: {startLocation}</p>
-      <p>Scheduled Time: {formattedScheduledTime}</p>
-      <p>Attendances: {attendance !== null ? `${attendance}/${maxAttendance}` : 'Loading...'}</p>
-      <RideAttendances rideId={id} rideName= {title} />
-      <button className="form-button" onClick={handleSelectRide}>
+      <div className="ride-details-info">
+      <div className="ride-details-info-item black-background">
+        <span className = "redBox"></span>
+        <span className="ride-details-info-label white">Date:</span>
+        <span className="ride-details-info-value white">{ride.date}</span>
+      </div>
+      <div className="ride-details-info-item black-background">
+        <span className = "redBox"></span>
+        <span className="ride-details-info-label white">Time:</span>
+        <span className="ride-details-info-value white">{ride.time}</span>
+      </div>
+      <div className="ride-details-info-item black-background">
+        <span className = "redBox"></span>
+        <span className="ride-details-info-label white">Est. duration:</span>
+        <span className="ride-details-info-value margin-smaller white">{ride.estimatedDuration}</span>
+      </div>
+      <div className ="ride-details-info-item description">
+        <span className = "emptyBox"></span>
+        <span className="ride-details-info-label">Description:</span>
+        <span className="ride-details-info-value">{ride.description}</span>
+      </div>
+      <div className ="ride-details-info-item">
+        <span className = "emptyBox"></span>
+        <span className="ride-details-info-label">Attendances:</span>
+        <span className="ride-details-info-value">{attendance !== null ? `${attendance}/${maxAttendance}` : 'Loading...'}</span>
+      </div>
+      <div className ="ride-details-info-item">
+      <span className = "emptyBox"></span>
+        <RideAttendances rideId={id}/>
+      </div>
+      <button className="form-button down" onClick={handleSelectRide}>
         {userInRide === true ? "Leave Ride" : "Join Ride"}
-      </button>
-      <button className="form-button" onClick={toggleAttendancePopup}>
-        View Attendance
       </button>
       {userIsOwner ? <button onClick={onClick} className="form-button">
         Edit Ride
       </button> : ""}
+    </div>
     </div>
   );
 };
