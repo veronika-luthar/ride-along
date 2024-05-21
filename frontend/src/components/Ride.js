@@ -67,12 +67,14 @@ const RideComponent = ({ ride, onSelectRide }) => {
   }
 
   return (
-    <div className="form-container">
-      <div className="red background">
+    <div>
+      <div className="red-background">
         <div className='black-background white'>
-        <h1 className="">{title}</h1>
-        <h3 >{city}</h3>
-        <h3>{startLocation}</h3>
+          <div className ='title-section'>
+          <h1>{title}</h1>
+          <p >{city}</p>
+          <p>{startLocation}</p>
+          </div>
         </div>
       </div>
       <div className="ride-details-info">

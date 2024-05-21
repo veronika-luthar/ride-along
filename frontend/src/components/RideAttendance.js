@@ -27,7 +27,7 @@ const RideAttendances = ({ rideId,rideName}) => {
           <span className="ride-details-info-labela">Owner:</span>
           <div className="ride-details-info-value-wrappera">
             <span className="ride-details-info-valuea">{owner.name}</span>
-            <span className="ride-details-info-valuea lightgrey">ph: {owner.phoneNumber && owner.phoneNumber}</span>
+            <span className="ride-details-info-valuea lightgrey"> {owner.phoneNumber && 'ph:'+owner.phoneNumber}</span>
           </div>
         </div>
       )}

@@ -16,16 +16,35 @@
   height: 100vh;
 }
 .down{
-  margin-top:30%
+  margin-top: 80px
+}
 
-}
+
 .red-background{
-  background-color: red;
+  border-left:40px solid  #fc2201;
 }
+
 .cover{
   background-color: #fff;
 }
 
+.title-section {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  margin-top: -10px; /* Add negative margin-top to move the title section up */
+  padding-left: 5px
+}
+
+.title-section h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.title-section p {
+  font-size: 16px;
+  padding-left: 5px
+}
 .cover-grey{
   background-color:#f0f0f0;
 }
@@ -40,6 +59,12 @@
   .ride-details-container {
     flex: 1;
     padding: 20px;
+    padding-top: 0; 
+    padding-left:0;
+    padding-right: 0px;
+    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+    border-top: 15px solid  #fc2201;
+  
   }
   .middle{
     text-align: center;
@@ -66,7 +91,7 @@
     justify-content: flex-start;
   }
   .redBox{
-    background-color: red;
+    background-color:  #fc2201;
     width: 25px;
     height:25px;
   }
@@ -130,20 +155,13 @@
   .ride-details-value {
     color: #666;
   }
-  
-  .ride-details-description {
-    margin-bottom: 10px;
-  }
+
 
   .description{
     width: 500px;
     height: 200px;
   }
 
-  .description-text{
-    width: 200px;
-    height: 200px;
-  }
 
   .ride-details-attendance {
     margin-bottom: 10px;
