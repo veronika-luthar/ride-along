@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import '../styles/FormStyles.css';
 import '../styles/Attendee.css';
+import Stars from './Stars';
 
 import { fetchUserInRide } from '../utils';
 

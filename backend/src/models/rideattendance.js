@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     notifications: DataTypes.BOOLEAN,
     isOwner: DataTypes.BOOLEAN
-  }, {
+  },{
     sequelize,
     modelName: 'RideAttendance',
   });

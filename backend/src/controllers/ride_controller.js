@@ -1,4 +1,4 @@
-const {Ride, sequelize} = require('../models');
+const {Ride,Rating, sequelize} = require('../models');
 const {RideAttendance} = require('../models');
 const {User} = require('../models');
 
@@ -210,30 +210,23 @@ module.exports = {
     async getUserInformationForRide(req,res){
       const rideID = req.params.rideID;
       try{
-      /*
-        var attendance = await User.findAll({
-          attributes: [
-            'name',
-            [
-              sequelize.literal(`
-              CASE
-                WHEN \`User\`.\`public\` = true THEN \`User\`.\`phone_Number\`
-                ELSE NULL
-              END
-            `),
-            'phoneNumber'
-          ]
-          ],
-          include: [
-            {
-              model: RideAttendance,
-              where: {
-                isOwner: true
-              },
-            }
-          ]
-        })*/
-        var attendance = await sequelize.query(`SELECT name, isOwner,CASE WHEN public = true THEN phone_number ELSE NULL END AS phoneNumber FROM users JOIN rideattendances ON users.id = rideattendances.userId WHERE rideId = ${rideID}`);
+        var attendance = await sequelize.query(
+          ` SELECT
+            name,
+            isOwner,
+            avg(ratings.no_stars) as rating,
+            CASE 
+              WHEN public = true 
+                THEN phone_number
+              ELSE NULL 
+            END 
+          AS phoneNumber 
+          FROM users 
+          INNER JOIN rideattendances ra ON users.id = ra.userId 
+          left join ratings on users.id = ratings.userId
+          WHERE ra.rideId = ${rideID}
+          GROUP BY name, isOwner, phone_number, public`);
+        
         console.log(attendance);
         
         res.status(200).json(attendance);
@@ -242,6 +235,34 @@ module.exports = {
         res.status(500).json({ error: 'Internal server error' });
       }
     },
+
+    async rateRide(req,res){
+
+      try{
+        var rideOwner = await sequelize.query(`
+          select 
+            userId 
+          from 
+            rideattendances 
+          where rideId = ${req.params.rideID} 
+                and isOwner = true
+        `);
+        rideOwner = rideOwner[0][0].userId;
+        const rating = await Rating.create({
+          userId: rideOwner,
+          reviewerId: req.user.id,
+          no_stars: req.body.rating,
+          comment: req.body.comment,
+          rideID: req.params.rideID
+        }); 
+        console.log(rating)
+        res.status(200).json({status: "Success"});
+      }catch(error){
+        console.error('Error rating ride:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    },
+
 
 
 

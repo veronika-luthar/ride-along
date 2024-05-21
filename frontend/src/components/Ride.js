@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { fetchUserRides } from '../utils';
 import RideAttendances from './RideAttendance'; // Import the RideAttendances component
 import { Route, useNavigate } from 'react-router-dom';
+import RateRider  from './RateRider';
 
 
 
@@ -15,6 +16,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
   const [attendance, setAttendance] = useState(null);
   const [userInRide, setUserInRide] = useState(false);
   const [showAttendancePopup, setShowAttendancePopup] = useState(false);
+  const [showRateRideButton, setRateRidePopUp] = useState(false);
   const navigate = useNavigate();
   const [userIsOwner, setUserIsOwner] = useState(false);
 
@@ -51,6 +53,10 @@ const RideComponent = ({ ride, onSelectRide }) => {
 
   const toggleAttendancePopup = () => {
     setShowAttendancePopup(!showAttendancePopup);
+  };
+
+ const toggleRateRidePopup = () => {
+      setRateRidePopUp(!showRateRideButton);
   };
 
   function onClick(){
@@ -110,11 +116,34 @@ const RideComponent = ({ ride, onSelectRide }) => {
       <button className="form-button down" onClick={handleSelectRide}>
         {userInRide === true ? "Leave Ride" : "Join Ride"}
       </button>
+      <button className="form-button" onClick={toggleRateRidePopup}>
+        Rate Ride
+      </button>
       {userIsOwner ? <button onClick={onClick} className="form-button">
         Edit Ride
       </button> : ""}
+      {showAttendancePopup && (
+        <div className="attendance-popup">
+          <div className="attendance-popup-content">
+            <RideAttendances rideId={id} rideName= {title} />
+            <button className="form-button" onClick={toggleAttendancePopup}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      {showRateRideButton && (
+        <div className="attendance-popup">
+          <div className="attendance-popup-content">
+            <RateRider rideID={id}/>
+            <button className="form-button" onClick={toggleRateRidePopup}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-    </div>
+  </div>
   );
 };
 
