@@ -116,32 +116,9 @@ const RideComponent = ({ ride, onSelectRide }) => {
       <button className="form-button down" onClick={handleSelectRide}>
         {userInRide === true ? "Leave Ride" : "Join Ride"}
       </button>
-      <button className="form-button" onClick={toggleRateRidePopup}>
-        Rate Ride
-      </button>
       {userIsOwner ? <button onClick={onClick} className="form-button">
         Edit Ride
       </button> : ""}
-      {showAttendancePopup && (
-        <div className="attendance-popup">
-          <div className="attendance-popup-content">
-            <RideAttendances rideId={id} rideName= {title} />
-            <button className="form-button" onClick={toggleAttendancePopup}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-      {showRateRideButton && (
-        <div className="attendance-popup">
-          <div className="attendance-popup-content">
-            <RateRider rideID={id}/>
-            <button className="form-button" onClick={toggleRateRidePopup}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   </div>
   );

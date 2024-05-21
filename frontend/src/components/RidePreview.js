@@ -22,5 +22,16 @@ const RidePreview = ({ ride, onSelectRide }) => {
     </div>
   );
 };
+/*
+      {showRateRideButton && (
+        <div className="attendance-popup">
+          <div className="attendance-popup-content">
+            <RateRider rideID={id}/>
+            <button className="form-button" onClick={toggleRateRidePopup}>
+              Close
+            </button>
+          </div>
+        </div>
+*/
 
 export default RidePreview;
