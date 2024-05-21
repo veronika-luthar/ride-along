@@ -18,10 +18,18 @@
   flex-direction: column;
 }
 
+.ride-details-info-value-wrappera {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .ride-details-info-valuea {
   margin-right: 5px;
 }
 
+.lightgrey{
+  color: lightslategray;
+}
 .owner-phone,
 .phone-separator {
   margin-left: 5px;

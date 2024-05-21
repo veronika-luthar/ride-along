@@ -27,7 +27,7 @@ const RideAttendances = ({ rideId,rideName}) => {
           <span className="ride-details-info-labela">Owner:</span>
           <div className="ride-details-info-value-wrappera">
             <span className="ride-details-info-valuea">{owner.name}</span>
-            <span className="ride-details-info-valuea">| {owner.phoneNumber && owner.phoneNumber}</span>
+            <span className="ride-details-info-valuea lightgrey">ph: {owner.phoneNumber && owner.phoneNumber}</span>
           </div>
         </div>
       )}
@@ -37,8 +37,9 @@ const RideAttendances = ({ rideId,rideName}) => {
           {attendees.map((userAttendance) => (
             <div key={userAttendance.name}>
               <span className="ride-details-info-valuea">
-              {userAttendance.name} |{userAttendance.phoneNumber && userAttendance.phoneNumber}
-                </span>
+              {userAttendance.name}
+              </span>
+              <span className="ride-details-info-valuea lightgrey">ph:{userAttendance.phoneNumber && userAttendance.phoneNumber}</span>
             </div>
           ))}
         </div>

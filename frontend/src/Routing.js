@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Login from './components/Login';
 import Register from './components/Register';
-import RideList from './components/RideList';
+import RideList from './components/RideListOld';
 import CreateRide from './components/CreateRide';
 import EditRide from './components/EditRide';
 import UserRides from './components/UserRides';
@@ -11,7 +11,7 @@ import FrontPage from './components/FrontPage';
 import React from 'react';
 import RideAttendances from './components/RideAttendance';
 import Header from './components/Header';
-import RideListPreview from './components/RideList_copy';
+import RideListPreview from './components/RideList';
 
 function Routing(){
     return(

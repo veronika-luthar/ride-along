@@ -16,8 +16,11 @@
   height: 100vh;
 }
 .down{
-  margin-top:40%
+  margin-top:30%
 
+}
+.red-background{
+  background-color: red;
 }
 .cover{
   background-color: #fff;
@@ -33,10 +36,7 @@
   color: #666;
 }
 
-.form-container{
-  background-color: #f0f0f0;
-}
-  
+
   .ride-details-container {
     flex: 1;
     padding: 20px;

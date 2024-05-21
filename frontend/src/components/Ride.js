@@ -68,7 +68,13 @@ const RideComponent = ({ ride, onSelectRide }) => {
 
   return (
     <div className="form-container">
-      <h3 className="form-title">{title}</h3>
+      <div className="red background">
+        <div className='black-background white'>
+        <h1 className="">{title}</h1>
+        <h3 >{city}</h3>
+        <h3>{startLocation}</h3>
+        </div>
+      </div>
       <div className="ride-details-info">
       <div className="ride-details-info-item black-background">
         <span className = "redBox"></span>
@@ -96,7 +102,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
         <span className="ride-details-info-value">{attendance !== null ? `${attendance}/${maxAttendance}` : 'Loading...'}</span>
       </div>
       <div className ="ride-details-info-item">
-      <span className = "emptyBox"></span>
+        <span className = "emptyBox"></span>
         <RideAttendances rideId={id}/>
       </div>
       <button className="form-button down" onClick={handleSelectRide}>
