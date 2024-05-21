@@ -2,6 +2,8 @@ import { createContext, useState, useContext } from 'react';
 import axios from "axios";
 import env from "react-dotenv";
 import { useNavigate } from 'react-router-dom';
+import '../styles/FormStyles.css';
+
 
 const FormContext = createContext(null);
 
@@ -60,9 +62,12 @@ export default function CreateRide(){
     }
 
     return(
-        <FormContext.Provider value={{input, form, errors, handleChange, handleSubmit, handleNext, handlePrev}}>
-            <PageCounter/>
-        </FormContext.Provider>
+        <div>
+            <div className="background"></div>
+            <FormContext.Provider value={{input, form, errors, handleChange, handleSubmit, handleNext, handlePrev}}> 
+                <PageCounter/>
+            </FormContext.Provider>
+        </div>
     )
 }
 
@@ -97,11 +102,10 @@ function FirstForm(){
     const navigate = useNavigate();
 
     return(
-        <div>
+        <div className="form-container">
             <h1>Create your ride</h1>
             <form onSubmit={context.handleNext}>
-                <label>
-                    City
+                <label htmlFor="city">City</label>
                     <input 
                         value={context.input.city}
                         onChange={context.handleChange}
@@ -112,9 +116,7 @@ function FirstForm(){
                         className="form-input"
                         required
                     />
-                </label>
-                <label>
-                    Date
+                <label htmlFor="date">Date</label>
                     <input
                         value={context.input.date}
                         onChange={context.handleChange}
@@ -123,9 +125,7 @@ function FirstForm(){
                         className="form-input"
                         required
                     />
-                </label>
-                <label>
-                    Time
+                <label htmlFor="time">Time</label>
                     <input
                         value={context.input.time}
                         onChange={context.handleChange}
@@ -134,10 +134,9 @@ function FirstForm(){
                         className="form-input"
                         required
                     />
-                </label>
-                <input type="submit" value="Next"/>
+                <input value="NEXT" type="submit" className="confirm-button"/>
             </form>
-            <button onClick={() => {navigate('/rides')}}>Cancel</button>
+            <button onClick={() => {navigate('/rides')}} className="secondary-button">Cancel</button>
         </div>
     )
 }
@@ -145,11 +144,10 @@ function FirstForm(){
 function SecondForm(){
     const context = useContext(FormContext);
     return(
-        <div>
+        <div className="form-container">
             <h1>Create your ride</h1>
             <form onSubmit={context.handleNext}>
-                <label>
-                    Start location
+            <label htmlFor="startLocation">Start location</label>
                     <input 
                         value={context.input.startLocation}
                         onChange={context.handleChange}
@@ -160,9 +158,7 @@ function SecondForm(){
                         className="form-input"
                         required
                     />
-                </label>
-                <label>
-                    Estimated duration
+                <label htmlFor="estimatedDuration">Estimated duration (in hours)</label>
                     <input
                         value={context.input.estimatedDuration}
                         onChange={context.handleChange}
@@ -172,9 +168,7 @@ function SecondForm(){
                         id="estimatedDuration"
                         className="form-input"
                     />
-                </label>
-                <label>
-                    Max attendance
+                <label htmlFor="maxAttendance">Maximum no. of attendees</label>
                     <input
                         value={context.input.maxAttendance}
                         onChange={context.handleChange} 
@@ -182,10 +176,9 @@ function SecondForm(){
                         id="maxAttendance"
                         className="form-input"
                     />
-                </label>
-                <input value="Next" type="submit"/>
+                <input value="NEXT" type="submit" className="confirm-button"/>
             </form>
-            <button onClick={context.handlePrev}>Back</button>
+            <button onClick={context.handlePrev} className="secondary-button">Back</button>
         </div>
     )
 }
@@ -193,11 +186,10 @@ function SecondForm(){
 function ThirdForm(){
     const context = useContext(FormContext);
     return(
-        <div>
+        <div className="form-container">
             <h1>Create your ride</h1>
             <form onSubmit={context.handleSubmit}>
-                <label>
-                    Title
+            <label htmlFor="title">Title</label>
                     <input
                         value={context.input.title}
                         onChange={context.handleChange}
@@ -208,9 +200,7 @@ function ThirdForm(){
                         className="form-input"
                         required
                     />
-                </label>
-                <label>
-                    Description
+                <label htmlFor="description">Description</label>
                     <textarea
                         value={context.input.description}
                         onChange={context.handleChange}
@@ -218,13 +208,12 @@ function ThirdForm(){
                         id="description"
                         className="form-input"
                     />
-                </label>
                 {
                    context.errors.map((error, index) => <p key={index}>{error}</p>)
                 }
-                <input value="Submit" type="submit"/>
+                <input value="COMPLETE" type="submit" className="confirm-button"/>
             </form>
-            <button onClick={context.handlePrev}>Back</button>
+            <button onClick={context.handlePrev} className="secondary-button">Back</button>
         </div>
     )
 }
@@ -233,7 +222,7 @@ function SuccessForm(){
     const navigate = useNavigate();
 
     return(
-        <div>
+        <div className="form-container">
             <h1>Success!</h1>
             <h3>Your ride has been created.</h3>
             <button onClick={() => {navigate('/rides')}}>Take me to 'my rides'</button>

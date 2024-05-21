@@ -1,11 +1,50 @@
 /* FormStyles.css */
 
+.secondary-button {
+  background: none;
+  color: #333;
+  text-decoration: underline;
+  margin: 10px;
+  border: none;
+}
+
+.background {
+  content: '';
+  position: fixed;
+  width: 150%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: url(../resources/bikingphoto.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+  left: -20vw;
+}
+
 .form-container1 {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
+}
+
+.form-container {
+  margin: auto;
+  margin-top: 10vh;
+  background-color:#FFFFFF;
+  width: 600px;
+  height: 600px;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  display: block;
 }
 
 .form-title {
@@ -27,11 +66,11 @@
 }
 
 .form-input {
-  width: 100%;
+  width: 500px;
+  margin-bottom: 30px;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 2px solid #9B9B9B;
 }
 
 .form-checkbox-label {
