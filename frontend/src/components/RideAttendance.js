@@ -39,7 +39,7 @@ const RideAttendances = ({ rideId,rideName}) => {
               <span className="ride-details-info-valuea">
               {userAttendance.name}
               </span>
-              <span className="ride-details-info-valuea lightgrey">ph:{userAttendance.phoneNumber && userAttendance.phoneNumber}</span>
+              <span className="ride-details-info-valuea lightgrey">{userAttendance.phoneNumber && 'ph:'+ userAttendance.phoneNumber}</span>
             </div>
           ))}
         </div>
