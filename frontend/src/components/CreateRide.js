@@ -102,40 +102,42 @@ function FirstForm(){
     const navigate = useNavigate();
 
     return(
-        <div className="form-container">
+        <div className="form-wrapper">
             <h1>Create your ride</h1>
-            <form onSubmit={context.handleNext}>
-                <label htmlFor="city">City</label>
-                    <input 
-                        value={context.input.city}
-                        onChange={context.handleChange}
-                        type="text"
-                        minLength="2"
-                        maxLength="100"
-                        id="city"
-                        className="form-input"
-                        required
-                    />
-                <label htmlFor="date">Date</label>
-                    <input
-                        value={context.input.date}
-                        onChange={context.handleChange}
-                        type="date"
-                        id="date"
-                        className="form-input"
-                        required
-                    />
-                <label htmlFor="time">Time</label>
-                    <input
-                        value={context.input.time}
-                        onChange={context.handleChange}
-                        type="time"
-                        id="time"
-                        className="form-input"
-                        required
-                    />
-                <input value="NEXT" type="submit" className="confirm-button"/>
-            </form>
+            <div className="form-container">
+                <form onSubmit={context.handleNext}>
+                    <label htmlFor="city">City</label>
+                        <input 
+                            value={context.input.city}
+                            onChange={context.handleChange}
+                            type="text"
+                            minLength="2"
+                            maxLength="100"
+                            id="city"
+                            className="form-input"
+                            required
+                        />
+                    <label htmlFor="date">Date</label>
+                        <input
+                            value={context.input.date}
+                            onChange={context.handleChange}
+                            type="date"
+                            id="date"
+                            className="form-input"
+                            required
+                        />
+                    <label htmlFor="time">Time</label>
+                        <input
+                            value={context.input.time}
+                            onChange={context.handleChange}
+                            type="time"
+                            id="time"
+                            className="form-input"
+                            required
+                        />
+                    <input value="NEXT" type="submit" className="confirm-button"/>
+                </form>
+            </div>
             <button onClick={() => {navigate('/rides')}} className="secondary-button">Cancel</button>
         </div>
     )
@@ -144,40 +146,43 @@ function FirstForm(){
 function SecondForm(){
     const context = useContext(FormContext);
     return(
-        <div className="form-container">
+
+        <div className="form-wrapper">
             <h1>Create your ride</h1>
-            <form onSubmit={context.handleNext}>
-            <label htmlFor="startLocation">Start location</label>
-                    <input 
-                        value={context.input.startLocation}
-                        onChange={context.handleChange}
-                        type="text"
-                        minLength="2"
-                        maxLength="250"
-                        id="startLocation"
-                        className="form-input"
-                        required
-                    />
-                <label htmlFor="estimatedDuration">Estimated duration (in hours)</label>
-                    <input
-                        value={context.input.estimatedDuration}
-                        onChange={context.handleChange}
-                        type="number"
-                        min="1"
-                        max="10"
-                        id="estimatedDuration"
-                        className="form-input"
-                    />
-                <label htmlFor="maxAttendance">Maximum no. of attendees</label>
-                    <input
-                        value={context.input.maxAttendance}
-                        onChange={context.handleChange} 
-                        type="number" 
-                        id="maxAttendance"
-                        className="form-input"
-                    />
-                <input value="NEXT" type="submit" className="confirm-button"/>
-            </form>
+            <div className="form-container">
+                <form onSubmit={context.handleNext}>
+                <label htmlFor="startLocation">Start location</label>
+                        <input 
+                            value={context.input.startLocation}
+                            onChange={context.handleChange}
+                            type="text"
+                            minLength="2"
+                            maxLength="250"
+                            id="startLocation"
+                            className="form-input"
+                            required
+                        />
+                    <label htmlFor="estimatedDuration">Estimated duration (in hours)</label>
+                        <input
+                            value={context.input.estimatedDuration}
+                            onChange={context.handleChange}
+                            type="number"
+                            min="1"
+                            max="10"
+                            id="estimatedDuration"
+                            className="form-input"
+                        />
+                    <label htmlFor="maxAttendance">Maximum no. of attendees</label>
+                        <input
+                            value={context.input.maxAttendance}
+                            onChange={context.handleChange} 
+                            type="number" 
+                            id="maxAttendance"
+                            className="form-input"
+                        />
+                    <input value="NEXT" type="submit" className="confirm-button"/>
+                </form>
+            </div>
             <button onClick={context.handlePrev} className="secondary-button">Back</button>
         </div>
     )
@@ -186,33 +191,35 @@ function SecondForm(){
 function ThirdForm(){
     const context = useContext(FormContext);
     return(
-        <div className="form-container">
+        <div className="form-wrapper">
             <h1>Create your ride</h1>
-            <form onSubmit={context.handleSubmit}>
-            <label htmlFor="title">Title</label>
-                    <input
-                        value={context.input.title}
-                        onChange={context.handleChange}
-                        type="text"
-                        minLength="2"
-                        maxLength="50"
-                        id="title"
-                        className="form-input"
-                        required
-                    />
-                <label htmlFor="description">Description</label>
-                    <textarea
-                        value={context.input.description}
-                        onChange={context.handleChange}
-                        maxLength="500"
-                        id="description"
-                        className="form-input"
-                    />
-                {
-                   context.errors.map((error, index) => <p key={index}>{error}</p>)
-                }
-                <input value="COMPLETE" type="submit" className="confirm-button"/>
-            </form>
+            <div className="form-container">
+                <form onSubmit={context.handleSubmit}>
+                <label htmlFor="title">Title</label>
+                        <input
+                            value={context.input.title}
+                            onChange={context.handleChange}
+                            type="text"
+                            minLength="2"
+                            maxLength="50"
+                            id="title"
+                            className="form-input"
+                            required
+                        />
+                    <label htmlFor="description">Description</label>
+                        <textarea
+                            value={context.input.description}
+                            onChange={context.handleChange}
+                            maxLength="500"
+                            id="description"
+                            className="form-input"
+                        />
+                    {
+                    context.errors.map((error, index) => <p key={index}>{error}</p>)
+                    }
+                    <input value="COMPLETE" type="submit" className="confirm-button"/>
+                </form>
+            </div>
             <button onClick={context.handlePrev} className="secondary-button">Back</button>
         </div>
     )
@@ -222,7 +229,7 @@ function SuccessForm(){
     const navigate = useNavigate();
 
     return(
-        <div className="form-container">
+        <div className="form-wrapper">
             <h1>Success!</h1>
             <h3>Your ride has been created.</h3>
             <button onClick={() => {navigate('/rides')}}>Take me to 'my rides'</button>
