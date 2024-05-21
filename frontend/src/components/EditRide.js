@@ -45,6 +45,8 @@ export default function EditRide() {
         <>
             <div className="form-wrapper">
                 <div className="background"></div>
+                <h1>{input.title}</h1>
+                <h4>{input.city}</h4>
                 <form onSubmit={handleSubmit} className="form-container">
                     <label htmlFor="date">Date</label>
                         <input
