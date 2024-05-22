@@ -40,15 +40,14 @@ export default function CreateRide(){
                 }
             })
             .catch(function (error) {
-                if(error.status === 500){
-                    const errorType = error.response.data.error;
-                    if(errorType.name === "SequelizeValidationError"){
-                        const errors = errorType.errors.map((x)  => x.message);
-                        setErrors(errors);
-                    }
-                    else{
-                        setErrors(["Unknown error occurred"]);
-                    }
+                const errorType = error.response.data.error;
+                if(errorType.name === "SequelizeValidationError"){
+                    const errors = errorType.errors.map((x)  => x.message);
+                    setErrors(errors);
+                    console.log(errors);
+                }
+                else{
+                    setErrors(["Unknown error occurred"]);
                 }
             });
     }
@@ -103,10 +102,10 @@ function FirstForm(){
 
     return(
         <div className="form-wrapper">
-            <h1>Create your ride</h1>
+            <h2>Create your ride</h2>
             <div className="form-container">
                 <form onSubmit={context.handleNext}>
-                    <label htmlFor="city">City</label>
+                    <label htmlFor="city">City:</label>
                         <input 
                             value={context.input.city}
                             onChange={context.handleChange}
@@ -117,7 +116,7 @@ function FirstForm(){
                             className="form-input"
                             required
                         />
-                    <label htmlFor="date">Date</label>
+                    <label htmlFor="date">Date:</label>
                         <input
                             value={context.input.date}
                             onChange={context.handleChange}
@@ -126,7 +125,7 @@ function FirstForm(){
                             className="form-input"
                             required
                         />
-                    <label htmlFor="time">Time</label>
+                    <label htmlFor="time">Time:</label>
                         <input
                             value={context.input.time}
                             onChange={context.handleChange}
@@ -148,10 +147,10 @@ function SecondForm(){
     return(
 
         <div className="form-wrapper">
-            <h1>Create your ride</h1>
+            <h2>Create your ride</h2>
             <div className="form-container">
                 <form onSubmit={context.handleNext}>
-                <label htmlFor="startLocation">Start location</label>
+                <label htmlFor="startLocation">Start location:</label>
                         <input 
                             value={context.input.startLocation}
                             onChange={context.handleChange}
@@ -162,7 +161,7 @@ function SecondForm(){
                             className="form-input"
                             required
                         />
-                    <label htmlFor="estimatedDuration">Estimated duration (in hours)</label>
+                    <label htmlFor="estimatedDuration">Estimated duration (in hours):</label>
                         <input
                             value={context.input.estimatedDuration}
                             onChange={context.handleChange}
@@ -172,7 +171,7 @@ function SecondForm(){
                             id="estimatedDuration"
                             className="form-input"
                         />
-                    <label htmlFor="maxAttendance">Maximum no. of attendees</label>
+                    <label htmlFor="maxAttendance">Maximum no. of attendees:</label>
                         <input
                             value={context.input.maxAttendance}
                             onChange={context.handleChange} 
@@ -192,10 +191,10 @@ function ThirdForm(){
     const context = useContext(FormContext);
     return(
         <div className="form-wrapper">
-            <h1>Create your ride</h1>
+            <h2>Create your ride</h2>
             <div className="form-container">
                 <form onSubmit={context.handleSubmit}>
-                <label htmlFor="title">Title</label>
+                <label htmlFor="title">Title:</label>
                         <input
                             value={context.input.title}
                             onChange={context.handleChange}
@@ -206,7 +205,7 @@ function ThirdForm(){
                             className="form-input"
                             required
                         />
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description">Description:</label>
                         <textarea
                             value={context.input.description}
                             onChange={context.handleChange}
@@ -215,7 +214,7 @@ function ThirdForm(){
                             className="form-input"
                         />
                     {
-                    context.errors.map((error, index) => <p key={index}>{error}</p>)
+                        context.errors.map((error, index) => <p key={index}>{error}</p>)
                     }
                     <input value="COMPLETE" type="submit" className="confirm-button"/>
                 </form>
@@ -230,7 +229,7 @@ function SuccessForm(){
 
     return(
         <div className="form-wrapper">
-            <h1>Success!</h1>
+            <h2>Success!</h2>
             <h3>Your ride has been created.</h3>
             <button onClick={() => {navigate('/rides')}}>Take me to 'my rides'</button>
         </div>

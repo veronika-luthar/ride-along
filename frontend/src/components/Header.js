@@ -21,8 +21,8 @@ export default function Header() {
       <div className="navbar-right">
         {isLoggedIn ? (
           <>
+            <a href="/profile" className="header-component">My Profile</a>
             <a href="/user-rides" className="header-component">My Rides</a>
-            <a href="/profile" className="header-component">Profile</a>
             <a href="/rides" className="header-browse-rides">Browse Rides</a>
             <button className="header-component" onClick={signOut}>Log Out</button>
           </>
@@ -30,6 +30,7 @@ export default function Header() {
           <>
             <a href="/login" className="header-component">Login</a>
             <a href="/register" className="header-component">Register</a>
+            <a href="/rides" className="header-browse-rides">Browse Rides</a>
           </>
         )}
       </div>

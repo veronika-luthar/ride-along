@@ -70,61 +70,61 @@ const RegisterForm = () => {
   };
 
   return (
-    <form className="update-form" onSubmit={handleSubmit}>
-      <h2 className='form-title'>Update your Profile</h2>
-      <label>
-        Name
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Veronika Luthar"
-        />
-      </label>
-      <label>
-        Email
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="veronika@somesemail.com"
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder=""
-        />
-      </label>
-      <label>
-        Phone no.
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phoneNumber}
-          onChange={handleChange}
-          placeholder="+000000000"
-        />
-      </label>
-      <label className="checkbox-container">
-        <input
-          type="checkbox"
-          name="isPublic"
-          checked={formData.isPublic}
-          onChange={handleChange}
-        />
-        Make my profile public
-      </label>
-      <button type="submit" className="confirm-button">
-        CONFIRM
-      </button>
-    </form>
+    <div className="form-wrapper">
+      <form className="form-container" onSubmit={handleSubmit}>
+        <h2 className='form-title'>Update your details</h2>
+        <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder=""
+            className="form-input"
+          />
+        <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder=""
+            className="form-input"
+          />
+        <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder=""
+            className="form-input"
+          />
+        <label htmlFor="phone">Phone no.:</label>
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            placeholder=""
+            className="form-input"
+         />
+        <div className="form-group">
+            <input 
+              type="checkbox" 
+              name="isPublic" 
+              onChange={handleChange} 
+              className="form-checkbox" 
+            />
+            <span className="form-checkbox-label">Make my account public</span>
+          </div>
+        <button type="submit" className="confirm-button">CONFIRM</button>
+      </form>
+    </div>
   );
 };
 

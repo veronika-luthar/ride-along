@@ -100,7 +100,7 @@
     transition: transform 0.3s ease;
   }
   
-  .cross::before {
+  .cross::after {
     top: 50%;
     left: 0;
     width: 100%;
@@ -108,7 +108,7 @@
     margin-top: -2px;
   }
   
-  .cross::after {
+  .cross::before {
     top: 0;
     left: 50%;
     width: 4px;
@@ -116,10 +116,10 @@
     margin-left: -2px;
   }
   
-  .circular-button:hover .cross::before {
-    transform: rotate(45deg);
+  .circular-button:hover {
+    transform: scale(1.10);
   }
   
-  .circular-button:hover .cross::after {
-    transform: rotate(45deg);
+  .circular-button:hover{
+    transform: scale(1.10);
   }

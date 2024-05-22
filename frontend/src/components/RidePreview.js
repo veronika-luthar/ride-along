@@ -17,17 +17,19 @@ const RidePreview = ({ ride, userInRide=false }) => {
         const rideTime = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate(), hours, minutes);
         console.log(time + ' current:' + rideTime);
         if (rideTime < currentTime && userInRide) {
-          
-          setShowRateRide(true);
+            setShowRateRide(true);
         }
     }
     shouldShowRateRide()
     })
 
 
+    const navigate = useNavigate();
     const rateRideClicked = () => {
         console.log('Rate ride clicked');
-        
+
+        console.log(ride.id);
+        navigate(`/rate-rider/${ride.id}`);
     }
 
   return (
