@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 const Profile = () => {
   
   const [userProfile, setUserProfile] = useState({});
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -21,7 +22,17 @@ const Profile = () => {
       setUserProfile(response.data);
     }
 
+    const getReviews = async () => {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${env.BASE_URL}/get_user/ratings/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setReviews(response.data);
+    }
     getUserProfile();
+    getReviews();
   }, []);
 
   return (

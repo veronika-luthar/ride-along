@@ -112,9 +112,11 @@ const RideComponent = ({ ride, onSelectRide }) => {
         <span className = "emptyBox"></span>
         <RideAttendances rideId={id}/>
       </div>
+      {localStorage.getItem('token') && (
       <button className="form-button down" onClick={handleSelectRide}>
         {userInRide === true ? "Leave Ride" : "Join Ride"}
       </button>
+      )}
       {userIsOwner ? <button onClick={onClick} className="form-button">
         Edit Ride
       </button> : ""}

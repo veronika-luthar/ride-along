@@ -27,6 +27,29 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     },
+  // Can you create two more dummy rides?
+  {
+    city: 'Paris',
+    description: 'Ride through the streets of Paris',
+    maxAttendance: 20,
+    date: new Date("2023-06-24"),
+    time: "11",
+    startLocation: 'Eiffel Tower',
+    title: 'Paris City Ride',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    city: 'Tokyo',
+    description: 'Experience the bustling city of Tokyo',
+    maxAttendance: 25,
+    date: new Date("2024-07-24"),
+    time: "12",
+    startLocation: 'Shibuya Crossing',
+    title: 'Tokyo City Ride',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
   ]);
 },
    down: async (queryInterface, Sequelize)  => {
