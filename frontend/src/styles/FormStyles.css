@@ -7,7 +7,11 @@
   margin: 10px;
   border: none;
   font-family: inherit;
+}
 
+.secondary-button:hover{
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .background {
@@ -178,4 +182,50 @@ label {
 
 .phone-input-dropdown {
   border-radius: 5px;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.stars input {
+  display: none;
+}
+
+.stars label {
+  font-size: 2em;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input:checked ~ label {
+  color: #ff4d4f;
+}
+
+.stars input:checked ~ label {
+  color: #ccc;
+}
+
+.stars label:hover,
+.stars label:hover ~ label {
+  color: #ff4d4f;
+}
+
+.stars label {
+  display: inline-block;
+  direction: ltr;
+  unicode-bidi: bidi-override;
+}
+
+.stars label::before {
+  content: "★";
+}
+
+.textarea {
+  height: 80px;
 }
