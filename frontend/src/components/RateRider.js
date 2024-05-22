@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/RateRider.css';
+import '../styles/FormStyles.css';
 import env from "react-dotenv";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
@@ -54,38 +54,38 @@ const RateRider = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
+    <div className="form-wrapper">
       <h2>Rate your most recent ride!</h2>
-      <p>This will be added to your fellow riders' personal average rating</p>
-      <div className="stars form-input">
-        {[...Array(5)].map((_, index) => (
-          <React.Fragment key={index}>
-            <input
-              type="radio"
-              id={`star${index}`}
-              name="rating"
-              value={index + 1}
-              checked={rating === index + 1}
-              onChange={() => handleChange(index)}
-            />
-            <label
-              htmlFor={`star${index}`}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                color: (hoverRating || rating) > index ? '#ff4d4f' : '#ccc'
-              }}
-            ></label>
-          </React.Fragment>
-        ))}
-      </div>
-      <label>
-        Comment
-        <textarea className="comment form-input" name="comment" />
-      </label>
-      <input type="submit" value="Confirm" className="form-button" />
-      <button type="button" className="cancel-button" onClick={() => window.history.back()}>Cancel</button>
-    </form>
+      <p>This will be added to the ride owner's personal average rating</p>
+      <form onSubmit={handleSubmit} className="form-container">
+        <div className="stars form-input">
+          {[...Array(5)].map((_, index) => (
+            <React.Fragment key={index}>
+              <input
+                type="radio"
+                id={`star${index}`}
+                name="rating"
+                value={index + 1}
+                checked={rating === index + 1}
+                onChange={() => handleChange(index)}
+              />
+              <label
+                htmlFor={`star${index}`}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
+                style={{
+                  color: (hoverRating || rating) > index ? '#ff4d4f' : '#ccc'
+                }}
+              ></label>
+            </React.Fragment>
+          ))}
+        </div>
+        <label htmlFor="comment">Comment:</label>
+          <textarea className="form-input textarea" name="comment" id="comment"/>
+        <input type="submit" value="Confirm" className="confirm-button" />
+      </form>
+      <button type="button" className="secondary-button" onClick={() => window.history.back()}>Cancel</button>
+    </div>
   );
 };
 
