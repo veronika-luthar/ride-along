@@ -4,6 +4,7 @@ import '../styles/Profile.css'; // Import the CSS file for styling
 import axios from 'axios'; // Import the axios library
 import env from "react-dotenv";
 import { useState, useEffect } from 'react';
+import Review from './Review';
 
 
 const Profile = () => {
@@ -29,7 +30,7 @@ const Profile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setReviews(response.data);
+      setReviews(response.data.result);
     }
     getUserProfile();
     getReviews();
@@ -54,6 +55,12 @@ const Profile = () => {
       <Link to="/edit-profile">
         <button className="edit-profile-button">Edit Profile</button>
       </Link>
+      <div style={{height: "50px"}}>
+        {reviews.map((review) => {
+        <Review reviews={reviews} />
+        })
+      }
+      </div>
     </div>
   );
 };
