@@ -3,9 +3,7 @@ import { fetchRides, fetchCities } from '../utils';
 import RidePreview from './RidePreview';
 import '../styles/FormStyles.css';
 import '../styles/ride.css';
-import RideAttendances from './RideAttendance';
 import Ride from './Ride';
-import { fetchRideAttendance, leaveRide, userInRide, fetchOwner } from '../utils';
 
 
 const RideListPreview = ({ onSelectRide }) => {
@@ -20,7 +18,6 @@ const RideListPreview = ({ onSelectRide }) => {
       try {
         const data = await fetchRides();
         setRides(data);
-        console.log(data);
       } catch (error) {
         console.error('Error fetching rides:', error);
       }

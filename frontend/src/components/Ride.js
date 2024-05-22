@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 import { fetchUserRides } from '../utils';
 import RideAttendances from './RideAttendance'; // Import the RideAttendances component
 import { Route, useNavigate } from 'react-router-dom';
-import RateRider  from './RateRider';
 
 
 

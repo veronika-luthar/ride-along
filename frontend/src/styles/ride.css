@@ -56,6 +56,16 @@
 }
 
 
+
+  .half{
+    width: 750px;
+    padding-left: 30%;
+  }
+
+.centre{
+  justify-self: center;
+}
+
   .ride-details-container {
     flex: 1;
     padding: 20px;

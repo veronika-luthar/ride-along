@@ -14,9 +14,7 @@ import RideAttendances from './components/RideAttendance';
 import Header from './components/Header';
 import RideListPreview from './components/RideList';
 import Error from './components/Error';
-import axios from "axios";
-import env from "react-dotenv";
-import { useNavigate } from 'react-router-dom';
+import UserList from './components/UserList';
 
 function Routing(){
     return(
@@ -29,12 +27,13 @@ function Routing(){
                 <Route path={'/register'} element={<Register/>} />
                 <Route path={'/create-ride'} element={<CreateRide/>} />
                 <Route path={'/edit-ride'} element={<EditRide/>}/>
-                <Route path={'/user-rides'} element={<UserRides/>} />
+                <Route path={'/user-rides'} element={<UserList/>} />
                 <Route path={'/profile'} element={<Profile/>} />
                 <Route path={'/edit-profile'} element={<EditProfile/>} />
                 <Route path={'/rides'} element={<RideListPreview/>} />
                 <Route path={'/ride-attendance'} element={<RideAttendances rideId= {1} />} />
-                <Route path={'/rate-rider'} element={<RateRider />} />
+                <Route path={'/rate-rider/:rideID'} element={<RateRider />} />
+                <Route path={'/new-user'} element={<UserList />} />
             </Routes>
         </BrowserRouter>
     )
