@@ -73,7 +73,7 @@ const RegisterForm = () => {
     <div className="form-wrapper">
       <form className="form-container" onSubmit={handleSubmit}>
         <h2 className='form-title'>Update your details</h2>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">Name:</label>
           <input
             type="text"
             name="name"
@@ -83,7 +83,7 @@ const RegisterForm = () => {
             placeholder=""
             className="form-input"
           />
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email:</label>
           <input
             type="email"
             name="email"
@@ -93,7 +93,7 @@ const RegisterForm = () => {
             placeholder=""
             className="form-input"
           />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Password:</label>
           <input
             type="password"
             name="password"
@@ -103,7 +103,7 @@ const RegisterForm = () => {
             placeholder=""
             className="form-input"
           />
-        <label htmlFor="phone">Phone no.</label>
+        <label htmlFor="phone">Phone no.:</label>
           <input
             type="tel"
             name="phone"

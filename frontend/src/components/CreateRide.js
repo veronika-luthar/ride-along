@@ -105,7 +105,7 @@ function FirstForm(){
             <h1>Create your ride</h1>
             <div className="form-container">
                 <form onSubmit={context.handleNext}>
-                    <label htmlFor="city">City</label>
+                    <label htmlFor="city">City:</label>
                         <input 
                             value={context.input.city}
                             onChange={context.handleChange}
@@ -116,7 +116,7 @@ function FirstForm(){
                             className="form-input"
                             required
                         />
-                    <label htmlFor="date">Date</label>
+                    <label htmlFor="date">Date:</label>
                         <input
                             value={context.input.date}
                             onChange={context.handleChange}
@@ -125,7 +125,7 @@ function FirstForm(){
                             className="form-input"
                             required
                         />
-                    <label htmlFor="time">Time</label>
+                    <label htmlFor="time">Time:</label>
                         <input
                             value={context.input.time}
                             onChange={context.handleChange}
@@ -150,7 +150,7 @@ function SecondForm(){
             <h1>Create your ride</h1>
             <div className="form-container">
                 <form onSubmit={context.handleNext}>
-                <label htmlFor="startLocation">Start location</label>
+                <label htmlFor="startLocation">Start location:</label>
                         <input 
                             value={context.input.startLocation}
                             onChange={context.handleChange}
@@ -161,7 +161,7 @@ function SecondForm(){
                             className="form-input"
                             required
                         />
-                    <label htmlFor="estimatedDuration">Estimated duration (in hours)</label>
+                    <label htmlFor="estimatedDuration">Estimated duration (in hours):</label>
                         <input
                             value={context.input.estimatedDuration}
                             onChange={context.handleChange}
@@ -171,7 +171,7 @@ function SecondForm(){
                             id="estimatedDuration"
                             className="form-input"
                         />
-                    <label htmlFor="maxAttendance">Maximum no. of attendees</label>
+                    <label htmlFor="maxAttendance">Maximum no. of attendees:</label>
                         <input
                             value={context.input.maxAttendance}
                             onChange={context.handleChange} 
@@ -194,7 +194,7 @@ function ThirdForm(){
             <h1>Create your ride</h1>
             <div className="form-container">
                 <form onSubmit={context.handleSubmit}>
-                <label htmlFor="title">Title</label>
+                <label htmlFor="title">Title:</label>
                         <input
                             value={context.input.title}
                             onChange={context.handleChange}
@@ -205,7 +205,7 @@ function ThirdForm(){
                             className="form-input"
                             required
                         />
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description">Description:</label>
                         <textarea
                             value={context.input.description}
                             onChange={context.handleChange}

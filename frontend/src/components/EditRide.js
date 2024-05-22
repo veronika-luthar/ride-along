@@ -48,7 +48,7 @@ export default function EditRide() {
                 <h1>{input.title}</h1>
                 <h4>{input.city}</h4>
                 <form onSubmit={handleSubmit} className="form-container">
-                    <label htmlFor="date">Date</label>
+                    <label htmlFor="date">Date:</label>
                         <input
                             value={input.date}
                             onChange={handleChange}
@@ -57,7 +57,7 @@ export default function EditRide() {
                             className="form-input"
                             required
                         />
-                        <label htmlFor="time">Time</label>
+                        <label htmlFor="time">Time:</label>
                         <input
                             value={input.time}
                             onChange={handleChange}
@@ -66,7 +66,7 @@ export default function EditRide() {
                             className="form-input"
                             required
                         />
-                        <label htmlFor="estimatedDuration">Estimated duration</label>
+                        <label htmlFor="estimatedDuration">Estimated duration:</label>
                         <input
                             value={input.estimatedDuration}
                             onChange={handleChange}
@@ -75,7 +75,7 @@ export default function EditRide() {
                             className="form-input"
                             required
                         />
-                        <label htmlFor="startLocation">Start location</label>
+                        <label htmlFor="startLocation">Start location:</label>
                         <input 
                             value={input.startLocation}
                             onChange={handleChange}
@@ -84,14 +84,14 @@ export default function EditRide() {
                             className="form-input"
                             required
                         />
-                        <label htmlFor="description">Description</label>
+                        <label htmlFor="description">Description:</label>
                         <textarea
                             value={input.description}
                             onChange={handleChange}
                             id="description"
                             className="form-input"
                         />
-                        <label htmlFor="time">Maximum no. of attendees</label>
+                        <label htmlFor="time">Maximum no. of attendees:</label>
                         <input
                             value={input.maxAttendance}
                             onChange={handleChange} 
