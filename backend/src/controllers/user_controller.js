@@ -132,6 +132,6 @@ module.exports = {
   },
 
   async isLoggedIn(req, res){
-    res.status(200);
+    res.status(200).json({message: 'Success'});
   }
 }
