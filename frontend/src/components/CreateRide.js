@@ -102,7 +102,7 @@ function FirstForm(){
 
     return(
         <div className="form-wrapper">
-            <h1>Create your ride</h1>
+            <h2>Create your ride</h2>
             <div className="form-container">
                 <form onSubmit={context.handleNext}>
                     <label htmlFor="city">City:</label>
@@ -147,7 +147,7 @@ function SecondForm(){
     return(
 
         <div className="form-wrapper">
-            <h1>Create your ride</h1>
+            <h2>Create your ride</h2>
             <div className="form-container">
                 <form onSubmit={context.handleNext}>
                 <label htmlFor="startLocation">Start location:</label>
@@ -191,7 +191,7 @@ function ThirdForm(){
     const context = useContext(FormContext);
     return(
         <div className="form-wrapper">
-            <h1>Create your ride</h1>
+            <h2>Create your ride</h2>
             <div className="form-container">
                 <form onSubmit={context.handleSubmit}>
                 <label htmlFor="title">Title:</label>
@@ -229,7 +229,7 @@ function SuccessForm(){
 
     return(
         <div className="form-wrapper">
-            <h1>Success!</h1>
+            <h2>Success!</h2>
             <h3>Your ride has been created.</h3>
             <button onClick={() => {navigate('/rides')}}>Take me to 'my rides'</button>
         </div>
