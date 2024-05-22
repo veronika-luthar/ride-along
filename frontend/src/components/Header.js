@@ -30,6 +30,7 @@ export default function Header() {
           <>
             <a href="/login" className="header-component">Login</a>
             <a href="/register" className="header-component">Register</a>
+            <a href="/rides" className="header-browse-rides">Browse Rides</a>
           </>
         )}
       </div>
