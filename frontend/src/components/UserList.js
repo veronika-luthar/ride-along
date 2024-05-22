@@ -89,11 +89,13 @@ const ownerOfRide = async (ride) => {
 
 const handleRideClick = (ride) => {
   setSelectedRide(ride);
+  document.body.classList.add('no-scroll');
   setShowPopup(true);
 };
 
 const handleClosePopup = () => {
   setShowPopup(false);
+  document.body.classList.remove('no-scroll');
 };
   
     return (
