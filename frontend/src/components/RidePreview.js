@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/RidePreview.css'; // Import the CSS file
 import { useEffect,useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-const RidePreview = ({ ride, userInRide=false }) => {
+const RidePreview = ({ ride, userInRide=false , owner=false}) => {
   const { city, createdAt, description, id, maxAttendance, date, time, startLocation, title, updatedAt } = ride;
   const formattedScheduledTime = `${time}`;
   const [showRateRideButton,setShowRateRide] = useState(false);
@@ -12,8 +12,8 @@ const RidePreview = ({ ride, userInRide=false }) => {
 
     const shouldShowRateRide =  async () => { 
         const currentTime = new Date();
-        const date1 = new Date(date)
-        const [hours, minutes] = time.split(':');;
+        const date1 = new Date(date);
+        const [hours, minutes] = time.split(':');
         const rideTime = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate(), hours, minutes);
         console.log(time + ' current:' + rideTime);
         if (rideTime < currentTime && userInRide) {
@@ -32,6 +32,10 @@ const RidePreview = ({ ride, userInRide=false }) => {
         navigate(`/rate-rider/${ride.id}`);
     }
 
+    function onEditClick(){
+      localStorage.setItem('ride-edit', JSON.stringify(ride));
+      navigate('/edit-ride');
+    }
   return (
     <div className="ride-preview">
       <div className="ride-preview-header">
@@ -46,7 +50,14 @@ const RidePreview = ({ ride, userInRide=false }) => {
         </button>
         </div>
         )}
-        {!showRateRideButton && (
+        {!showRateRideButton && owner && (
+        <div>
+        <button className="form-button" onClick={onEditClick}>
+           Edit Ride
+        </button>
+        </div>
+        )}
+        {!showRateRideButton && !owner &&(
         <div className="ride-preview-date-time">
           <p>{ride.date}</p>
           <p>{formattedScheduledTime}</p>
