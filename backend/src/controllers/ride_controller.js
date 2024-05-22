@@ -1,4 +1,4 @@
-const {Ride, sequelize} = require('../models');
+const {Ride,Rating, sequelize} = require('../models');
 const {RideAttendance} = require('../models');
 const {User} = require('../models');
 
@@ -10,11 +10,11 @@ module.exports = {
         title: req.body.title,
         date: req.body.date,
         time: req.body.time,
-        estimatedDuration: req.body.estimated_duration,
+        estimatedDuration: req.body.estimatedDuration,
         city: req.body.city,
-        startLocation: req.body.start_location,
+        startLocation: req.body.startLocation,
         description: req.body.description,
-        maxAttendance: req.body.max_attendance
+        maxAttendance: req.body.maxAttendance
       });
       const test = await RideAttendance.create({
         rideId: ride.id,
@@ -24,11 +24,58 @@ module.exports = {
       res.status(200).json({status: "Success"});
     } catch (err){
       console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: err });
     }
-    //console.log("RIDE " + ride.id);
+},
+
+
+  async isOwner(req, res){
+    try{ 
+      const rideAttendance = await RideAttendance.findOne({
+        where: {
+          userId: req.user.id,
+          rideId: req.body.rideID
+        }
+      });
+      if(rideAttendance === null){
+        res.status(200).json({isOwner: false});
+      }
+      else if(rideAttendance.isOwner){
+        res.status(200).json({isOwner: true});
+      }
+      else{
+        res.status(200).json({isOwner: false});
+      }
+  } catch(err){
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+    }
   },
 
+  async editRide(req, res){
+    try {
+      const ride = await Ride.findByPk(req.body.id);
+      const newRide = await ride.update({
+        date: req.body.date,
+        time: req.body.time,
+        estimatedDuration: req.body.estimatedDuration,
+        startLocation: req.body.startLocation,
+        description: req.body.description,
+        maxAttendance: req.body.maxAttendance
+      },
+      {
+        where: {
+          id: req.body.id
+        },
+      });
+      newRide.save();
+      console.log(newRide);
+      res.status(200).json({status: "Success"});
+    } catch (err){
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  },
    
     async getRidesByCity(req, res) {
         try {
@@ -163,30 +210,23 @@ module.exports = {
     async getUserInformationForRide(req,res){
       const rideID = req.params.rideID;
       try{
-      /*
-        var attendance = await User.findAll({
-          attributes: [
-            'name',
-            [
-              sequelize.literal(`
-              CASE
-                WHEN \`User\`.\`public\` = true THEN \`User\`.\`phone_Number\`
-                ELSE NULL
-              END
-            `),
-            'phoneNumber'
-          ]
-          ],
-          include: [
-            {
-              model: RideAttendance,
-              where: {
-                isOwner: true
-              },
-            }
-          ]
-        })*/
-        var attendance = await sequelize.query(`SELECT name, isOwner,CASE WHEN public = true THEN phone_number ELSE NULL END AS phoneNumber FROM Users JOIN RideAttendances ON Users.id = RideAttendances.userId WHERE rideId = ${rideID}`);
+        var attendance = await sequelize.query(
+          ` SELECT
+            name,
+            isOwner,
+            avg(ratings.no_stars) as rating,
+            CASE 
+              WHEN public = true 
+                THEN phone_number
+              ELSE NULL 
+            END 
+          AS phoneNumber 
+          FROM users 
+          INNER JOIN rideattendances ra ON users.id = ra.userId 
+          left join ratings on users.id = ratings.userId
+          WHERE ra.rideId = ${rideID}
+          GROUP BY name, isOwner, phone_number, public`);
+        
         console.log(attendance);
         
         res.status(200).json(attendance);
@@ -195,6 +235,36 @@ module.exports = {
         res.status(500).json({ error: 'Internal server error' });
       }
     },
+
+    async rateRide(req,res){
+
+      try{
+        var rideOwner = await sequelize.query(`
+          select 
+            userId 
+          from 
+            rideattendances 
+          where rideId = ${req.params.rideID} 
+                and isOwner = true
+        `);
+        rideOwner = rideOwner[0][0].userId;
+        console.log(rideOwner);
+        console.log("Found the ride owner");
+        const rating = await Rating.create({
+          userId: rideOwner,
+          reviewerId: req.user.id,
+          no_stars: req.body.rating,
+          comment: req.body.comment,
+          rideID: req.params.rideID
+        }); 
+        console.log(rating)
+        res.status(200).json({status: "Success"});
+      }catch(error){
+        console.error('Error rating ride:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    },
+
 
 
 

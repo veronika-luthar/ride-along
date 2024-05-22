@@ -1,19 +1,57 @@
 /* FormStyles.css */
 
+.secondary-button {
+  background: none;
+  color: #231F20;
+  text-decoration: underline;
+  margin: 10px;
+  border: none;
+  font-family: inherit;
+
+}
+
+.background {
+  content: '';
+  position: fixed;
+  width: 150%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: url(../resources/bikingphoto.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+  left: -20vw;
+}
+
 .form-container {
-  max-width: 400px;
-  margin: 0 auto;
+  width:fit-content;
+  height: auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.form-wrapper{
+  background-color:#FFFFFF;
+  width: fit-content;
+  height: auto;
+  margin: auto;
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
 }
 
 .form-title {
   margin-bottom: 20px;
   text-align: center;
   font-size: 24px;
-  color: #333;
+  color: #231F20;
 }
 
 .form-group {
@@ -24,41 +62,120 @@
   display: block;
   margin-bottom: 5px;
   font-size: 16px;
-  color: #333;
+  color: #231F20;
 }
 
 .form-input {
-  width: 100%;
+  font-family: inherit;
+  width: 500px;
+  margin-bottom: 30px;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 2px solid #9B9B9B;
 }
 
 .form-checkbox-label {
   display: inline-block;
   margin-left: 5px;
   font-size: 16px;
-  color: #333;
+  color: #231F20;
 }
 
 .form-button {
     width: 100%;
     padding: 10px;
     margin: 10px 0; /* Add margin to the top and bottom of the buttons */
-    background-color: #007bff;
+    background-color: #FA362F;
     border: none;
     border-radius: 4px;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
+    font-family: inherit;
 }
 
 .form-button:hover {
-  background-color: #0056b3;
+  background-color: #9B9B9B;
 }
 
 .error-message {
-  color: red;
+  color: #FA362F;
   margin-top: 10px;
+}
+
+/* UpdateForm.css */
+.update-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.update-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.update-form label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.update-form label input[type="text"],
+.update-form label input[type="email"],
+.update-form label input[type="password"],
+.update-form label input[type="tel"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox-container input {
+  margin-right: 0.5rem;
+}
+
+.confirm-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #FA362F;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.confirm-button:hover {
+  background-color: #FA362F;
+}
+
+.form-title{
+  font-family: 'Radio Canada';
+}
+
+.phone-input-container {
+  width: 100%;
+}
+
+.phone-input-button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.phone-input-dropdown {
+  border-radius: 5px;
 }

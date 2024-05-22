@@ -1,13 +1,18 @@
-import RideComponent from './Ride';
 import React, { useState, useEffect } from 'react';
 import { fetchRides, fetchCities } from '../utils';
+import RidePreview from './RidePreview';
 import '../styles/FormStyles.css';
 import '../styles/ride.css';
+import Ride from './Ride';
+import { Link } from 'react-router-dom';
 
-const RideList = ({ onSelectRide }) => {
+
+const RideListPreview = ({ onSelectRide }) => {
   const [rides, setRides] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
+  const [selectedRide, setSelectedRide] = useState(null);
+
 
   useEffect(() => {
     const getRides = async () => {
@@ -40,28 +45,56 @@ const RideList = ({ onSelectRide }) => {
     ? rides.filter((ride) => ride.city === selectedCity)
     : rides;
 
-  return (
-    <div>
-      <h1 className="form-title">Available Rides</h1>
-      <div className='form-group'>
-        <select className="form-container" id="cityFilter" value={selectedCity} onChange={handleCityChange}>
-          <option value="">All Cities</option>
-          {cities.map((city) => (
-            <option key={city} value={city}>
-              {city}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="ride-list">
-        {filteredRides.map((ride, index) => (
-          <div key={ride.id} className={`ride-item ${(index + 1) % 3 === 0 ? 'last-in-row' : ''}`}>
-            <RideComponent ride={ride} onSelectRide={onSelectRide} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+    const handleRideClick = (ride) => {
+      setSelectedRide(ride);
+    };
 
-export default RideList;
+  
+    return (
+      <div className="photo">
+      <div className="ride-list-preview">
+        <div className="ride-list-container cover full-height">
+          <h1 className="form-title">Browse rides</h1>
+          <div className="form-group">
+            <span className="cityFilter">Filter by:   </span>
+            <select
+              className="cityFilterSelect"
+              id="cityFilterSelect"
+              value={selectedCity}
+              onChange={handleCityChange}
+            >
+              <option value="">All cities</option>
+              {cities.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="ride-list">
+            {filteredRides.map((ride, index) => (
+              <div
+                key={ride.id}
+                className="ride-item"
+                onClick={() => handleRideClick(ride)}
+              >
+                <RidePreview ride={ride} />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={`ride-details-container full-height ${selectedRide ? 'cover-grey' : ''}`}>
+          {selectedRide && ( <Ride ride={selectedRide} />
+          )}
+        </div>
+      </div>
+      {localStorage.getItem('token') && (
+        <Link to="/create-ride" className="circular-button">
+          <span className="cross"></span>
+        </Link>
+      )}
+      </div>
+    );
+  };
+
+export default RideListPreview;

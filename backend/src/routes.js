@@ -11,6 +11,12 @@ router.post('/register', user_controller.createUser);
 router.post('/edit_profile', authenticateToken, user_controller.editProfile);
 router.post('/login', user_controller.loginUser);
 router.get('/get_user', authenticateToken, user_controller.getUser);
+router.get('/is-logged-in', authenticateToken, user_controller.isLoggedIn);
+
+router.get('/get_user/ratings/all', authenticateToken, user_controller.getUserAllRating);
+
+
+router.get('/get_user/ratings', authenticateToken, user_controller.getUserRating);
 
 router.get('/rides', ride_controller.getRides);
 
@@ -22,15 +28,19 @@ router.get('/user/rides',authenticateToken,ride_controller.getRidesByUser);
 router.get('/cities', ride_controller.getCities);
 
 
-router.post('/rides/:rideID/join',authenticateToken, ride_controller.joinRide);
+router.post('/rides/:rideID/join',authenticateToken,authenticateToken, ride_controller.joinRide);
 
 router.post('/create-ride', authenticateToken, ride_controller.createRide);
+router.post('/edit-ride', ride_controller.editRide);
+router.post('/is-owner', authenticateToken, ride_controller.isOwner);
 
-router.post('/rides/:rideID/leave',authenticateToken,ride_controller.leaveRide); 
+router.post('/rides/:rideID/leave', ride_controller.leaveRide); 
 
 router.get('/rides/:rideID/attendance', ride_controller.getRideAttendance); 
 
 router.get('/rides/:rideID/users', ride_controller.getUserInformationForRide); 
+
+router.post('/rides/:rideID/rate', authenticateToken, ride_controller.rateRide);
 
 
 

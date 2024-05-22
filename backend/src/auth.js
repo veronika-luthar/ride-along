@@ -12,13 +12,13 @@ function verifyToken(token) {
 
 async function authenticateLogin(email_user, password) {
   const user = await User.findOne({ where: { email: email_user } });
-  console.log(user);
+  //console.log(user);
   if (!user) {
-    console.log('User not found');
+    //console.log('User not found');
     throw new Error('User not found');
   }
   const isValidPassword = await bcrypt.compare(password, user.password);
-  console.log(isValidPassword);
+  //console.log(isValidPassword);
   if (!isValidPassword) {
     throw new Error('Invalid password');
   }
@@ -26,20 +26,20 @@ async function authenticateLogin(email_user, password) {
 }
 
 function authenticateToken(req, res, next) {
-  console.log("Authenticating token");
+  //console.log("Authenticating token");
   const authHeader = req.headers['authorization'];
-  console.log(authHeader);
+  //console.log(authHeader);
   const token = authHeader && authHeader.split(' ')[1];
-  console.log(token);
+  //console.log(token);
   if (!token) {
-    console.log("not token");
+    //console.log("not token");
     return res.sendStatus(401);
   }
   try {
-    console.log("Verificando token");
+    //console.log("Verificando token");
     req.user = verifyToken(token);
-    console.log("Token verificado");
-    console.log(req.user);
+    //console.log("Token verificado");
+    //console.log(req.user);
     next();
   } catch (error) {
     res.sendStatus(403);
@@ -47,3 +47,5 @@ function authenticateToken(req, res, next) {
 }
 
 module.exports = { generateToken, verifyToken, authenticateLogin, authenticateToken };
+
+

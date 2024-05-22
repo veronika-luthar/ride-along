@@ -1,0 +1,122 @@
+/* Front page */
+@font-face {
+    font-family: 'Radio Canada';
+    src: url('../fonts/RadioCanada-Regular.ttf');
+}
+  
+  .frontpage {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: url(../resources/bikingphoto.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+  
+  /* OVERLAY */
+  .overlaylayer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: rgba(35, 31, 32, 0.35);
+  }
+  
+  /* Focal point */
+  .focalpoint {
+    position: absolute;
+    width: 497px;
+    height: 179px;
+    left: 46px;
+    top: 20%;
+    filter: drop-shadow(0px 10px 4px rgba(0, 0, 0, 0.25));
+  }
+  
+  /* TEXT - Ride along */
+  .main-text {
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    left: 10px;
+    top: 0;
+    font-family: 'Radio Canada';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 80px;
+    line-height: 115px;
+    text-transform: capitalize;
+    color: #F5F5F5;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* TEXT - Connect with other mountain bikers and organize rides to go on together. */
+  .description-text {
+    position: absolute;
+    width: 454px;
+    height: 58px;
+    left: 15px;
+    top: 80%;
+    font-family: 'Radio Canada';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 29px;
+    color: #F5F5F5;
+    text-shadow: 0px 10px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Let's ride */
+  .button-text {
+    position: absolute;
+    width: 155px;
+    height: 43px;
+    left: 70px;
+    top: 70%;
+    font-family: 'Radio Canada';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 43px;
+    color: #FFFFFF;
+  }
+  
+  /* BUTTON - Call to action */
+/* BUTTON - Call to action */
+.button-arrow {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    left: 180px;
+    background: #FA362F;
+    top: 71%;
+    border-radius: 55%; /* Make the button circular */
+  }
+  
+  /* Ellipse 1 */
+  .button-arrow-eclipse {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 0;
+    top: 0;
+    background: #FA362F;
+    border-radius: 50%; /* Make the button circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Arrow 1 */
+  #button-arrow {
+    box-sizing: border-box;
+    width: 15px; /* Adjust the width of the arrow */
+    height: 15px; /* Adjust the height of the arrow */
+    border-top: 2px solid #FFFFFF; /* Create the top border of the arrow */
+    border-right: 2px solid #FFFFFF; /* Create the right border of the arrow */
+    transform: rotate(45deg); /* Rotate the arrow to point diagonally */
+  }

@@ -1,6 +1,16 @@
 import env from "react-dotenv";
 import axios from 'axios'; // Import the axios library
 
+export const fetchOwner = async (rideID, token) => {
+  try{
+    const response = await axios.post(`${env.BASE_URL}/is-owner`, {rideID: rideID} , { headers: { Authorization: `Bearer ${token}`}});
+    return response.data.isOwner;
+  } catch (error){
+    console.error('Error checking if user is owner of ride.', error);
+    return false;
+  }
+}
+
 export const fetchRides = async () => {
   try {
     const response = await fetch(`${env.BASE_URL}/rides`);
@@ -132,5 +142,29 @@ export const fetchUserInRide = async (rideID) => {
       console.error('Error fetching users in ride:', error);
       throw error;
   }   
+
+};
+
+export const rateRide = async (rideID,ratingData) => {
+  try{
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${env.BASE_URL}/rides/${rideID}/rate`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(ratingData)
+  });
+  console.log(response);
+  const data = await response.json();
+  if(!response.ok){
+      throw new Error('Error rating ride');
+  }
+  }catch(error){
+      console.error('Error fetching users in ride:', error);
+      throw error;
+  }   
+
 
 };

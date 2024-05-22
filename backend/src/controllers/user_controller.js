@@ -1,4 +1,4 @@
-const {User, sequelize} = require('../models');
+const {User,Rating, sequelize} = require('../models');
 const { generateToken, authenticateLogin, authenticateToken } = require("../auth");
 const bcrypt = require('bcryptjs');
 
@@ -77,5 +77,61 @@ module.exports = {
       console.error(err);
       res.status(500).json({ message: 'Server Error' });
     }
+  },
+
+
+  async getUserRating(req, res) {
+    try {
+      const userID = req.user.id;
+  
+      const result = await Rating.findOne({
+        attributes: [
+          [sequelize.fn('AVG', sequelize.col('no_stars')), 'meanRating']
+        ],
+        where: {
+          userID: userID
+        },
+        raw: true
+      });
+  
+      if (result) {
+        const meanRating = result.meanRating;
+        console.log(`Mean rating for userID ${userID}: ${meanRating}`);
+        res.status(200).json({ meanRating });
+      } else {
+        console.log(`No ratings found for userID ${userID}`);
+        res.status(404).json({ message: 'No ratings found' });
+      }
+    } catch (error) {
+      console.error('Error calculating mean rating:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  },
+
+  async getUserAllRating(req, res) {
+    try {
+      const userID = req.user.id;
+  
+      const result = await Rating.findAll({
+        where: {
+          userID: userID
+        }
+      });
+      console.log(result);
+      if (result) {
+        console.log(`All ratings for ${userID}: ${result}`);
+        res.status(200).json({result });
+      } else {
+        console.log(`No ratings found for userID ${userID}`);
+        res.status(404).json({ message: 'No ratings found' });
+      }
+    } catch (error) {
+      console.error('Error retreiving all ratings:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  },
+
+  async isLoggedIn(req, res){
+    res.status(200);
   }
 }

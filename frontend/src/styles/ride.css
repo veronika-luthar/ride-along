@@ -1,9 +1,189 @@
-.ride-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+@font-face {
+  font-family: 'Radio Canada';
+  src: url('../fonts/RadioCanada-Regular.ttf');
+}
+
+.photo {
+    position: sticky;
+    content: '';
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    background: url(../resources/bikingphoto.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.full-height{
+  height: 100vh;
+}
+.down{
+  margin-top: 80px
+}
+
+
+.red-background{
+  border-left:40px solid  #fc2201;
+}
+
+.cover{
+  background-color: #fff;
+}
+
+.title-section {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  margin-top: -10px; /* Add negative margin-top to move the title section up */
+  padding-left: 5px
+}
+
+.title-section h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.title-section p {
+  font-size: 16px;
+  padding-left: 5px
+}
+.cover-grey{
+  background-color:#f0f0f0;
+}
+
+
+.cityFilter{
+  margin-left: 25px;
+  color: #666;
+}
+
+
+
+  .half{
+    width: 750px;
+    padding-left: 30%;
   }
 
-  .last-in-row {
-    margin-right: 0; 
+.centre{
+  justify-self: center;
+}
+
+  .ride-details-container {
+    flex: 1;
+    padding: 20px;
+    padding-top: 0; 
+    padding-left:0;
+    padding-right: 0px;
+    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+    border-top: 15px solid  #fc2201;
+  
+  }
+  .middle{
+    text-align: center;
+
+  }
+  .ride-details-info {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  
+  .ride-details-info-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .black-background{
+    background-color: #333;
+  }
+  .no-justify{
+    justify-content: flex-start;
+  }
+  .redBox{
+    background-color:  #fc2201;
+    width: 25px;
+    height:25px;
+  }
+  .emptyBox{
+    width: 25px;
+    height:25px;
+  }
+  .ride-details-info-label {
+    font-weight: bold;
+    justify-self: flex-start;
+  }
+
+  .white{
+    color: white;
+  }
+  
+  .ride-details-info-value {
+    margin-left: 25%;
+  }
+
+  .margin-smaller{
+    margin: left 110px;
+  }
+  .inline{
+    display: inline;
+  }
+
+  
+  .ride-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ride-details-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-city {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+
+  
+  .ride-details-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .ride-details-value {
+    color: #666;
+  }
+
+
+  .description{
+    width: 500px;
+    height: 200px;
+  }
+
+
+  .ride-details-attendance {
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-attendees {
+    margin-bottom: 10px;
+  }
+  
+  .ride-details-attendees-list {
+    list-style: none;
+    padding-left: 0;
   }
