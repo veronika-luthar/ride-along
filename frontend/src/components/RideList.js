@@ -4,6 +4,7 @@ import RidePreview from './RidePreview';
 import '../styles/FormStyles.css';
 import '../styles/ride.css';
 import Ride from './Ride';
+import { Link } from 'react-router-dom';
 
 
 const RideListPreview = ({ onSelectRide }) => {
@@ -88,9 +89,9 @@ const RideListPreview = ({ onSelectRide }) => {
         </div>
       </div>
       {localStorage.getItem('token') && (
-      <a href="/create-ride" class="circular-button">
-        <span class="cross"></span>
-      </a>
+        <Link to="/create-ride" className="circular-button">
+          <span className="cross"></span>
+        </Link>
       )}
       </div>
     );

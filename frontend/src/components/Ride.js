@@ -112,7 +112,7 @@ const RideComponent = ({ ride, onSelectRide }) => {
         <span className = "emptyBox"></span>
         <RideAttendances rideId={id}/>
       </div>
-      {localStorage.getItem('token') && (
+      {localStorage.getItem('token') &&  (
       <button className="form-button down" onClick={handleSelectRide}>
         {userInRide === true ? "Leave Ride" : "Join Ride"}
       </button>
