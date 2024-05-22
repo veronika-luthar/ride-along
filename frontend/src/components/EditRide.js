@@ -9,22 +9,38 @@ import { useNavigate } from 'react-router-dom';
 
 export default function EditRide() {
     const navigate = useNavigate();
-    console.log(localStorage.getItem('ride-edit'));
+    //console.log(localStorage.getItem('ride-edit'));
     
     useEffect(() => {
-            console.log("hello");
             async function isLoggedIn(){
-            const token = localStorage.getItem('token');
-            await axios.get(`${env.BASE_URL}/is-logged-in`, {
-                headers: {
-                Authorization: `Bearer ${token}`,
-                },
-            })
-            .then().catch(function (error){
-                localStorage.setItem('error', error.response.data +" " + error.response.status);
-                navigate('/err');
-            });
-        }
+                const token = localStorage.getItem('token');
+                await axios.get(`${env.BASE_URL}/is-logged-in`, {
+                    headers: {
+                    Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then(function (response){
+                    if(response.status === 200){
+                        if(localStorage.getItem("ride-edit") !== null){
+                            const ride = JSON.parse(localStorage.getItem("ride-edit"));
+                    
+                            console.log(ride.date);
+                    
+                            // Need to convert date to correct format
+                            const date = new Date(ride.date).toISOString();
+                            let newDate = date.slice(0, date.indexOf('T'));
+                            ride.date = newDate;
+                            setInput(ride);
+                            
+                        }
+                    }
+                }).catch(function (error){
+                    localStorage.setItem('error', error.response.data +" " + error.response.status);
+                    navigate('/err');
+                });
+                console.log("hi");
+
+            }
         isLoggedIn();
       }, []);
     
@@ -42,18 +58,7 @@ export default function EditRide() {
     });
 
     
-    if(localStorage.getItem("ride-edit") !== null){
-        setInput(localStorage.getItem("ride-edit"));
-
-        // Need to convert date to correct format
-        const date = new Date(input.date).toISOString();
-        let newDate = date.slice(0, date.indexOf('T'));
-        setInput({
-            ...input,
-            [date]: newDate
-        });
-        
-    }
+    
 
 
     function handleChange(e) {
