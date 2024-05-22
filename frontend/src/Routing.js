@@ -29,7 +29,7 @@ function Routing(){
                 <Route path={'/edit-profile'} element={<EditProfile/>} />
                 <Route path={'/rides'} element={<RideListPreview/>} />
                 <Route path={'/ride-attendance'} element={<RideAttendances rideId= {1} />} />
-                <Route path={'/rate-rider'} element={<RateRider />} />
+                <Route path={'/rate-rider/:rideID'} element={<RateRider />} />
             </Routes>
         </BrowserRouter>
     )

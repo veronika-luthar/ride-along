@@ -248,6 +248,8 @@ module.exports = {
                 and isOwner = true
         `);
         rideOwner = rideOwner[0][0].userId;
+        console.log(rideOwner);
+        console.log("Found the ride owner");
         const rating = await Rating.create({
           userId: rideOwner,
           reviewerId: req.user.id,
