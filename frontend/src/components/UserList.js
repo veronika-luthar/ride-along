@@ -83,8 +83,8 @@ const ownerOfRide = async (ride) => {
       <div className="ride-list-preview">
         <div className="ride-list-container cover full-height">
           <h1 className="form-title">Completed Rides</h1>
-          <div className="form-group">
-            <div className="ride-list half">
+          <div className="form-group half flex centre">
+            <div className="ride-list">
               {pastRides.map((ride, index) => (
                 <div
                   key={ride.id}
@@ -96,7 +96,7 @@ const ownerOfRide = async (ride) => {
               ))}
             </div>
             <h1 className="form-title">Owned Rides</h1>
-            <div className="ride-list half">
+            <div className="ride-list">
               {ownedRides.map((ride, index) => (
                 <div
                   key={ride.id}
@@ -108,7 +108,7 @@ const ownerOfRide = async (ride) => {
               ))}
             </div>
             <h1 className="form-title">Joined Rides</h1>
-            <div className="ride-list half">
+            <div className="ride-list">
               {currentRides.map((ride, index) => (
                 <div
                   key={ride.id}

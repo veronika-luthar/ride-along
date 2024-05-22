@@ -55,11 +55,17 @@
   color: #666;
 }
 
+
+
   .half{
-    width: 100px;
+    width: 750px;
+    padding-left: 30%;
   }
 
-  
+.centre{
+  justify-self: center;
+}
+
   .ride-details-container {
     flex: 1;
     padding: 20px;
