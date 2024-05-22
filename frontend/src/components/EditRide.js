@@ -1,20 +1,59 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../styles/FormStyles.css';
 import env from "react-dotenv";
 import { useNavigate } from 'react-router-dom';
 
 
+
+
 export default function EditRide() {
     const navigate = useNavigate();
-    let ride = JSON.parse(localStorage.getItem('ride-edit'));
+    console.log(localStorage.getItem('ride-edit'));
+    
+    useEffect(() => {
+            console.log("hello");
+            async function isLoggedIn(){
+            const token = localStorage.getItem('token');
+            await axios.get(`${env.BASE_URL}/is-logged-in`, {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                },
+            })
+            .then().catch(function (error){
+                localStorage.setItem('error', error.response.data +" " + error.response.status);
+                navigate('/err');
+            });
+        }
+        isLoggedIn();
+      }, []);
+    
+    
 
-    // Need to convert date to correct format
-    const date = new Date(ride.date).toISOString();
-    let newDate = date.slice(0, date.indexOf('T'));
-    ride.date = newDate;
+    const [input, setInput] = useState({
+        title: "",
+        date: "",
+        time: "",
+        estimatedDuration: "",
+        city: "",
+        startLocation: "",
+        description: "",
+        maxAttendance: "",
+    });
 
-    const [input, setInput] = useState(ride);
+    
+    if(localStorage.getItem("ride-edit") !== null){
+        setInput(localStorage.getItem("ride-edit"));
+
+        // Need to convert date to correct format
+        const date = new Date(input.date).toISOString();
+        let newDate = date.slice(0, date.indexOf('T'));
+        setInput({
+            ...input,
+            [date]: newDate
+        });
+        
+    }
 
 
     function handleChange(e) {

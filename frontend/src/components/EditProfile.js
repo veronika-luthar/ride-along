@@ -26,16 +26,23 @@ const RegisterForm = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-      setFormData({
-        name: response.data.name,
-        email: response.data.email,
-        phoneNumber: response.data.phone_number,
-        isPublic: response.data.public,
-      });
-      console.log(formData.isPublic);
+      })
+      .then(function (response){
+        if(response.status === 200){
+          setFormData({
+            name: response.data.name,
+            email: response.data.email,
+            phoneNumber: response.data.phone_number,
+            isPublic: response.data.public,
+          });
+          console.log(formData.isPublic);
+        }
+      }).catch(function (error){
+          localStorage.setItem('error', error.response.data +" " + error.response.status);
+          navigate('/err');
+      });;
+      
     }
-
     getUserProfile();
   }, []);
 

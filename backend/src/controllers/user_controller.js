@@ -129,5 +129,9 @@ module.exports = {
       console.error('Error retreiving all ratings:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
+  },
+
+  async isLoggedIn(req, res){
+    res.status(200);
   }
 }

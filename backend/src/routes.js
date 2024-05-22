@@ -11,6 +11,7 @@ router.post('/register', user_controller.createUser);
 router.post('/edit_profile', authenticateToken, user_controller.editProfile);
 router.post('/login', user_controller.loginUser);
 router.get('/get_user', authenticateToken, user_controller.getUser);
+router.get('/is-logged-in', authenticateToken, user_controller.isLoggedIn);
 
 router.get('/get_user/ratings/all', authenticateToken, user_controller.getUserAllRating);
 

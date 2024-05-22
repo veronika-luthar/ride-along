@@ -13,6 +13,7 @@ import React from 'react';
 import RideAttendances from './components/RideAttendance';
 import Header from './components/Header';
 import RideListPreview from './components/RideList';
+import Error from './components/Error';
 import UserList from './components/UserList';
 
 function Routing(){
@@ -21,6 +22,7 @@ function Routing(){
             <Header/>
             <Routes>
                 <Route path={'/'} element={<FrontPage/>} />
+                <Route path={'/err'} element={<Error/>} />
                 <Route path={'/login'} element={<Login/>} />
                 <Route path={'/register'} element={<Register/>} />
                 <Route path={'/create-ride'} element={<CreateRide/>} />

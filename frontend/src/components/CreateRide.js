@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import axios from "axios";
 import env from "react-dotenv";
 import { useNavigate } from 'react-router-dom';
@@ -8,8 +8,24 @@ import '../styles/FormStyles.css';
 const FormContext = createContext(null);
 
 export default function CreateRide(){
-
     const navigate = useNavigate();
+
+    useEffect(() => {
+        async function isLoggedIn(){
+            const token = localStorage.getItem('token');
+            await axios.get(`${env.BASE_URL}/is-logged-in`, {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                },
+            })
+            .then().catch(function (error){
+                localStorage.setItem('error', error.response.data +" " + error.response.status);
+                navigate('/err');
+            });
+        }
+        isLoggedIn();
+      }, []);
+
     const [input, setInput] = useState({
         title: "",
         date: "",
