@@ -221,9 +221,9 @@ module.exports = {
               ELSE NULL 
             END 
           AS phoneNumber 
-          FROM users 
-          INNER JOIN rideattendances ra ON users.id = ra.userId 
-          left join ratings on users.id = ratings.userId
+          FROM Users 
+          INNER JOIN rideattendances ra ON Users.id = ra.userId 
+          left join ratings on Users.id = ratings.userId
           WHERE ra.rideId = ${rideID}
           GROUP BY name, isOwner, phone_number, public`);
         
