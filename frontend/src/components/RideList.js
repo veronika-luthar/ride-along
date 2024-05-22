@@ -87,9 +87,11 @@ const RideListPreview = ({ onSelectRide }) => {
           )}
         </div>
       </div>
+      {localStorage.getItem('token') && (
       <a href="/create-ride" class="circular-button">
         <span class="cross"></span>
       </a>
+      )}
       </div>
     );
   };

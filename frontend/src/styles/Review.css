@@ -1,0 +1,22 @@
+.review {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #fff;
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px; /* Adjust max-width as needed */
+  margin: 0 auto;
+}
+
+.rating {
+  color: #f39c12; /* Change color to desired star color */
+}
+
+.comment {
+  margin-top: 10px;
+  flex-grow: 1; /* Allow the comment to grow vertically */
+  overflow: auto; /* Add scrollbar if comment exceeds available space */
+}

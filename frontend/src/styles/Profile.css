@@ -1,24 +1,24 @@
-/* Profile.css */
-
 .profile-container {
-  /* center items */
-  max-width: 400px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px; /* Adjust max-width as needed */
+  text-align: center;
 }
 
 .profile-item {
   margin-bottom: 10px;
+  text-align: left;
 }
 
 .edit-profile-button {
-  padding: 10px 20px;
-  font-size: 16px;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #fa4903;
   color: #fff;
-  background-color: #007bff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -26,4 +26,9 @@
 
 .edit-profile-button:hover {
   background-color: #0056b3;
+}
+
+.reviews-container {
+  margin-top: 20px;
+  text-align: left;
 }
