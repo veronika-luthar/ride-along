@@ -13,6 +13,10 @@ import React from 'react';
 import RideAttendances from './components/RideAttendance';
 import Header from './components/Header';
 import RideListPreview from './components/RideList';
+import Error from './components/Error';
+import axios from "axios";
+import env from "react-dotenv";
+import { useNavigate } from 'react-router-dom';
 
 function Routing(){
     return(
@@ -20,6 +24,7 @@ function Routing(){
             <Header/>
             <Routes>
                 <Route path={'/'} element={<FrontPage/>} />
+                <Route path={'/err'} element={<Error/>} />
                 <Route path={'/login'} element={<Login/>} />
                 <Route path={'/register'} element={<Register/>} />
                 <Route path={'/create-ride'} element={<CreateRide/>} />

@@ -71,3 +71,7 @@ button.header-component {
 button.header-component:hover {
   text-decoration: underline;
 }
+
+.error-text {
+  text-align: center;
+}
