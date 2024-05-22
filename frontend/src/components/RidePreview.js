@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/RidePreview.css'; // Import the CSS file
 import { useEffect,useState } from 'react';
-const RidePreview = ({ ride, onSelectRide }) => {
+const RidePreview = ({ ride, userInRide=false }) => {
   console.log(ride);
   const { city, createdAt, description, id, maxAttendance, date, time, startLocation, title, updatedAt } = ride;
   const formattedScheduledTime = `${time}`;
@@ -16,7 +16,8 @@ const RidePreview = ({ ride, onSelectRide }) => {
         const [hours, minutes] = time.split(':');
         const rideTime = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate(), hours, minutes);
         console.log(time + ' current:' + rideTime);
-        if (rideTime < currentTime) {
+        if (rideTime < currentTime && userInRide) {
+          
           setShowRateRide(true);
         }
     }
@@ -26,7 +27,7 @@ const RidePreview = ({ ride, onSelectRide }) => {
 
     const rateRideClicked = () => {
         console.log('Rate ride clicked');
-        onSelectRide(ride);
+        
     }
 
   return (

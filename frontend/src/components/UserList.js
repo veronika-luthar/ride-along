@@ -5,47 +5,79 @@ import '../styles/FormStyles.css';
 import '../styles/ride.css';
 import RideAttendances from './RideAttendance';
 import Ride from './Ride';
-import { fetchRideAttendance, leaveRide, userInRide, fetchOwner } from '../utils';
-
+import { fetchRideAttendance, leaveRide, fetchOwner,fetchUserRides } from '../utils';
 
 const UserList = ({ onSelectRide }) => {
-  const [rides, setRides] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState('');
-  const [selectedRide, setSelectedRide] = useState(null);
+    const [rides, setRides] = useState([]);
+    const [selectedCity, setSelectedCity] = useState('');
+    const [selectedRide, setSelectedRide] = useState(null);
+    const [pastRides, setPastRides] = useState([]);
+    const [currentRides, setCurrentRides] = useState([]);
+    const [ownedRides, setOwnedRides] = useState([]);
+  
+    useEffect(() => {
+      const getRides = async () => {
+        try {
+          const data = await fetchUserRides();
+          setRides(data);
+          await sortRides();
+          console.log(data);
+        } catch (error) {
+          console.error('Error fetching rides:', error);
+        }
+      };
+  
+      getRides();
+    }, []);
+  
+    const sortRides = async () => {
+      const sortedPastRides = [];
+      const sortedCurrentRides = [];
+      const sortedOwnedRides = [];
 
-
-  useEffect(() => {
-    const getRides = async () => {
-      try {
-        const data = await fetchRides();
-        setRides(data);
-        console.log(data);
-      } catch (error) {
-        console.error('Error fetching rides:', error);
+      for (const ride of rides) {
+        console.log(ride);
+        if (await rideCompleted(ride)) {
+          sortedPastRides.push(ride);
+          continue;
+        }
+        if(await ownerOfRide(ride)){
+          sortedOwnedRides.push(ride);
+          continue;
+        }
+        sortedCurrentRides.push(ride);
       }
+      console.log("sortedPastRides", sortedPastRides);
+      console.log("sortedCurrentRides", sortedCurrentRides);
+      console.log("sortedOwnedRides", sortedOwnedRides);
+      setPastRides(sortedPastRides);
+      setCurrentRides(sortedCurrentRides);
+      setOwnedRides(sortedOwnedRides);
     };
 
-    const getCities = async () => {
-      try {
-        const data = await fetchCities();
-        setCities(data);
-      } catch (error) {
-        console.error('Error fetching cities:', error);
-      }
-    };
-
-    getRides();
-    getCities();
-  }, []);
-
-  const handleCityChange = (event) => {
-    setSelectedCity(event.target.value);
-  };
-
-  const filteredRides = selectedCity
-    ? rides.filter((ride) => ride.city === selectedCity)
-    : rides;
+  const rideCompleted =  async (ride) => { 
+    const currentTime = new Date();
+    const [hours, minutes] = ride.time.split(':');
+    console.log(ride.date)
+    const rideDate = new Date(ride.date);
+    const rideTime = new Date(rideDate.getFullYear(), rideDate.getMonth(), rideDate.getDate(), hours, minutes);
+    console.log(rideTime + ' current:' + currentTime);
+    if (rideTime < currentTime) {
+      return true;
+    }
+    return false
+  }
+const ownerOfRide = async (ride) => {
+  if (localStorage.getItem('token') !== null && localStorage.getItem('token') !== "") {
+    const response = await fetchOwner(ride.id, localStorage.getItem('token'));
+    console.log("ownerOfRide", response)
+    if (response === true) {
+        return true
+    } else {
+      return false
+    }
+  }
+}
 
     const handleRideClick = (ride) => {
       setSelectedRide(ride);
@@ -53,45 +85,57 @@ const UserList = ({ onSelectRide }) => {
 
   
     return (
-      <div className="photo">
+      <div className="grey-background">
       <div className="ride-list-preview">
         <div className="ride-list-container cover full-height">
-          <h1 className="form-title">Browse rides</h1>
+          <h1 className="form-title">Completed Rides</h1>
           <div className="form-group">
-            <span className="cityFilter">Filter by:   </span>
-            <select
-              className="cityFilterSelect"
-              id="cityFilterSelect"
-              value={selectedCity}
-              onChange={handleCityChange}
-            >
-              <option value="">All cities</option>
-              {cities.map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
+            <div className="ride-list">
+              {pastRides.map((ride, index) => (
+                <div
+                  key={ride.id}
+                  className="ride-item"
+                  onClick={() => handleRideClick(ride)}
+                >
+                  <RidePreview ride={ride} userInRide={true}  />
+                </div>
               ))}
-            </select>
-          </div>
-          <div className="ride-list">
-            {filteredRides.map((ride, index) => (
-              <div
-                key={ride.id}
-                className="ride-item"
-                onClick={() => handleRideClick(ride)}
-              >
-                <RidePreview ride={ride} />
-              </div>
-            ))}
-          </div>
+            </div>
+            <h1 className="form-title">Owned Rides</h1>
+            <div className="ride-list">
+              {ownedRides.map((ride, index) => (
+                <div
+                  key={ride.id}
+                  className="ride-item"
+                  onClick={() => handleRideClick(ride)}
+                >
+                  <RidePreview ride={ride} userInRide={true}  />
+                </div>
+              ))}
+            </div>
+            <h1 className="form-title">Joined Rides</h1>
+            <div className="ride-list">
+              {currentRides.map((ride, index) => (
+                <div
+                  key={ride.id}
+                  className="ride-item"
+                  onClick={() => handleRideClick(ride)}
+                >
+                  <RidePreview ride={ride} userInRide={true}  />
+                </div>
+              ))}
+            </div>
         </div>
-        <div className={`ride-details-container full-height ${selectedRide ? 'cover-grey' : ''}`}>
-          {selectedRide && ( <Ride ride={selectedRide} />
-          )}
-        </div>
+      </div>
       </div>
       </div>
     );
   };
+/*
 
+        <div className={`ride-details-container full-height ${selectedRide ? 'cover-grey' : ''}`}>
+          {selectedRide && ( <Ride ride={selectedRide} />
+          )}
+        </div>*/
+        
 export default UserList;

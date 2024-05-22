@@ -13,6 +13,7 @@ import React from 'react';
 import RideAttendances from './components/RideAttendance';
 import Header from './components/Header';
 import RideListPreview from './components/RideList';
+import UserList from './components/UserList';
 
 function Routing(){
     return(
@@ -30,6 +31,7 @@ function Routing(){
                 <Route path={'/rides'} element={<RideListPreview/>} />
                 <Route path={'/ride-attendance'} element={<RideAttendances rideId= {1} />} />
                 <Route path={'/rate-rider'} element={<RateRider />} />
+                <Route path={'/new-user'} element={<UserList />} />
             </Routes>
         </BrowserRouter>
     )
