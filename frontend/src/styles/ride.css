@@ -4,6 +4,7 @@
 }
 
 .photo {
+    position: sticky;
     content: '';
     width: 100%;
     left: 0px;
@@ -11,6 +12,7 @@
     background: url(../resources/bikingphoto.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+
 }
 .full-height{
   height: 100vh;

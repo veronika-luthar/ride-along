@@ -97,11 +97,8 @@ const handleClosePopup = () => {
 };
   
     return (
-      <div className="grey-background">
-      <div className="ride-list-preview">
-        <div className="ride-list-container cover full-height">
+      <div className="my-rides-container">
           <h1 className="form-title">Completed Rides</h1>
-          <div className="form-group half flex centre">
             <div className="ride-list">
               {pastRides.map((ride, index) => (
                 <div
@@ -137,12 +134,9 @@ const handleClosePopup = () => {
                 </div>
               ))}
             </div>
-        </div>
-      </div>
         {showPopup && (
         <GlassmorphismPopup ride={selectedRide} onClose={handleClosePopup} />
       )}
-      </div>
       </div>
     );
   };
