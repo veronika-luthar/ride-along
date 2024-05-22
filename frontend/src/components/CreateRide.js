@@ -40,15 +40,14 @@ export default function CreateRide(){
                 }
             })
             .catch(function (error) {
-                if(error.status === 500){
-                    const errorType = error.response.data.error;
-                    if(errorType.name === "SequelizeValidationError"){
-                        const errors = errorType.errors.map((x)  => x.message);
-                        setErrors(errors);
-                    }
-                    else{
-                        setErrors(["Unknown error occurred"]);
-                    }
+                const errorType = error.response.data.error;
+                if(errorType.name === "SequelizeValidationError"){
+                    const errors = errorType.errors.map((x)  => x.message);
+                    setErrors(errors);
+                    console.log(errors);
+                }
+                else{
+                    setErrors(["Unknown error occurred"]);
                 }
             });
     }
@@ -215,7 +214,7 @@ function ThirdForm(){
                             className="form-input"
                         />
                     {
-                    context.errors.map((error, index) => <p key={index}>{error}</p>)
+                        context.errors.map((error, index) => <p key={index}>{error}</p>)
                     }
                     <input value="COMPLETE" type="submit" className="confirm-button"/>
                 </form>
