@@ -90,6 +90,9 @@ const RideListPreview = ({ onSelectRide }) => {
           )}
         </div>
       </div>
+      <a href="/create-ride" class="circular-button">
+        <span class="cross"></span>
+      </a>
       </div>
     );
   };
