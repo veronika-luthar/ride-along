@@ -19,24 +19,24 @@ const UserList = ({ onSelectRide }) => {
       const getRides = async () => {
         try {
           const data = await fetchUserRides();
-          setRides(data);
+          await setRidesAsync(data);
           await sortRides();
-          console.log(data);
         } catch (error) {
           console.error('Error fetching rides:', error);
         }
       };
-  
       getRides();
-    }, []);
+    }, [rides]);
   
+    const setRidesAsync = async (data) => {
+      setRides(data);
+    };
     const sortRides = async () => {
       const sortedPastRides = [];
       const sortedCurrentRides = [];
       const sortedOwnedRides = [];
 
       for (const ride of rides) {
-        console.log(ride);
         if (await rideCompleted(ride)) {
           sortedPastRides.push(ride);
           continue;
@@ -47,9 +47,6 @@ const UserList = ({ onSelectRide }) => {
         }
         sortedCurrentRides.push(ride);
       }
-      console.log("sortedPastRides", sortedPastRides);
-      console.log("sortedCurrentRides", sortedCurrentRides);
-      console.log("sortedOwnedRides", sortedOwnedRides);
       setPastRides(sortedPastRides);
       setCurrentRides(sortedCurrentRides);
       setOwnedRides(sortedOwnedRides);
@@ -58,10 +55,8 @@ const UserList = ({ onSelectRide }) => {
   const rideCompleted =  async (ride) => { 
     const currentTime = new Date();
     const [hours, minutes] = ride.time.split(':');
-    console.log(ride.date)
     const rideDate = new Date(ride.date);
     const rideTime = new Date(rideDate.getFullYear(), rideDate.getMonth(), rideDate.getDate(), hours, minutes);
-    console.log(rideTime + ' current:' + currentTime);
     if (rideTime < currentTime) {
       return true;
     }
@@ -70,7 +65,6 @@ const UserList = ({ onSelectRide }) => {
 const ownerOfRide = async (ride) => {
   if (localStorage.getItem('token') !== null && localStorage.getItem('token') !== "") {
     const response = await fetchOwner(ride.id, localStorage.getItem('token'));
-    console.log("ownerOfRide", response)
     if (response === true) {
         return true
     } else {
@@ -90,7 +84,7 @@ const ownerOfRide = async (ride) => {
         <div className="ride-list-container cover full-height">
           <h1 className="form-title">Completed Rides</h1>
           <div className="form-group">
-            <div className="ride-list">
+            <div className="ride-list half">
               {pastRides.map((ride, index) => (
                 <div
                   key={ride.id}
@@ -102,7 +96,7 @@ const ownerOfRide = async (ride) => {
               ))}
             </div>
             <h1 className="form-title">Owned Rides</h1>
-            <div className="ride-list">
+            <div className="ride-list half">
               {ownedRides.map((ride, index) => (
                 <div
                   key={ride.id}
@@ -114,7 +108,7 @@ const ownerOfRide = async (ride) => {
               ))}
             </div>
             <h1 className="form-title">Joined Rides</h1>
-            <div className="ride-list">
+            <div className="ride-list half">
               {currentRides.map((ride, index) => (
                 <div
                   key={ride.id}
@@ -137,5 +131,5 @@ const ownerOfRide = async (ride) => {
           {selectedRide && ( <Ride ride={selectedRide} />
           )}
         </div>*/
-        
+
 export default UserList;

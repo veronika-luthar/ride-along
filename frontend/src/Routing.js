@@ -25,7 +25,7 @@ function Routing(){
                 <Route path={'/register'} element={<Register/>} />
                 <Route path={'/create-ride'} element={<CreateRide/>} />
                 <Route path={'/edit-ride'} element={<EditRide/>}/>
-                <Route path={'/user-rides'} element={<UserRides/>} />
+                <Route path={'/user-rides'} element={<UserList/>} />
                 <Route path={'/profile'} element={<Profile/>} />
                 <Route path={'/edit-profile'} element={<EditProfile/>} />
                 <Route path={'/rides'} element={<RideListPreview/>} />

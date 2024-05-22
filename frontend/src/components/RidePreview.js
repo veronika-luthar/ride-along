@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/RidePreview.css'; // Import the CSS file
 import { useEffect,useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const RidePreview = ({ ride, userInRide=false }) => {
-  console.log(ride);
   const { city, createdAt, description, id, maxAttendance, date, time, startLocation, title, updatedAt } = ride;
   const formattedScheduledTime = `${time}`;
   const [showRateRideButton,setShowRateRide] = useState(false);
@@ -13,7 +13,7 @@ const RidePreview = ({ ride, userInRide=false }) => {
     const shouldShowRateRide =  async () => { 
         const currentTime = new Date();
         const date1 = new Date(date)
-        const [hours, minutes] = time.split(':');
+        const [hours, minutes] = time.split(':');;
         const rideTime = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate(), hours, minutes);
         console.log(time + ' current:' + rideTime);
         if (rideTime < currentTime && userInRide) {
