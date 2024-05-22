@@ -214,7 +214,7 @@ module.exports = {
           ` SELECT
             name,
             isOwner,
-            avg(ratings.no_stars) as rating,
+            avg(Ratings.no_stars) as rating,
             CASE 
               WHEN public = true 
                 THEN phone_number
