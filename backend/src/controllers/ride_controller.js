@@ -243,7 +243,7 @@ module.exports = {
           select 
             userId 
           from 
-            rideattendances 
+            RideAttendances 
           where rideId = ${req.params.rideID} 
                 and isOwner = true
         `);
