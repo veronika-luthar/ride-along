@@ -118,7 +118,7 @@ const handleClosePopup = () => {
                   className="ride-item"
                   onClick={() => handleRideClick(ride)}
                 >
-                  <RidePreview ride={ride} userInRide={true}  />
+                  <RidePreview ride={ride} userInRide={true}   owner={true}/>
                 </div>
               ))}
             </div>

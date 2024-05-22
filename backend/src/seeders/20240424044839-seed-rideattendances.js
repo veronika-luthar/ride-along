@@ -15,15 +15,31 @@ module.exports = {
       const rideAttendances = [
         {
           rideId: rideIds[0],
-          userId: userIds[0],
+          userId: userIds[1],
           notifications: true,
           createdAt: new Date(),
           updatedAt: new Date(),
           isOwner : true
         },
         {
+          rideId: rideIds[0],
+          userId: userIds[0],
+          notifications: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          isOwner : false
+        },
+        {
+          rideId: rideIds[0],
+          userId: userIds[2],
+          notifications: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          isOwner : false
+        },
+        {
           rideId: rideIds[1],
-          userId: userIds[1],
+          userId: userIds[2],
           notifications: false,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -31,15 +47,7 @@ module.exports = {
         },
         {
           rideId: rideIds[1],
-          userId: userIds[0],
-          notifications: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          isOwner : false
-        },
-        {
-          rideId: rideIds[0],
-          userId: userIds[1],
+          userId: userIds[3],
           notifications: false,
           createdAt: new Date(),
           updatedAt: new Date(),

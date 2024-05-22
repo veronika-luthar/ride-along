@@ -117,7 +117,7 @@ module.exports = {
           userID: userID
         }
       });
-  
+      console.log(result);
       if (result) {
         console.log(`All ratings for ${userID}: ${result}`);
         res.status(200).json({result });

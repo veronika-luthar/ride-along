@@ -24,14 +24,6 @@
   left: -20vw;
 }
 
-/*.form-container1 {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-} */
-
 .form-container {
   width:fit-content;
   height: auto;
@@ -172,4 +164,18 @@ label {
 
 .form-title{
   font-family: 'Radio Canada';
+}
+
+.phone-input-container {
+  width: 100%;
+}
+
+.phone-input-button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.phone-input-dropdown {
+  border-radius: 5px;
 }

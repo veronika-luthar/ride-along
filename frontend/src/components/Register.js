@@ -1,10 +1,10 @@
-// RegisterForm.js
 import axios from 'axios';
 import React, { useState } from 'react';
+import 'react-phone-input-2/lib/style.css';
+import PhoneInput from 'react-phone-input-2';
 import '../styles/FormStyles.css';
-import { useNavigate } from 'react-router-dom'; // Import useHistory
+import { useNavigate } from 'react-router-dom';
 import env from "react-dotenv";
-
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -21,6 +21,10 @@ const RegisterForm = () => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
     setFormData({ ...formData, [name]: newValue });
+  };
+
+  const handlePhoneChange = (value) => {
+    setFormData({ ...formData, phoneNumber: value });
   };
 
   const handleSubmit = async (e) => {
@@ -81,13 +85,15 @@ const RegisterForm = () => {
           </div>
           <div className="form-group">
             <label className="form-label">Phone Number:</label>
-            <input 
-              type="tel" 
-              name="phoneNumber" 
-              value={formData.phoneNumber} 
-              onChange={handleChange} 
-              className="form-input" 
-              required 
+            <PhoneInput
+              country={'us'}
+              value={formData.phoneNumber}
+              onChange={handlePhoneChange}
+              inputClass="form-input"
+              containerClass="phone-input-container"
+              buttonClass="phone-input-button"
+              dropdownClass="phone-input-dropdown"
+              required
             />
           </div>
           <div className="form-group">

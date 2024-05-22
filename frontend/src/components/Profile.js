@@ -4,11 +4,13 @@ import '../styles/Profile.css'; // Import the CSS file for styling
 import axios from 'axios'; // Import the axios library
 import env from "react-dotenv";
 import { useState, useEffect } from 'react';
+import Review from './Review';
 
 
 const Profile = () => {
   
   const [userProfile, setUserProfile] = useState({});
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -21,7 +23,17 @@ const Profile = () => {
       setUserProfile(response.data);
     }
 
+    const getReviews = async () => {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${env.BASE_URL}/get_user/ratings/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setReviews(response.data.result);
+    }
     getUserProfile();
+    getReviews();
   }, []);
 
   return (
@@ -43,6 +55,12 @@ const Profile = () => {
       <Link to="/edit-profile">
         <button className="edit-profile-button">Edit Profile</button>
       </Link>
+      <div style={{height: "50px"}}>
+        {reviews.map((review) => {
+        <Review reviews={reviews} />
+        })
+      }
+      </div>
     </div>
   );
 };
