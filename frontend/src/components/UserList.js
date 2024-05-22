@@ -8,7 +8,7 @@ import Ride from './Ride';
 import { fetchRideAttendance, leaveRide, userInRide, fetchOwner } from '../utils';
 
 
-const RideListPreview = ({ onSelectRide }) => {
+const UserList = ({ onSelectRide }) => {
   const [rides, setRides] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
@@ -90,11 +90,8 @@ const RideListPreview = ({ onSelectRide }) => {
           )}
         </div>
       </div>
-      <a href="/create-ride" class="circular-button">
-        <span class="cross"></span>
-      </a>
       </div>
     );
   };
 
-export default RideListPreview;
+export default UserList;

@@ -2,7 +2,7 @@
     background-color: #f0f0f0;
     padding: 20px;
     margin-bottom: 10px;
-    width: 100%;
+    width: 90%;
     height:120px;
     border-radius: 5px;
     margin-left : 5%
@@ -67,4 +67,59 @@
 
 .ride-preview-date-time p{
     margin: 0;
+  }
+
+  .circular-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: red;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    z-index: 9999;
+    cursor: pointer;
+  }
+  
+  .cross {
+    position: relative;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .cross::before,
+  .cross::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    transition: transform 0.3s ease;
+  }
+  
+  .cross::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    margin-top: -2px;
+  }
+  
+  .cross::after {
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    margin-left: -2px;
+  }
+  
+  .circular-button:hover .cross::before {
+    transform: rotate(45deg);
+  }
+  
+  .circular-button:hover .cross::after {
+    transform: rotate(45deg);
   }
