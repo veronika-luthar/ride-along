@@ -4,6 +4,7 @@ import RidePreview from './RidePreview';
 import '../styles/FormStyles.css';
 import '../styles/ride.css';
 import RideAttendances from './RideAttendance';
+import GlassmorphismPopup from './GlassMorphPop';
 import Ride from './Ride';
 import { fetchRideAttendance, leaveRide, fetchOwner,fetchUserRides } from '../utils';
 
@@ -14,18 +15,29 @@ const UserList = ({ onSelectRide }) => {
     const [pastRides, setPastRides] = useState([]);
     const [currentRides, setCurrentRides] = useState([]);
     const [ownedRides, setOwnedRides] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
   
     useEffect(() => {
       const getRides = async () => {
         try {
           const data = await fetchUserRides();
+          console.log(data);
           await setRidesAsync(data);
-          await sortRides();
         } catch (error) {
           console.error('Error fetching rides:', error);
         }
       };
+    
       getRides();
+    }, []);
+    
+    useEffect(() => {
+      const sortAndSetRides = async () => {
+        await sortRides();
+        console.log(pastRides);
+      };
+    
+      sortAndSetRides();
     }, [rides]);
   
     const setRidesAsync = async (data) => {
@@ -52,6 +64,7 @@ const UserList = ({ onSelectRide }) => {
       setOwnedRides(sortedOwnedRides);
     };
 
+    
   const rideCompleted =  async (ride) => { 
     const currentTime = new Date();
     const [hours, minutes] = ride.time.split(':');
@@ -73,10 +86,15 @@ const ownerOfRide = async (ride) => {
   }
 }
 
-    const handleRideClick = (ride) => {
-      setSelectedRide(ride);
-    };
 
+const handleRideClick = (ride) => {
+  setSelectedRide(ride);
+  setShowPopup(true);
+};
+
+const handleClosePopup = () => {
+  setShowPopup(false);
+};
   
     return (
       <div className="grey-background">
@@ -121,6 +139,9 @@ const ownerOfRide = async (ride) => {
             </div>
         </div>
       </div>
+        {showPopup && (
+        <GlassmorphismPopup ride={selectedRide} onClose={handleClosePopup} />
+      )}
       </div>
       </div>
     );
