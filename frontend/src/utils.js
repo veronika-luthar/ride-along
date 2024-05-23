@@ -79,8 +79,26 @@ export const leaveRide = async (rideID, userID) => {
   }catch (error) {
     console.error('Error leaving ride:', error);
     throw error;
-  }
+  };
 };
+
+
+  export const rideIsRated = async (rideID) => {  
+    try {
+      const userIDTest = 1;
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${env.BASE_URL}/rides/${rideID}/isRated`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      });
+      return response.isRated;
+    }catch (error) {
+      console.error('Error leaving ride:', error);
+      throw error;
+    }
+  };
 
 
 
@@ -145,7 +163,7 @@ export const fetchUserInRide = async (rideID) => {
 
 };
 
-export const rateRide = async (rideID,ratingData) => {
+export const rateRide = async (rideID,ratingData) => {  
   try{
     const token = localStorage.getItem('token');
     const response = await fetch(`${env.BASE_URL}/rides/${rideID}/rate`, {
@@ -165,6 +183,4 @@ export const rateRide = async (rideID,ratingData) => {
       console.error('Error fetching users in ride:', error);
       throw error;
   }   
-
-
-};
+  };

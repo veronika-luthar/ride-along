@@ -6,7 +6,7 @@ import '../styles/ride.css';
 import RideAttendances from './RideAttendance';
 import GlassmorphismPopup from './GlassMorphPop';
 import Ride from './Ride';
-import { fetchRideAttendance, leaveRide, fetchOwner,fetchUserRides } from '../utils';
+import { fetchRideAttendance, rideIsRated,leaveRide, fetchOwner,fetchUserRides } from '../utils';
 
 const UserList = ({ onSelectRide }) => {
     const [rides, setRides] = useState([]);
@@ -15,6 +15,7 @@ const UserList = ({ onSelectRide }) => {
     const [pastRides, setPastRides] = useState([]);
     const [currentRides, setCurrentRides] = useState([]);
     const [ownedRides, setOwnedRides] = useState([]);
+    const [ratedRides, setRatedRides] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
   
     useEffect(() => {
@@ -47,11 +48,17 @@ const UserList = ({ onSelectRide }) => {
       const sortedPastRides = [];
       const sortedCurrentRides = [];
       const sortedOwnedRides = [];
+      const sortedRatedRides = [];
 
       for (const ride of rides) {
         if (await rideCompleted(ride)) {
-          sortedPastRides.push(ride);
-          continue;
+          if(await rideIsRated(ride.id)){
+            sortedRatedRides.push(ride);
+            continue;
+          }else{
+            sortedPastRides.push(ride);
+            continue;
+          }
         }
         if(await ownerOfRide(ride)){
           sortedOwnedRides.push(ride);
@@ -59,6 +66,7 @@ const UserList = ({ onSelectRide }) => {
         }
         sortedCurrentRides.push(ride);
       }
+      setRatedRides(sortedRatedRides);
       setPastRides(sortedPastRides);
       setCurrentRides(sortedCurrentRides);
       setOwnedRides(sortedOwnedRides);
