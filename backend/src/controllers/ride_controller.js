@@ -1,7 +1,14 @@
 const {Ride,Rating, sequelize} = require('../models');
 const {RideAttendance} = require('../models');
 const {User} = require('../models');
+const { Op }  = require('sequelize');
 
+
+getCurrentDate = () => {
+    var currentDate = new Date();
+    const startOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    return startOfDay;
+}
 
 module.exports = {
   async createRide(req, res){
@@ -82,7 +89,11 @@ module.exports = {
           const city = req.params.city;
           const rides = await Ride.findAll({
             where: {
-              city: city
+              city: city,
+              date:{
+                [Op.gte]:getCurrentDate()
+              }
+              
             }
           });
           res.status(200).json(rides);
@@ -117,7 +128,7 @@ module.exports = {
             }
             ride.updatedAt = sequelize.fn('NOW');
             await ride.save();
-            await sequelize.query(`INSERT INTO RIDEATTENDANCEs (rideId, userId, notifications,createdAt,UpdatedAt) VALUES (${rideID}, ${userID}, true,NOW(),NOW())`)
+            await sequelize.query(`INSERT INTO RideAttendances (rideId, userId, notifications,createdAt,UpdatedAt) VALUES (${rideID}, ${userID}, true,NOW(),NOW())`)
             /*await RideAttendance.create({
                 rideId: rideID,
                 userId: userID,
@@ -136,8 +147,8 @@ module.exports = {
         try {
           console.log(req.user);
           const rides = await Ride.findAll({
-            where: { startDate:{
-              [Op.gte]: new Date()
+            where: { date:{
+              [Op.gte]:getCurrentDate()
                 }
             }
           }
@@ -152,7 +163,7 @@ module.exports = {
 
     async getCities(req,res){
         try{
-            const [cities, metadata] = await sequelize.query(`SELECT DISTINCT city FROM rides`);
+            const [cities, metadata] = await sequelize.query(`SELECT DISTINCT city FROM Rides`);
             const cityValues = cities.map(city => city.city);
             res.status(200).json(cityValues);
         }catch(error){
@@ -164,7 +175,7 @@ module.exports = {
     async getRidesByUser(req,res){
       try{
         const userID = req.user.id;
-        const rides = await sequelize.query(`SELECT * FROM rides WHERE id IN (SELECT rideId FROM rideattendances WHERE userId = ${userID})`);
+        const rides = await sequelize.query(`SELECT * FROM Rides WHERE id IN (SELECT rideId FROM RideAttendances WHERE userId = ${userID})`);
         res.status(200).json(rides[0]);
       }
       catch(error){
@@ -183,7 +194,7 @@ module.exports = {
           }
           ride.updatedAt = sequelize.fn('NOW');
           await ride.save();
-          await sequelize.query(`DELETE FROM rideattendances WHERE rideId = ${rideID} AND userId = ${userID}`);
+          await sequelize.query(`DELETE FROM RideAttendances WHERE rideId = ${rideID} AND userId = ${userID}`);
           res.status(200).json({ message: 'Ride left successfully' }); // Send a response back to the client
       } catch (error) {
         console.error('Error leaving ride:', error);
@@ -220,16 +231,16 @@ module.exports = {
           ` SELECT
             name,
             isOwner,
-            avg(ratings.no_stars) as rating,
+            avg(Ratings.no_stars) as rating,
             CASE 
               WHEN public = true 
                 THEN phone_number
               ELSE NULL 
             END 
           AS phoneNumber 
-          FROM users 
-          INNER JOIN rideattendances ra ON users.id = ra.userId 
-          left join ratings on users.id = ratings.userId
+          FROM Users 
+          INNER JOIN RideAttendances ra ON Users.id = ra.userId 
+          left join Ratings on Users.id = Ratings.userId
           WHERE ra.rideId = ${rideID}
           GROUP BY name, isOwner, phone_number, public`);
         
@@ -249,7 +260,7 @@ module.exports = {
           select 
             userId 
           from 
-            rideattendances 
+            RideAttendances 
           where rideId = ${req.params.rideID} 
                 and isOwner = true
         `);
