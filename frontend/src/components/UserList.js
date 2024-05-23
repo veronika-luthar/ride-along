@@ -6,7 +6,7 @@ import '../styles/ride.css';
 import RideAttendances from './RideAttendance';
 import GlassmorphismPopup from './GlassMorphPop';
 import Ride from './Ride';
-import { fetchRideAttendance, leaveRide, fetchOwner,fetchUserRides } from '../utils';
+import { fetchRideAttendance, rideIsRated,leaveRide, fetchOwner,fetchUserRides } from '../utils';
 
 const UserList = ({ onSelectRide }) => {
     const [rides, setRides] = useState([]);
@@ -50,8 +50,8 @@ const UserList = ({ onSelectRide }) => {
 
       for (const ride of rides) {
         if (await rideCompleted(ride)) {
-          sortedPastRides.push(ride);
-          continue;
+            sortedPastRides.push(ride);
+            continue;
         }
         if(await ownerOfRide(ride)){
           sortedOwnedRides.push(ride);

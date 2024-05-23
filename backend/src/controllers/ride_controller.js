@@ -282,6 +282,28 @@ module.exports = {
       }
     },
 
+    async rideIsRated(req,res){
+      try{
+        const rating = await Rating.findOne({
+          where: {
+            rideID: req.params.rideID,
+            reviewerId: req.user.id
+          }
+        });
+        console.log(rating)
+        if(rating === null){
+          console.log("Ride is not rated");
+          res.status(200).json({isRated: false});
+        }else{
+          res.status(200).json({isRated: true});
+        }
+      }catch(error){
+        console.error('Error checking if ride is rated:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    },
+    
+
 
 
 

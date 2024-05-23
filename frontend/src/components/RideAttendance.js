@@ -27,7 +27,7 @@ const RideAttendances = ({ rideId,rideName}) => {
         <div className="ride-details-info-itema">
           <span className="ride-details-info-labela">Owner:</span>
           <div className="ride-details-info-value-wrappera">
-            <span className="ride-details-info-valuea">{owner.name}  {(<Stars rating = {owner.rating}/>)}</span>
+            <span className="ride-details-info-valuea">{owner.name}  {owner.rating!=null && (<Stars rating = {owner.rating}/>)}</span>
             <span className="ride-details-info-valuea lightgrey"> {owner.phoneNumber && 'ph:'+owner.phoneNumber}</span>
           </div>
         </div>
