@@ -18,9 +18,11 @@ const RidePreview = ({ ride, userInRide=false , owner=false}) => {
         const date1 = new Date(date);
         const [hours, minutes] = time.split(':');
         const rideTime = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate(), hours, minutes);
-        console.log(time + ' current:' + rideTime);
+     //   console.log(time + ' current:' + rideTime);
         if (rideTime < currentTime && userInRide) {
-            if(rideIsRated(id)){
+            console.log(title);
+            if(await rideIsRated(id)){
+              console.log('Ride is rated' + title);
               setShowRatedText(true);
               setShowRateRide(true);
             }

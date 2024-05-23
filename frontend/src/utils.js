@@ -93,7 +93,8 @@ export const leaveRide = async (rideID, userID) => {
         Authorization: `Bearer ${token}`,
       },
       });
-      return response.isRated;
+      const data = await response.json();
+      return data.isRated;
     }catch (error) {
       console.error('Error leaving ride:', error);
       throw error;

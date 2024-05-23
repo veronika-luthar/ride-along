@@ -290,7 +290,9 @@ module.exports = {
             reviewerId: req.user.id
           }
         });
+        console.log(rating)
         if(rating === null){
+          console.log("Ride is not rated");
           res.status(200).json({isRated: false});
         }else{
           res.status(200).json({isRated: true});
