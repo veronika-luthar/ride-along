@@ -1,7 +1,14 @@
 const {Ride,Rating, sequelize} = require('../models');
 const {RideAttendance} = require('../models');
 const {User} = require('../models');
+const { Op }  = require('sequelize');
 
+
+getCurrentDate = () => {
+    var currentDate = new Date();
+    const startOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    return startOfDay;
+}
 
 module.exports = {
   async createRide(req, res){
@@ -82,7 +89,11 @@ module.exports = {
           const city = req.params.city;
           const rides = await Ride.findAll({
             where: {
-              city: city
+              city: city,
+              date:{
+                [Op.gte]:getCurrentDate()
+              }
+              
             }
           });
           res.status(200).json(rides);
@@ -136,8 +147,8 @@ module.exports = {
         try {
           console.log(req.user);
           const rides = await Ride.findAll({
-            where: { startDate:{
-              [Op.gte]: new Date()
+            where: { date:{
+              [Op.gte]:getCurrentDate()
                 }
             }
           }
