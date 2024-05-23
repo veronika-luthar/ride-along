@@ -245,9 +245,14 @@ function SuccessForm(){
 
     return(
         <div className="form-wrapper">
-            <h2>Success!</h2>
-            <h3>Your ride has been created.</h3>
-            <button onClick={() => {navigate('/rides')}}>Take me to 'my rides'</button>
+                <h2>Success!</h2>
+                <h4>Your ride has been created.</h4>
+                <ul>
+                    <li>You can see and edit your ride under 'My Rides'.</li>
+                    <li>You are able to change the date and time for up to 48 hours before the ride commences.</li>
+                    <li>You are not able to change the title or the city that the ride takes place in.</li>
+                </ul>
+                <button onClick={() => {navigate('/user-rides')}} className='secondary-button'>Take me to 'My rides'</button>
         </div>
     )
 }
