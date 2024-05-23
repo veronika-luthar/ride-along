@@ -135,7 +135,13 @@ module.exports = {
     async getRides(req, res) {
         try {
           console.log(req.user);
-          const rides = await Ride.findAll();
+          const rides = await Ride.findAll({
+            where: { startDate:{
+              [Op.gte]: new Date()
+                }
+            }
+          }
+          );
           res.status(200).json(rides);
         } catch (error) {
           console.error('Error retrieving rides:', error);
